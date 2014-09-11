@@ -1,0 +1,13 @@
+.idea/
+.sass-cache/
+build
+node_modules
+test/subtasks/build
+test/subtasks/dist
+test/subtasks/docs
+test/subtasks/report
+test/integration/modes/**/dist
+test/integration/modes/**/build
+test/integration/modes/**/api/.gitignore
+test/subtasks/uglify/app.min.js
+xunit.xml
