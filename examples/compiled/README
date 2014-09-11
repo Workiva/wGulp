@@ -1,0 +1,8 @@
+The compiled mode example
+
+
+To run the example app locally
+
+    npm install
+
+    gulp

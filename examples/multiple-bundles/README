@@ -1,0 +1,12 @@
+Defining multiple bundles example. Take a look at gulpfile.js to see how multiple bundles are defined.
+
+
+To run the example app locally
+
+    npm install
+    tsd reinstall
+
+    gulp
+    python -m SimpleHTTPServer 3000
+
+    visit http://localhost:3000 to see the running app
