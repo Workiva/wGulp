@@ -1,0 +1,5 @@
+{
+    "devDependencies": {
+        "wGulp": "git+ssh://git@github.com:WebFilings/wGulp.git#master"
+    }
+}

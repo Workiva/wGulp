@@ -1,0 +1,27 @@
+{
+    // Enforcing
+    "camelcase": true,
+    "curly": true,
+    "eqeqeq": true,
+    "es3": true,
+    "freeze": true,
+    "indent": 4,
+    "maxlen": 100,
+    "nonew": true,
+    "undef": true,
+    "unused": true,
+
+    // Relaxing
+    "predef": [
+        "module",
+        "beforeEach",
+        "describe",
+        "expect",
+        "it",
+        "xit",
+        "spyOn",
+        "jasmine"
+    ],
+    "browser": true,
+    "node": true
+}

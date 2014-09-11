@@ -1,0 +1,11 @@
+language: javascript
+
+project: node
+
+install:
+  - npm install
+
+script:
+  - npm test
+
+test_reports: xunit.xml

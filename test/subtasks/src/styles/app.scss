@@ -1,0 +1,21 @@
+@import "constants";
+
+h1 {
+  color: $test_color_1;
+}
+
+h2 {
+  color: $test_color_2;
+}
+
+h3 {
+  color: $test_color_3;
+}
+
+body {
+  width: 100%;
+
+  div {
+    padding: 5px;
+  }
+}

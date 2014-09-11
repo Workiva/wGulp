@@ -1,0 +1,20 @@
+The browserify mode example (with tests)
+
+
+To run the example app locally
+
+    npm install
+    tsd reinstall
+
+    gulp
+    python -m SimpleHTTPServer 3000
+
+    visit http://localhost:3000 to see the running app
+
+
+To run the javascript tests
+
+    npm install
+    tsd reinstall
+
+    gulp test

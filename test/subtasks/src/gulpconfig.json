@@ -1,0 +1,11 @@
+{
+    "path": {
+        "src": "./src/",
+        "build": "./build/",
+        "build_src": "./build/src/",
+        "test_ts_dir": "./build/"
+    },
+    "tslintrc": "tslint.json",
+    "build_tasks": ["clean", ["react", "ts"], "bundle:app"],
+    "test_tasks": ["build", ["tstest"]]
+}
