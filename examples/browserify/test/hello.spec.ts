@@ -1,7 +1,7 @@
 /// <reference path="../api/node/node.d.ts" />
 /// <reference path="../api/jasmine/jasmine.d.ts" />
 
-var Hat:any = require('../src/hat');
+import Hat = require('../src/hat');
 
 describe('hello', function():any {
     it('world', function():any {
