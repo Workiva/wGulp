@@ -69,9 +69,10 @@ module.exports = function(gulp, options, subtasks) {
 
     gulp.desc('tsc:test', 'Transpile TypeScript from test to build_test');
     gulp.task('tsc:test', subtasks.tsc({
+        glob: options.glob.ts,
         cwd: options.path.test,
         options: options.ts,
-        dest: options.path.build
+        dest: options.path.build_test
     }));
 
     // Tasks that are just a collection of other tasks
