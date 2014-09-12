@@ -1,0 +1,7 @@
+test
+examples
+node_modules
+smithy.yml
+.sass-cache
+.npmignore
+xunit.xml

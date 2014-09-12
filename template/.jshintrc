@@ -1,0 +1,38 @@
+{
+    "predef": [
+        "define",
+        "module",
+        "require",
+        "jasmine",
+        "describe",
+        "xdescribe",
+        "it",
+        "xit",
+        "beforeEach",
+        "afterEach",
+        "expect",
+        "runs",
+        "waits",
+        "waitsFor",
+        "spyOn"
+    ],
+    "browser": true,
+
+    "asi": false,
+    "camelcase": true,
+    "curly": true,
+    "eqeqeq": true,
+    "forin": true,
+    "immed": true,
+    "indent": 4,
+    "latedef": true,
+    "newcap": true,
+    "noarg": true,
+    "noempty": false,
+    "nonew": true,
+    "quotmark": "single",
+    "undef": true,
+    "unused": true,
+    "trailing": true,
+    "maxdepth": 5
+}

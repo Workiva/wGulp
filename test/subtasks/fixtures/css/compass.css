@@ -1,0 +1,23 @@
+/* line 3, ../../src/styles/app.scss */
+h1 {
+  color: "#aabbcc";
+}
+
+/* line 7, ../../src/styles/app.scss */
+h2 {
+  color: "#041536";
+}
+
+/* line 11, ../../src/styles/app.scss */
+h3 {
+  color: "#deadbe";
+}
+
+/* line 15, ../../src/styles/app.scss */
+body {
+  width: 100%;
+}
+/* line 18, ../../src/styles/app.scss */
+body div {
+  padding: 5px;
+}
