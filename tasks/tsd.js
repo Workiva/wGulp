@@ -10,7 +10,7 @@ module.exports = function(gulp, defaults, subtasks) {
     var gutil = require('gulp-util');
     var mkdirp = require('mkdirp');
     var path = require('path');
-    var join = require('join');
+    var join = path.join;
     var tap = require('gulp-tap');
 
     var discoverInternalTaskname = taskname + ':discover:internal';
