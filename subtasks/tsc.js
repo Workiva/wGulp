@@ -20,12 +20,16 @@ module.exports = function(gulp, defaults){
                 });
             }
 
-            return stream.pipe(changed(config.dest || defaults.path.build_src))
-                .pipe(tsc(config.options || defaults.ts))
+            var outDir = config.dest || defaults.path.build_src;
+            var tscOptions = config.options || defaults.ts;
+            tscOptions.outDir = outDir;
+
+            return stream.pipe(changed(outDir))
+                .pipe(tsc(tscOptions))
                 .on('error', function(err){
                     cb(new gutil.PluginError('tsc', err));
                 })
-                .pipe(gulp.dest(config.dest || defaults.path.build_src));
+                .pipe(gulp.dest(outDir));
         };
     };
 };
