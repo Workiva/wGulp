@@ -248,13 +248,7 @@ Lint TypeScript files. Takes one custom arg:
 
 
 ## Testing with wGulp
-The default testing configuration relies on the jspm module loader to dynamically load test and source files. In order to utilize this functionality, you will need to install jspm:
-
-`npm install jspm@0.7.0-beta.9 -g`
-
->**Note:** You'll want to use the beta.9 version for now until a stable 0.7.0 is released.
-
-After installing jspm, run `jspm init` and accept the defaults. Now you should be able to run tests successfully.
+The default testing configuration relies on the jspm module loader to dynamically load test and source files. In order to utilize this functionality, you will need to install any 3rd-party library dependencies via jspm.
 
 If you do not want to use jspm to load your tests and instead would like to rely on browserify to bundle before testing, take a look at the `browserify-with-karma` example. Use a karma.conf.js that looks like the one in that example project.
 
