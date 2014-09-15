@@ -160,9 +160,9 @@ This can be accomplished like so:
 
 Internal TS definitions simply live in `./api/` and should be committed.
 
-#### DefinitelTyped Definitions
+#### DefinitelyTyped Definitions
 
-DefinitelyTyped definitions should be installed to the `./api/` by configuring the `path` option in `tsd.json`:
+DefinitelyTyped definitions should be installed to `./api/` by configuring the `path` option in `tsd.json`:
 
 ```json
 {
@@ -177,16 +177,17 @@ DefinitelyTyped definitions should be installed to the `./api/` by configuring t
 
 #### External Definitions
 
-TS definitions distributed with your project's dependencies will be automatically discovered and moved to the `./api/` directory during the **`tsd`** task.
+TS definitions distributed with your project's dependencies will be automatically discovered and moved to `./api/` during the `tsd` task.
 To configure the dependency directories that are searched during that task, you can change the `dependencies` paths option (see [Overriding Default Project Structure](#overriding-default-project-structure)).
 
-#### `tsd`
+#### The `tsd` Task
 
-Once you configure `tsd.json` to install to `./api/` and as long as you maintain your internal TS definitions in `./api/`, the **`tsd`** task will take care of the following:
+The `tsd` task will take care of the following:
 
-* discover all third-party TS definitions and move them to `./api/`
-* generate an `./api/.gitignore` file to ignore all external definitions (including those from DefinitelyTyped)
+* Discovering all third-party TS definitions and moving them to `./api/`
+* Generating an `./api/.gitignore` file to ignore all external definitions (including those from DefinitelyTyped)
 
+**Notes:**
 > If two or more external definitions collide (have the same filename), the task will warn you.
 >
 > If any external definition collides with an internal definition, the task will warn you and terminate early to prevent overwriting the internal definition.
