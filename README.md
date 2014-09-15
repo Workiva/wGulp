@@ -40,6 +40,7 @@ Using wGulp
 The best and quickest way to get value out of wGulp is to adhere to a standard directory structure (which can be overridden for legacy projects).
 
 * `./src` - TypeScript or JavaScript source code
+* `./api` - TypeScript definition files (see [Centralized APIs with TypeScript Definition Files](#centralized-apis-with-typescript-definition-files))
 * `./test` - TypeScript or JavaScript test specs, written with Jasmine
 * `./sass` - Default location for OOCSS styles
 * `./build` - Assets generated via build
@@ -59,7 +60,7 @@ Out of the box wGulp provides a *lot* of functionality. It is a collection of be
 
 ### Main Tasks
     analyze - Generate code complexity report
-    applyLicense - Prepends an Apache 2.0 license header to source files in src and sass. Does *not* do CoffeeScript yet 
+    applyLicense - Prepends an Apache 2.0 license header to source files in src and sass. Does *not* do CoffeeScript yet
     build - Build. Execute the tasks specified in build_tasks
     bundle - Generate all bundles specified in "bundles"
     bundle:<bundleName> - Create a bundle using the <bundleName> options specified in "bundles"
@@ -87,6 +88,7 @@ Out of the box wGulp provides a *lot* of functionality. It is a collection of be
     test - Execute tasks specified in test_tasks and use Karma to run the tests
     test:jasmine - Execute tasks specified in test_tasks and use node-jasmine to run the tests
     tsc - Compile TypeScript
+    tsd - Discover and centralize TypeScript definition files
     tslint - Validate TS files with tslint
     tsc:test - Compile TS test files from ./test/ to ./build/test/
     watch - Alias for watch:build
@@ -102,10 +104,10 @@ Tasks `build`, `dist`, `test`, and `default` can be modified by overriding the t
 Here are the defaults:
 
 ```js
-    build_tasks: ['clean', ['lint'], ['jsx', 'tsc', 'copy:js'], 'bundle'],
+    build_tasks: ['clean', ['lint', 'tsd'], ['jsx', 'tsc', 'copy:html', 'copy:js', 'sass'],
     test_tasks: ['build', ['tsc:test', 'copy:jstest']],
-    dist_tasks: ['clean', 'build', 'minify'],
-    default_tasks: ['test', ['analyze', 'jsdoc']],
+    dist_tasks: ['clean', 'build', 'minify', 'bundle', 'library_dist'],
+    default_tasks: ['test', ['analyze', 'jsdoc'], 'dist'],
 ```
 
 This uses runSequence to execute the tasks. Read more about this in the [runSequence subtask](#runsequence).
@@ -137,6 +139,57 @@ Adding bundle configurations is easy! Here is a simple example using jspm:
     exclude - [optional] Array of module names to exclude from the bundle
     external - [optional - applies to browserify only] Array of module names to externalize
     add_to_config - [optional - applies to jspm only] true or false. Writes bundle information to config.js, defaults to true
+
+
+### Centralized APIs with TypeScript Definition Files
+
+Maintaining statically typed APIs speeds up development, enables static code analysis, and builds an inherent contract between modules.
+TypeScript definition files are the recommended way to establish these APIs, but using them becomes tricky when consuming from multiple sources.
+
+There are three different sources for TS definitions:
+
+* Internal - project specific TS definitions that should be source controlled
+* DefinitelyTyped - TS definitions installed from [DefinitelyTyped](https://github.com/borisyankov/DefinitelyTyped) with the `tsd` package manager
+* External - TS definitions included in third-party packages (found in `node_modules/` or `jspm_packages/` for example)
+
+To make usage consistent, all TS definitions should be centralized in an API directory (`./api/`), but only the internal definitions should be source controlled.
+
+This can be accomplished like so:
+
+#### Internal Definitions
+
+Internal TS definitions simply live in `./api/` and should be committed.
+
+#### DefinitelTyped Definitions
+
+DefinitelyTyped definitions should be installed to the `./api/` by configuring the `path` option in `tsd.json`:
+
+```json
+{
+  "version": "v4",
+  "repo": "borisyankov/DefinitelyTyped",
+  "ref": "master",
+  "path": "api",
+  "bundle": "typings/tsd.d.ts",
+  "installed": {}
+}
+```
+
+#### External Definitions
+
+TS definitions distributed with your project's dependencies will be automatically discovered and moved to the `./api/` directory during the **`tsd`** task.
+To configure the dependency directories that are searched during that task, you can change the `dependencies` paths option (see [Overriding Default Project Structure](#overriding-default-project-structure)).
+
+#### `tsd`
+
+Once you configure `tsd.json` to install to `./api/` and as long as you maintain your internal TS definitions in `./api/`, the **`tsd`** task will take care of the following:
+
+* discover all third-party TS definitions and move them to `./api/`
+* generate an `./api/.gitignore` file to ignore all external definitions (including those from DefinitelyTyped)
+
+> If two or more external definitions collide (have the same filename), the task will warn you.
+>
+> If any external definition collides with an internal definition, the task will warn you and terminate early to prevent overwriting the internal definition.
 
 
 ## Subtasks
@@ -284,11 +337,13 @@ Any of these paths can be overridden with your custom configuration and the defa
         build_styles: "./build/css/",
         build_test: "./build/test/",
         dist: "./dist/",
+        api: "./api/",
         coverage: "./report/coverage/",
         complexity: "./report/complexity/",
         docs: "./docs/",
         styles: "./sass/",
-        style_include_paths: []
+        style_include_paths: [],
+        dependencies: ["./jspm_packages"]
     }
 ```
 
