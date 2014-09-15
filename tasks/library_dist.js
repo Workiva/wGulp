@@ -1,5 +1,4 @@
 module.exports = function(gulp, defaults, subtasks) {
-    var tap = require('gulp-tap');
     var fs = require('fs');
 
     var taskName = 'library_dist';

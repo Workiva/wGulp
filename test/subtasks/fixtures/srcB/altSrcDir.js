@@ -4,4 +4,4 @@ var Greeter = (function () {
     }
     return Greeter;
 })();
-//# sourceMappingURL=app.js.map
+//# sourceMappingURL=altSrcDir.js.map

@@ -51,7 +51,7 @@
     "gulp-sass": "^0.7.2",
     "gulp-shell": "^0.2.8",
     "gulp-tap": "^0.1.1",
-    "gulp-tsc": "^0.7.0",
+    "gulp-tsc": "^0.9.0",
     "gulp-tslint": "^1.1.0",
     "gulp-uglify": "^0.3.1",
     "gulp-util": "^2.2.19",
@@ -84,6 +84,7 @@
   "devDependencies": {
     "byline": "^4.1.1",
     "chai": "^1.9.1",
+    "merge-stream": "^0.1.5",
     "mocha": "^1.18.2",
     "mocha-multi": "^0.4.1",
     "sinon": "^1.10.3"
