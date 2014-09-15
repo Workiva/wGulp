@@ -302,3 +302,21 @@ var customizedOptions = {
     }
 };
 ```
+
+### Accessing resolved configuration options
+
+If you are writing custom tasks in your `gulpfile.js` you may find it useful to be able to access the configuration that wGulp is using (including any overrides you have specified). These configuration options are exported in wGulp. Here is an example of using them:
+
+```js
+wGulp = require('wGulp')(gulp, customizedOptions);
+// Add a config variable
+var config = wfgulp.config;
+var paths = config.path;
+
+// Now use the the resolved configuration
+gulp.task('copy:something', wfgulp.copy({
+    glob: config.glob.jsx,
+    dest: paths.dist
+}));
+```
+
