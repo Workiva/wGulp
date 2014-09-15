@@ -71,6 +71,7 @@
     "karma-phantomjs-launcher": "^0.1.4",
     "karma-requirejs": "^0.2.2",
     "lodash": "^2.4.1",
+    "merge-stream": "^0.1.5",
     "mkdirp": "^0.5.0",
     "open": "0.0.5",
     "partialify": "^3.1.1",
@@ -84,7 +85,6 @@
   "devDependencies": {
     "byline": "^4.1.1",
     "chai": "^1.9.1",
-    "merge-stream": "^0.1.5",
     "mocha": "^1.18.2",
     "mocha-multi": "^0.4.1",
     "sinon": "^1.10.3"
