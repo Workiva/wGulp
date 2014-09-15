@@ -29,7 +29,7 @@ module.exports = function(gulp, defaults){
             // (without this, compiling only test TS files will have inconsistent
             // output paths)
             var baseDirFile = path.resolve(path.join(defaults.path.src, './.baseDir.ts'));
-            fs.writeFileSync(baseDirFile, '// Ignore this file. For a complete explanation, see https://github.com/Webfilings/wGulp/issues/??');
+            fs.writeFileSync(baseDirFile, '// Ignore this file. For a complete explanation, see https://github.com/WebFilings/wGulp/issues/7');
             var mergedStream = merge(stream,
                 gulp.src('.baseDir.ts', {cwd: defaults.path.src})
             );
