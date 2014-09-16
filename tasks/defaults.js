@@ -46,7 +46,7 @@ module.exports = function(gulp, options, subtasks) {
     gulp.desc('copy:html', "Copy HTML from src to build_src");
     gulp.task('copy:html', subtasks.copy({
         glob: options.glob.html,
-        src: options.path.src,
+        cwd: options.path.src,
         changed: true,
         dest: options.path.build_src
     }));
