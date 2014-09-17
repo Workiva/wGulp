@@ -146,11 +146,10 @@ Adding bundle configurations is easy! Here is a simple example using jspm:
 Maintaining statically typed APIs speeds up development, enables static code analysis, and builds an inherent contract between modules.
 TypeScript definition files are the recommended way to establish these APIs, but using them becomes tricky when consuming from multiple sources.
 
-There are three different sources for TS definitions:
+There are two different sources for TS definitions:
 
 * Internal - project specific TS definitions that should be source controlled
-* DefinitelyTyped - TS definitions installed from [DefinitelyTyped](https://github.com/borisyankov/DefinitelyTyped) with the `tsd` package manager
-* External - TS definitions included in third-party packages (found in `node_modules/` or `jspm_packages/` for example)
+* External - TS definitions installed with third-party packages (found in `node_modules/` or `jspm_packages/` for example), or from [DefinitelyTyped](https://github.com/borisyankov/DefinitelyTyped) via the `tsd` package manager
 
 To make usage consistent, all TS definitions should be centralized in an API directory (`./api/`), but only the internal definitions should be source controlled.
 
@@ -160,9 +159,11 @@ This can be accomplished like so:
 
 Internal TS definitions simply live in `./api/` and should be committed.
 
-#### DefinitelyTyped Definitions
+### External Definitions
 
-DefinitelyTyped definitions should be installed to `./api/` by configuring the `path` option in `tsd.json`:
+DefinitelyTyped definitions should be installed to `./api/` by configuring the `path` option in `tsd.json`.
+
+> This is the default setting if you build your project with the [yeoman wGulp generator](https://github.com/WebFilings/generator-wGulp).
 
 ```json
 {
@@ -175,10 +176,9 @@ DefinitelyTyped definitions should be installed to `./api/` by configuring the `
 }
 ```
 
-#### External Definitions
-
 TS definitions distributed with your project's dependencies will be automatically discovered and moved to `./api/` during the `tsd` task.
-To configure the dependency directories that are searched during that task, you can change the `dependencies` paths option (see [Overriding Default Project Structure](#overriding-default-project-structure)).
+
+This should rarely be needed (convention over configuration), but the dependency directories that are searched during the `tsd` task can be configured by changing the `dependencies` path option (see [Overriding Default Project Structure](#overriding-default-project-structure)).
 
 #### The `tsd` Task
 
@@ -191,6 +191,63 @@ The `tsd` task will take care of the following:
 > If two or more external definitions collide (have the same filename), the task will warn you.
 >
 > If any external definition collides with an internal definition, the task will warn you and terminate early to prevent overwriting the internal definition.
+
+#### Example
+
+To illustrate why this centralized API pattern is effective, consider the following example.
+
+**File Structure**
+```
+|- api
+|  \- application.d.ts
+|- jspm_packages
+|  |- dependency (provides its own tsd)
+|  |  |- lib.d.ts
+|  |  \- lib.js
+|  \- lodash (does not provide a tsd)
+|     \- lodash.js
+|- src
+|  \- application.ts
+\- tsd.json (sets `path` to ./api/)
+```
+
+Assume the application wants to get type info for its own code, the dependency that provides its own tsd, and lodash.
+The application's tsd and the DefinitelyTyped definitions (once installed) are in `./api/`, but the dependency's tsd is buried in `./jspm_packages/`.
+Additionally, the DefinitelyTyped definitions are not gitignored by default because they're installed to `./api/`.
+
+The `tsd` task will centralize all tsds to `./api/` and gitignore all external definitions, giving you an api directory structure like so:
+
+```
+\- api
+   |- lodash
+   |  \- lodash.d.ts (external, ignored)
+   |- .gitignore
+   |- application.d.ts (internal)
+   \- lib.d.ts (external, ignored)
+```
+
+This means that without any additional configuration, you can easily reference external definitions in your source code and in your internal definitions, like so:
+
+**application.d.ts**
+```
+/// <reference path="lib.d.ts" />
+/// <reference path="lodash/lodash.d.ts" />
+
+declare module application {
+    ...
+}
+```
+
+**application.js**
+```
+/// <reference path="../api/application.d.ts" />
+/// <reference path="../api/lib.d.ts" />
+/// <reference path="../api/lodash/lodash.dts" />
+
+module.exports = {
+    ...
+}
+```
 
 
 ## Subtasks
