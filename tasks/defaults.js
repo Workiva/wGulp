@@ -2,6 +2,7 @@ module.exports = function(gulp, options, subtasks) {
 
     var _ = require('lodash'),
         changed = require('gulp-changed'),
+        connect = require('gulp-connect'),
         glob = require('glob'),
         open = require('open'),
         path = require('path');
@@ -74,6 +75,13 @@ module.exports = function(gulp, options, subtasks) {
     }));
 
     // Tasks that are just a collection of other tasks
+    gulp.task('connect:noreload', subtasks.connect({livereload: false}));
+
+    gulp.task('connect:stop', function(done){
+        connect.serverClose();
+        done();
+    });
+
     gulp.desc('cover', 'View code coverage statistics');
     gulp.task('cover', ['test'], function(done){
         var results = glob.sync('**/index.html', {cwd: options.path.coverage});
