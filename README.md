@@ -238,13 +238,13 @@ declare module application {
 }
 ```
 
-**application.js**
+**application.ts**
 ```
 /// <reference path="../api/application.d.ts" />
 /// <reference path="../api/lib.d.ts" />
-/// <reference path="../api/lodash/lodash.dts" />
+/// <reference path="../api/lodash/lodash.d.ts" />
 
-module.exports = {
+export = {
     ...
 }
 ```
