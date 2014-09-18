@@ -40,7 +40,7 @@ module.exports = function(gulp, options, subtasks) {
         return taskName;
     });
     gulp.desc('bundle', 'Run all bundle tasks');
-    gulp.task('bundle', bundleTasks);
+    gulp.task('bundle', subtasks.runSequence(bundleTasks));
 
     // Copy tasks
     gulp.desc('copy:html', "Copy HTML from src to build_src");
