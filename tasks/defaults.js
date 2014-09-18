@@ -11,6 +11,9 @@ module.exports = function(gulp, options, subtasks) {
     gulp.desc('build', 'Run build tasks');
     gulp.task('build', subtasks.runSequence(options.build_tasks));
 
+    gulp.desc('default', 'Run default tasks');
+    gulp.task('default', subtasks.runSequence(options.default_tasks));
+
     gulp.desc('dist', 'Run dist tasks');
     gulp.task('dist', function(cb){
         // Redefine tsc task with sourcemaps disabled
@@ -22,17 +25,19 @@ module.exports = function(gulp, options, subtasks) {
         return subtasks.runSequence(options.dist_tasks)(cb);
     });
 
+    // Test tasks
     gulp.desc('test:generate', 'Run test tasks')
     gulp.task('test:generate', subtasks.runSequence(options.test_tasks));
 
     gulp.desc('test:jasmine', 'Run test tasks and execute with jasmine');
     gulp.task('test:jasmine', subtasks.runSequence(['test:generate', 'jasmine']));
 
+    // TODO finish this task when other tasks get in
+    gulp.desc('test:functional', 'Run functional tests in a browser');
+    gulp.task('test:functional', subtasks.runSequence(['requireAll', 'connect']));
+
     gulp.desc('test', 'Run test tasks and execute with Karma');
     gulp.task('test', subtasks.runSequence(['test:generate', 'karma']));
-
-    gulp.desc('default', 'Run default tasks');
-    gulp.task('default', subtasks.runSequence(options.default_tasks));
 
     // Bundle tasks
     var bundleTasks = _.map(Object.keys(options.bundles), function(bundleName){
@@ -75,8 +80,10 @@ module.exports = function(gulp, options, subtasks) {
     }));
 
     // Tasks that are just a collection of other tasks
+    gulp.desc('connect:noreload', 'Start a server without livereload');
     gulp.task('connect:noreload', subtasks.connect({livereload: false}));
 
+    gulp.desc('connect:stop', 'Stop a running connect server allowing gulp to exit');
     gulp.task('connect:stop', function(done){
         connect.serverClose();
         done();
