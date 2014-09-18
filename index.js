@@ -14,6 +14,7 @@ module.exports = function(gulp, config){
     var subtasks = {
         analyze: require('./subtasks/analyze')(gulp, options),
         applyLicense: require('./subtasks/apply_license')(gulp, options),
+        catcher: require('./subtasks/catcher')(gulp, options),
         clean: require('./subtasks/clean')(gulp, options),
         coffee: require('./subtasks/coffee')(gulp, options),
         compass: require('./subtasks/compass')(gulp, options),

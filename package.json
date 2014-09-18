@@ -80,6 +80,7 @@
     "source-map": "^0.1.33",
     "typescript": "^1.0.1",
     "vinyl-source-stream": "^0.1.1",
+    "wf-catcher": "git+ssh://git@github.com:webfilings/wf-catcher#jam",
     "yargs": "^1.2.1"
   },
   "devDependencies": {
