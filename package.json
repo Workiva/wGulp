@@ -79,6 +79,7 @@
     "react": "^0.10.0",
     "requirejs": "^2.1.14",
     "source-map": "^0.1.33",
+    "suffer": "git+ssh://git@github.com:webfilings/suffer#wip",
     "typescript": "^1.0.1",
     "vinyl-source-stream": "^0.1.1",
     "wf-catcher": "git+ssh://git@github.com:webfilings/wf-catcher#jam",
