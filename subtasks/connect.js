@@ -13,7 +13,7 @@ module.exports = function(gulp, defaults){
             connect.server({
                 root: [rootPath],
                 port: config.port || defaults.port || 9000,
-                livereload: config.livereload || true
+                livereload: config.livereload != false
             });
             done();
         };

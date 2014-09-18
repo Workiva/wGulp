@@ -27,6 +27,7 @@ module.exports = function(gulp, config){
         jsx: require('./subtasks/jsx')(gulp, options),
         minify_css: require('./subtasks/minify_css')(gulp, options),
         minify_js: require('./subtasks/minify_js')(gulp, options),
+        requireAll: require('./subtasks/requireAll')(gulp, options),
         sass: require('./subtasks/sass')(gulp, options),
         tsc: require('./subtasks/tsc')(gulp, options),
         tslint: require('./subtasks/tslint')(gulp, options)
