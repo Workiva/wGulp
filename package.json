@@ -17,7 +17,8 @@
   },
   "peerDependencies": {
     "gulp": "^3.8.7",
-    "jspm": "0.7.1"
+    "jspm": "0.7.1",
+    "nightwatch": "^0.5"
   },
   "dependencies": {
     "autostrip-json-comments": "0.0.4",
