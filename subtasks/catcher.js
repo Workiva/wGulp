@@ -1,4 +1,4 @@
-var Catcher = require('wf-catcher');
+var Catcher = require('wf-catcher/catcher');
 
 module.exports = function(gulp, defaults){
     gulp.desc('catcher', 'Start a test result catcher server');
