@@ -33,8 +33,15 @@ module.exports = function(gulp, options, subtasks) {
     gulp.task('test:jasmine', subtasks.runSequence(['test:generate', 'jasmine']));
 
     // TODO finish this task when other tasks get in
+    gulp.task('requireAll:functionalTest', subtasks.requireAll({
+        glob: '**/*Spec.js', // options.glob.spec, // TODO - why doesn't it like this glob
+        cwd: options.path.functional_test,
+        dest: path.join(options.path.functional_test, 'index.js')
+    }));
+
     gulp.desc('test:functional', 'Run functional tests in a browser');
-    gulp.task('test:functional', subtasks.runSequence(['requireAll', 'connect']));
+    gulp.task('test:functional', ['requireAll:functionalTest', 'catcher', 'connect']);
+//    gulp.task('test:functional', subtasks.runSequence(['requireAll:functionalTest', 'connect']));
 
     gulp.desc('test', 'Run test tasks and execute with Karma');
     gulp.task('test', subtasks.runSequence(['test:generate', 'karma']));

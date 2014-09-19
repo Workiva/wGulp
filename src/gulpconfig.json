@@ -9,7 +9,7 @@
         "build_test": "./build/test/",
         "dist": "./dist/",
         "api": "./api/",
-        "functional_test": "./functional_test/",
+        "functional_test": "./functionalTest/",
         "report": "./report/",
         "coverage": "./report/coverage/",
         "complexity": "./report/complexity/",
@@ -29,7 +29,7 @@
         "html": "**/*.html",
         "sass": "**/*.sass",
         "scss": "**/*.scss",
-        "sources": [ "**/*.css", "**/*.jsx", "**/*.ts", "**/*.js", "**/*.sass", "**/*.scss"],
+        "sources": ["**/*.css", "**/*.jsx", "**/*.ts", "**/*.js", "**/*.sass", "**/*.scss"],
         "spec": ["**/*Spec.js", "**/*.spec.js", "**/*Spec.ts", "**/*.spec.ts"]
     },
     "compass_config": "config.rb",
