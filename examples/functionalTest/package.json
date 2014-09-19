@@ -14,7 +14,7 @@
   "jspm": {
     "name": "functionalTest",
     "dependencies": {
-      "paw": "github:workiva/paw@master"
+      "paw": "github:workiva/paw@HY-1378_jspm_configuration"
     }
   }
 }

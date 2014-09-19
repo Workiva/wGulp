@@ -1,8 +1,8 @@
-//var Paw = require('paw/Paw');
-//var Train = require('paw/Train');
+var Paw = require('paw/Paw');
+var Train = require('paw/Train');
 
 describe("pawSpec", function() {
-/*
+
   var paw;
 
   beforeEach(function() {
@@ -16,17 +16,16 @@ describe("pawSpec", function() {
     };
     Train.mixObjectInto(paw, extraStuff);
   });
-*/
+
   it("should use have extra stuff", function() {
 
-//      expect(paw.extra).toBeDefined();
-      expect(true).toBeTruthy();
+      expect(paw.extra).toBeDefined();
 
   });
-/*
+
   it("should click theButton2", function() {
       paw.extra();
       expect(window._clicked).toBe('theButton2');
   });
-*/
+
 });
