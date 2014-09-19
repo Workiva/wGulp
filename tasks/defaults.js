@@ -38,9 +38,11 @@ module.exports = function(gulp, options, subtasks) {
         cwd: options.path.functional_test,
         dest: path.join(options.path.functional_test, 'index.js')
     }));
-
     gulp.desc('test:functional', 'Run functional tests in a browser');
-    gulp.task('test:functional', ['requireAll:functionalTest', 'catcher', 'connect']);
+    gulp.task('test:functional', ['requireAll:functionalTest', 'catcher', 'connect'], function(done){
+        open('http://localhost:' + options.port + '/');
+        done();
+    });
 
     gulp.desc('test', 'Run test tasks and execute with Karma');
     gulp.task('test', subtasks.runSequence(['test:generate', 'karma']));
