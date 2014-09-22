@@ -139,6 +139,7 @@ Adding bundle configurations is easy! Here is a simple example using jspm:
     exclude - [optional] Array of module names to exclude from the bundle
     external - [optional - applies to browserify only] Array of module names to externalize
     add_to_config - [optional - applies to jspm only] true or false. Writes bundle information to config.js, defaults to true
+    sfx - [optional - applies to jspm only] If true, create a [self-executing bundle](https://github.com/jspm/jspm-cli#4-creating-a-self-executing-bundle)
 
 
 ### Centralized APIs with TypeScript Definition Files

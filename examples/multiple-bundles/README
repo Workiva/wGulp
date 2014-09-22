@@ -1,5 +1,7 @@
 Defining multiple bundles example. Take a look at gulpfile.js to see how multiple bundles are defined.
 
+You'll notice one of these bundles is specified as an "sfx" (self-executing) bundle.
+This will be output in globals format and does not require SystemJS to load.
 
 To run the example app locally
 
