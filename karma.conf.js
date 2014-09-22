@@ -41,7 +41,7 @@ module.exports = function(karma) {
     var configuration = lodash.merge(defaultConfiguration, karmaShim.config);
 
     // manually concatenate files array
-    configuration.files = [].concat(defaultConfiguration.files, configuration.files);
+    configuration.files = [].concat(defaultConfiguration.files, configuration.files || []);
 
     karma.set(configuration);
 };
