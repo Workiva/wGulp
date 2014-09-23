@@ -395,6 +395,8 @@ gulp test --browsers PhantomJS
 
 **Run in multiple browsers**
 ```bash
+gulp test -cf
+gulp test --chrome --firefox
 gulp test --browsers Chrome,Firefox
 ```
 
