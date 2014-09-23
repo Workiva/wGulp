@@ -376,24 +376,29 @@ wGulp supports supplying the karma browser via a command line argument. Supporte
 ```bash
 gulp test -c
 gulp test --chrome
-gulp test --browser=Chrome
+gulp test --browsers Chrome
 ```
 
 **Run in Firefox**
 ```bash
 gulp test -f
 gulp test --firefox
-gulp test --browser=Firefox
+gulp test --browsers Firefox
 ```
 
 **Run in PhantomJS**
 ```bash
 gulp test -p
 gulp test --phantom
-gulp test --browser=PhantomJS
+gulp test --browsers PhantomJS
 ```
 
-*Note:* The `--browser=` option hands the string directly to karma's `browsers: []` configuration, so it is not limited to the three browsers listed above.
+**Run in multiple browsers**
+```bash
+gulp test --browsers Chrome,Firefox
+```
+
+*Note:* The `--browsers` option hands the string directly to karma's `browsers: []` configuration, so it is not limited to the three browsers listed above.
 
 
 ## Customization

@@ -51,8 +51,8 @@ module.exports = function(gulp, options, subtasks) {
         else if(argv.phantom || argv.p){
             karmaOptions.browsers = ['PhantomJS'];
         }
-        else if(argv.browser){
-            karmaOptions.browsers = [argv.browser];
+        else if(argv.browsers){
+            karmaOptions.browsers = argv.browsers.split(',');
         }
 
         // Run karma
