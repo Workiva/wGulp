@@ -37,17 +37,20 @@ module.exports = function(gulp, options, subtasks) {
             action: 'start',
             configFile: options.karma
         };
-        if(argv.chrome || argv.c){
-            karmaOptions.browsers = ['Chrome'];
-        }
-        else if(argv.firefox || argv.f){
-            karmaOptions.browsers = ['Firefox'];
-        }
-        else if(argv.phantom || argv.p){
-            karmaOptions.browsers = ['PhantomJS'];
-        }
-        else if(argv.browsers){
+        if(argv.browsers){
             karmaOptions.browsers = argv.browsers.split(',');
+        }
+        else if(argv.c || argv.f || argv.p || argv.chrome || argv.firefox || argv.phantom) {
+            karmaOptions.browsers = [];
+            if(argv.chrome || argv.c){
+                karmaOptions.browsers.push('Chrome');
+            }
+            if(argv.firefox || argv.f){
+                karmaOptions.browsers.push('Firefox');
+            }
+            if(argv.phantom || argv.p){
+                karmaOptions.browsers.push('PhantomJS');
+            }
         }
 
         // Run karma
