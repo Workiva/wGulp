@@ -5,9 +5,8 @@ This example is intended to show off the bundle-sfx (self-executing bundle) feat
 To run the example app locally
 
     npm install
+    jspm install
 
     gulp
-    python -m SimpleHTTPServer 3000
-
-    visit http://localhost:3000 to see the running app
+    gulp serve
 
