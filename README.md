@@ -369,6 +369,33 @@ npm install jspm -g
 
 If you do not want to use jspm to load your tests and instead would like to rely on browserify to bundle before testing, take a look at the `browserify-with-karma` example. Use a karma.conf.js that looks like the one in that example project.
 
+### Override Karma browser option via CLI
+wGulp supports supplying the karma browser via a command line argument. Supported arguments are as follows. Note that these work for both `gulp test` and `gulp watch:test`.
+
+**Run in Chrome**
+```bash
+gulp test -c
+gulp test --chrome
+gulp test --browser=Chrome
+```
+
+**Run in Firefox**
+```bash
+gulp test -f
+gulp test --firefox
+gulp test --browser=Firefox
+```
+
+**Run in PhantomJS**
+```bash
+gulp test -p
+gulp test --phantom
+gulp test --browser=PhantomJS
+```
+
+*Note:* The `--browser=` option hands the string directly to karma's `browsers: []` configuration, so it is not limited to the three browsers listed above.
+
+
 ## Customization
 You can now customize the configuration of wGulp by editing `gulpfile.js`:
 
