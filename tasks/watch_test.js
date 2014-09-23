@@ -1,5 +1,6 @@
 module.exports = function(gulp, options, subtasks) {
 
+    var argv = require('yargs').argv;
     var cwd = process.cwd();
     var _ = require('lodash');
     var path = require('path');
@@ -31,11 +32,27 @@ module.exports = function(gulp, options, subtasks) {
         karmaConf(karmaShim);
         var files = karmaShim.config.files;
 
+        // Build karma options
+        var karmaOptions = {
+            action: 'start',
+            configFile: options.karma
+        };
+        if(argv.chrome || argv.c){
+            karmaOptions.browsers = ['Chrome'];
+        }
+        else if(argv.firefox || argv.f){
+            karmaOptions.browsers = ['Firefox'];
+        }
+        else if(argv.phantom || argv.p){
+            karmaOptions.browsers = ['PhantomJS'];
+        }
+        else if(argv.browser){
+            karmaOptions.browsers = [argv.browser];
+        }
+
+        // Run karma
         return gulp.src(files)
-            .pipe(karma({
-                configFile: options.karma,
-                action: 'start'
-            }));
+            .pipe(karma(karmaOptions));
     };
     gulp.task(taskname, ['test:generate'], fn);
 };
