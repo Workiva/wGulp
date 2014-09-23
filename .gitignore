@@ -1,6 +1,12 @@
 .idea/
 .sass-cache/
 build
+examples/**/api/.gitignore
+examples/**/build
+examples/**/dist
+examples/**/docs
+examples/**/jspm_packages
+examples/**/report
 node_modules
 test/subtasks/build
 test/subtasks/dist

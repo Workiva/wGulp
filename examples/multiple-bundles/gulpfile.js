@@ -11,8 +11,7 @@ var customizedOptions = {
          buttonModule: {
              bundler: 'browserify',
              entry: './build/src/buttonModule.js',
-             output: 'buttonBundle.js',
-             sfx: true
+             output: 'buttonBundle.js'
          }
     }
 };
