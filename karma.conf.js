@@ -4,9 +4,13 @@ module.exports = function(karma) {
     var cwd = process.cwd();
     var path = require('path');
     var lodash = require('lodash');
+
+    var polyfill = path.resolve(cwd, "node_modules/wGulp/src/function-bind-polyfill.js");
+
     var defaultConfiguration = {
         basePath: path.resolve(cwd),
         browsers: ["PhantomJS"],
+        files: [polyfill],
         frameworks: ['jspm', 'jasmine'],
         jspm: {
             loadFiles: ['build/test/**/*.js'],
@@ -35,5 +39,9 @@ module.exports = function(karma) {
         localKarmaFunction(karmaShim);
     }
     var configuration = lodash.merge(defaultConfiguration, karmaShim.config);
+
+    // manually concatenate files array
+    configuration.files = [].concat(defaultConfiguration.files, configuration.files || []);
+
     karma.set(configuration);
 };

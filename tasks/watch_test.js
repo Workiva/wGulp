@@ -25,8 +25,12 @@ module.exports = function(gulp, options, subtasks) {
         gulp.watch([testJs, testTs, srcJs, srcTs, srcJsx], ['test:generate']);
         gulp.watch(buildJs).on('change', server.changed);
 
-        var polyfill = path.resolve(cwd, "node_modules/wGulp/src/function-bind-polyfill.js");
-        var files = [polyfill];
+        // get files from karma config
+        var karmaShim = {set: function(config) { this.config = config; }};
+        var karmaConf = require(path.resolve(cwd, 'node_modules/wGulp/karma.conf.js'));
+        karmaConf(karmaShim);
+        var files = karmaShim.config.files;
+
         return gulp.src(files)
             .pipe(karma({
                 configFile: options.karma,

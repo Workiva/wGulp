@@ -57,7 +57,7 @@
     "gulp-util": "^2.2.19",
     "jshint": "^2.5.0",
     "jshint-stylish": "^0.1.5",
-    "karma": "^0.12.21",
+    "karma": "^0.12.23",
     "karma-browserifast": "^0.7.0",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^0.1.4",
