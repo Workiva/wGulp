@@ -4,7 +4,9 @@ module.exports = function(gulp, defaults, subtasks) {
 
     var taskName = 'test:nightwatch';
 
-    gulp.task(taskName + ':run', ['connect:noreload'], function(done){
+    gulp.task(taskName + ':run',
+        ['requireAll:functionalTest', 'catcher', 'connect:noreload'],
+        function(done){
         var command = './node_modules/.bin/nightwatch -c ' + defaults.nightwatch_config;
         return gulp.src('').pipe(shell([command]));
     });

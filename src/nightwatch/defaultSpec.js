@@ -1,14 +1,14 @@
 var fs = require('fs'),
     path = require('path');
 
-var sufferLoader = fs.readFileSync(path.resolve(__dirname, '../../node_modules/suffer/dist/suffer.js')).toString();
+var autoPawPath = path.resolve(__dirname, '../../node_modules/autoPaw/dist/autoPaw.js');
+var autoPawJs = fs.readFileSync(autoPawPath).toString();
 
 module.exports = {
-    "All Suffer Tests" : function (browser) {
-        browser
-            .url("http://localhost:9000?runTests=4000&runnerPath=node_modules/suffer/dist/sufferRunner.js")
+    "All Suffer Tests" : function (client) {
+        client.url(client.launch_url)
             .waitForElementVisible('body', 1000)
-            .execute(sufferLoader)
+            .execute(autoPawJs)
             .pause(100000)
             .end();
   }

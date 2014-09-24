@@ -19,7 +19,7 @@
 
   "test_settings" : {
     "default" : {
-      "launch_url" : "http://localhost",
+      "launch_url" : "http://localhost:9000?runTests=4000&runnerPath=node_modules/wGulp/node_modules/autoPaw/dist/",
       "selenium_port"  : 4444,
       "selenium_host"  : "localhost",
       "silent": true,
