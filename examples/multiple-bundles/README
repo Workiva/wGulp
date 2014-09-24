@@ -1,6 +1,5 @@
 Defining multiple bundles example. Take a look at gulpfile.js to see how multiple bundles are defined.
 
-
 To run the example app locally
 
     npm install

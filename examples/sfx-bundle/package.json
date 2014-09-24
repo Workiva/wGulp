@@ -1,0 +1,13 @@
+{
+  "devDependencies": {
+    "wGulp": "git+ssh://git@github.com:WebFilings/wGulp.git#master"
+  },
+  "dependencies": {
+    "react": "^0.11.1"
+  },
+  "jspm": {
+    "dependencies": {
+      "react": "^0.11.2"
+    }
+  }
+}

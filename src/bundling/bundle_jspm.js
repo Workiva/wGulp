@@ -11,6 +11,7 @@ function ensureOutputDir(filePath){
 };
 
 module.exports = function(gulp, options, bundleOptions, cb){
+    var bundleCommand = bundleOptions.sfx ? " bundle-sfx " : " bundle ";
     var entry = bundleOptions.entry || "";
     var output = bundleOptions.output || "";
     var inject = bundleOptions.add_to_config === false ? "" : " --inject";
@@ -26,7 +27,7 @@ module.exports = function(gulp, options, bundleOptions, cb){
     // Ensure output directory exists
     ensureOutputDir(output);
 
-    var command = "./node_modules/.bin/jspm bundle " + entry + includes + excludes + " " + output + inject;
+    var command = "./node_modules/.bin/jspm" + bundleCommand + entry + includes + excludes + " " + output + inject;
 
     return gulp.src('').pipe(shell([command]));
 };
