@@ -403,6 +403,28 @@ gulp test --browsers Chrome,Firefox
 
 *Note:* The `--browsers` option hands the string directly to karma's `browsers: []` configuration, so it is not limited to the three browsers listed above.
 
+### Testing with SauceLabs
+wGulp comes with SauceLabs support so that you can easily run your unit tests in a large number of browsers.
+In order to utilize this feature you will need a SauceLabs account. Configure wGulp with your username and accessKey via customizedOptions:
+
+```js
+var customizedOptions = {
+    sauceLabs: {
+        testName: "Some identifier of your project/test run",
+        username: "your-sauce-username",
+        accessKey: "your-sauce-accessKey"
+    }
+};
+```
+
+After that is configured, it is easy to use it.
+
+```
+gulp test --sauce
+```
+
+If you would like to customize the browsers that your tests get run in, add a `browsers` key to the sauceLabs config. Its value should be an object containing karma-sauce-launcher configs. See the karma-sauce-launcher [documentation](https://github.com/karma-runner/karma-sauce-launcher#adding-karma-sauce-launcher-to-an-existing-karma-config) for more information.
+
 
 ## Customization
 You can now customize the configuration of wGulp by editing `gulpfile.js`:
