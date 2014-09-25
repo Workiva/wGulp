@@ -9,6 +9,21 @@ wGulp aims to lessen the start-up time of a new JavaScript project by providing 
 
 It's easy, it's sensible, it gets you cool features for free, it frees up your mind to actually think about interesting problems like your business logic.
 
+### Table of Contents
+
+- [Quick-start](#quick-start)
+- [Using wGulp](#using-wgulp)
+  - [Expected/Default project structure](#expecteddefault-project-structure)
+  - [See what's included out of the box](#see-whats-included-out-of-the-box)
+    - [Main Tasks](#main-tasks)
+    - [Build, test, dist, and default tasks](#build-test-dist-and-default-tasks)
+    - [Bundling](#bundling)
+    - [Centralized APIs with TypeScript Definition Files](#centralized-apis-with-typescript-definition-files)
+  - [Testing with wGulp](#testing-with-wgulp)
+- [Extending wGulp](#extending-wgulp)
+  - [Subtasks](#subtasks)
+  - [Customization](#customization)
+
 Quick-start
 ===============
 
@@ -160,7 +175,7 @@ This can be accomplished like so:
 
 Internal TS definitions simply live in `./api/` and should be committed.
 
-### External Definitions
+#### External Definitions
 
 DefinitelyTyped definitions should be installed to `./api/` by configuring the `path` option in `tsd.json`.
 
@@ -250,6 +265,77 @@ export = {
 }
 ```
 
+
+## Testing with wGulp
+The default testing configuration relies on the jspm module loader to dynamically load test and source files. In order to utilize this functionality, you will need to install any 3rd-party library dependencies via jspm.
+
+If you don't already have jspm installed globally, go ahead and do so:
+
+```
+npm install jspm -g
+```
+
+If you do not want to use jspm to load your tests and instead would like to rely on browserify to bundle before testing, take a look at the `browserify-with-karma` example. Use a karma.conf.js that looks like the one in that example project.
+
+### Override Karma browser option via CLI
+wGulp supports supplying the karma browser via a command line argument. Supported arguments are as follows. Note that these work for both `gulp test` and `gulp watch:test`. This is a simple alternative to specifying your own `karma.conf.js` when you only want to change the browser that the tests are running in.
+
+**Run in Chrome**
+```bash
+gulp test -c
+gulp test --chrome
+gulp test --browsers Chrome
+```
+
+**Run in Firefox**
+```bash
+gulp test -f
+gulp test --firefox
+gulp test --browsers Firefox
+```
+
+**Run in PhantomJS**
+```bash
+gulp test -p
+gulp test --phantom
+gulp test --browsers PhantomJS
+```
+
+**Run in multiple browsers**
+```bash
+gulp test -cf
+gulp test --chrome --firefox
+gulp test --browsers Chrome,Firefox
+```
+
+*Note:* The `--browsers` option hands the string directly to karma's `browsers: []` configuration, so it is not limited to the three browsers listed above.
+
+### Testing with SauceLabs
+wGulp comes with SauceLabs support so that you can easily run your unit tests in a large number of browsers.
+In order to utilize this feature you will need a SauceLabs account. Configure wGulp with your username and accessKey via customizedOptions:
+
+```js
+var customizedOptions = {
+    sauceLabs: {
+        testName: "Some identifier of your project/test run",
+        username: "your-sauce-username",
+        accessKey: "your-sauce-accessKey"
+    }
+};
+```
+
+After that is configured, it is easy to use it.
+
+```
+gulp test --sauce
+```
+
+If you would like to customize the browsers that your tests get run in, add a `browsers` key to the sauceLabs config. Its value should be an object containing karma-sauce-launcher configs. See the karma-sauce-launcher [documentation](https://github.com/karma-runner/karma-sauce-launcher#adding-karma-sauce-launcher-to-an-existing-karma-config) for more information.
+
+
+# Extending wGulp
+
+wGulp provides a simple interface to extend its functionality via subtasks and customized configuration options.
 
 ## Subtasks
 
@@ -357,73 +443,6 @@ Lint TypeScript files. Takes one custom arg:
 
     config_file - Path to tslint config file. Defaults to config's "tslintrc"
     emitError - Whether or not to fail/exit on error. Defaults to true
-
-
-## Testing with wGulp
-The default testing configuration relies on the jspm module loader to dynamically load test and source files. In order to utilize this functionality, you will need to install any 3rd-party library dependencies via jspm.
-
-If you don't already have jspm installed globally, go ahead and do so:
-
-```
-npm install jspm -g
-```
-
-If you do not want to use jspm to load your tests and instead would like to rely on browserify to bundle before testing, take a look at the `browserify-with-karma` example. Use a karma.conf.js that looks like the one in that example project.
-
-### Override Karma browser option via CLI
-wGulp supports supplying the karma browser via a command line argument. Supported arguments are as follows. Note that these work for both `gulp test` and `gulp watch:test`. This is a simple alternative to specifying your own `karma.conf.js` when you only want to change the browser that the tests are running in.
-
-**Run in Chrome**
-```bash
-gulp test -c
-gulp test --chrome
-gulp test --browsers Chrome
-```
-
-**Run in Firefox**
-```bash
-gulp test -f
-gulp test --firefox
-gulp test --browsers Firefox
-```
-
-**Run in PhantomJS**
-```bash
-gulp test -p
-gulp test --phantom
-gulp test --browsers PhantomJS
-```
-
-**Run in multiple browsers**
-```bash
-gulp test -cf
-gulp test --chrome --firefox
-gulp test --browsers Chrome,Firefox
-```
-
-*Note:* The `--browsers` option hands the string directly to karma's `browsers: []` configuration, so it is not limited to the three browsers listed above.
-
-### Testing with SauceLabs
-wGulp comes with SauceLabs support so that you can easily run your unit tests in a large number of browsers.
-In order to utilize this feature you will need a SauceLabs account. Configure wGulp with your username and accessKey via customizedOptions:
-
-```js
-var customizedOptions = {
-    sauceLabs: {
-        testName: "Some identifier of your project/test run",
-        username: "your-sauce-username",
-        accessKey: "your-sauce-accessKey"
-    }
-};
-```
-
-After that is configured, it is easy to use it.
-
-```
-gulp test --sauce
-```
-
-If you would like to customize the browsers that your tests get run in, add a `browsers` key to the sauceLabs config. Its value should be an object containing karma-sauce-launcher configs. See the karma-sauce-launcher [documentation](https://github.com/karma-runner/karma-sauce-launcher#adding-karma-sauce-launcher-to-an-existing-karma-config) for more information.
 
 
 ## Customization
