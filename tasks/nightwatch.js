@@ -11,8 +11,9 @@ module.exports = function(gulp, defaults, subtasks) {
         return gulp.src('').pipe(shell([command]));
     });
 
-    gulp.task(taskName, [taskName + ':run'], function(){
-        return gulp.start(['connect:stop']);
+    gulp.task(taskName, [taskName + ':run'], function(done){
+        gulp.start(['connect:stop', 'catcher:stop']);
+        done();
     });
 
 };

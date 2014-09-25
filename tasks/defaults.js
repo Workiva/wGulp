@@ -1,6 +1,7 @@
 module.exports = function(gulp, options, subtasks) {
 
     var _ = require('lodash'),
+        Catcher = require('wf-catcher/catcher'),
         changed = require('gulp-changed'),
         connect = require('gulp-connect'),
         glob = require('glob'),
@@ -32,7 +33,6 @@ module.exports = function(gulp, options, subtasks) {
     gulp.desc('test:jasmine', 'Run test tasks and execute with jasmine');
     gulp.task('test:jasmine', subtasks.runSequence(['test:generate', 'jasmine']));
 
-    // TODO finish this task when other tasks get in
     gulp.task('requireAll:functionalTest', subtasks.requireAll({
         glob: '**/*Spec.js', // options.glob.spec, // TODO - why doesn't it like this glob
         cwd: options.path.functional_test,
@@ -46,6 +46,22 @@ module.exports = function(gulp, options, subtasks) {
 
     gulp.desc('test', 'Run test tasks and execute with Karma');
     gulp.task('test', subtasks.runSequence(['test:generate', 'karma']));
+
+    var server = null;
+    gulp.desc('catcher', 'Start a test result catcher server');
+    gulp.task('catcher', function(done) {
+        server = new Catcher();
+        server.start();
+        done();
+    });
+
+    gulp.desc('catcher:stop', 'Stop a test result catcher server');
+    gulp.task('catcher:stop', function(done){
+        if(server){
+            server.stop();
+        }
+        done();
+    })
 
     // Bundle tasks
     var bundleTasks = _.map(Object.keys(options.bundles), function(bundleName){
