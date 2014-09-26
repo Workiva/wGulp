@@ -42,6 +42,8 @@ module.exports = function(gulp, options, subtasks) {
             action: 'run',
             configFile: options.karma
         };
+
+        // Determine which browsers to run in based on CLI options
         if(argv.browsers){
             karmaOptions.browsers = argv.browsers.split(',');
         }
@@ -55,6 +57,18 @@ module.exports = function(gulp, options, subtasks) {
             }
             if(argv.phantom || argv.p){
                 karmaOptions.browsers.push('PhantomJS');
+            }
+        }
+
+        // Add SauceLabs configuration if user specified --sauce option
+        if(argv.sauce && options.sauceLabs && options.sauceLabs.browsers){
+            karmaOptions.customLaunchers = options.sauceLabs.browsers;
+            karmaOptions.browsers = Object.keys(options.sauceLabs.browsers);
+            karmaOptions.reporters = ['dots', 'saucelabs'];
+            karmaOptions.sauceLabs = {
+                username: options.sauceLabs.username,
+                accessKey: options.sauceLabs.accessKey,
+                testName: options.sauceLabs.testName
             }
         }
 

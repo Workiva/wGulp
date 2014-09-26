@@ -37,6 +37,8 @@ module.exports = function(gulp, options, subtasks) {
             action: 'start',
             configFile: options.karma
         };
+
+        // Determine which browsers to run in based on CLI options
         if(argv.browsers){
             karmaOptions.browsers = argv.browsers.split(',');
         }
