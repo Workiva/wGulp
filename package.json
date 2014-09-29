@@ -12,6 +12,7 @@
     "gulp-init": "./src/init.js"
   },
   "main": "index.js",
+  "license": "Apache-2.0",
   "scripts": {
     "test": "multi='xunit=xunit.xml tap=-' mocha test/**/*.spec.js --reporter mocha-multi"
   },

@@ -1,4 +1,3 @@
-
 module.exports = function(karma) {
     var fs = require('fs');
     var cwd = process.cwd();
