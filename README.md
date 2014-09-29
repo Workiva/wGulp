@@ -35,11 +35,15 @@ $ npm install -g gulp
 # Create a package.json if you don't have one
 $ npm init
 
-  # Add wGulp as a dependency
+# Add wGulp as a dependency
 $ npm install webfilings/wGulp --save-dev
 
 # Create your initial gulpfile.js
 $ ./node_modules/.bin/gulp-init
+
+# Initialize jspm
+$ jspm init
+$ jspm install
 ```
 > Pro-tip: Add ./node_modules/.bin to your path to be able to run `gulp-init` without specifying the path
 
