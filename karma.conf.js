@@ -18,9 +18,6 @@ module.exports = function(karma) {
         preprocessors: {
             'build/src/**/*.js': ['coverage']
         },
-        proxies: {
-            '/jspm_packages/': '/base/jspm_packages/'
-        },
         reporters: ['progress', 'junit', 'html', 'coverage'],
         junitReporter: {
             outputFile: './report/tests/test-results.xml'
