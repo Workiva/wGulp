@@ -9,6 +9,10 @@ wGulp aims to lessen the start-up time of a new JavaScript project by providing 
 
 It's easy, it's sensible, it gets you cool features for free, it frees up your mind to actually think about interesting problems like your business logic.
 
+#### Upgrading wGulp?
+
+Take a look at the [release notes](https://github.com/Workiva/karma-jspm/releases/tag/1.0.0). We will publish any breaking changes there.
+
 ### Table of Contents
 
 - [Quick-start](#quick-start)
