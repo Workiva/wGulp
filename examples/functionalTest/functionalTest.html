@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title>SomeApp to Test</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+        <script src="./jspm_packages/system@0.8.js"></script>
+        <script src="config.js"></script>
+        <script type="text/javascript" src="./node_modules/wGulp/node_modules/suffer/dist/suffer.js"></script>
+
+    </head>
+    <body>
+        <ul>
+            <li><a href="?runTests">Run tests via the querystring</a></li>
+            <li><a href="?runTests&reportURL=http://localhost:3000/result">Run tests and report XML</a></li>
+            <li><a href="?runTests&testIndexFile=./functionalTest/paw_index">Run a different list of tests</a></li>
+        </ul>
+        <!-- almost nothing in the page - will hit harder apps later... -->
+        <button onClick='window._clicked = this.id; console.log("hello")'  id='theButton'>Whatever</button>
+        <button onClick='window._clicked = this.id; console.log("hello2")' id='theButton2'>Whatever2</button>
+        <button onClick='window._clicked = this.id; console.log("hello3")' id='theButton3'>Whatever3</button>
+    </body>
+</html>

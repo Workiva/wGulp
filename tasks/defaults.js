@@ -17,7 +17,9 @@
 module.exports = function(gulp, options, subtasks) {
 
     var _ = require('lodash'),
+        Catcher = require('wf-catcher/catcher'),
         changed = require('gulp-changed'),
+        connect = require('gulp-connect'),
         glob = require('glob'),
         open = require('open'),
         path = require('path');
@@ -25,6 +27,9 @@ module.exports = function(gulp, options, subtasks) {
     // Tasks that call runSequence
     gulp.desc('build', 'Run build tasks');
     gulp.task('build', subtasks.runSequence(options.build_tasks));
+
+    gulp.desc('default', 'Run default tasks');
+    gulp.task('default', subtasks.runSequence(options.default_tasks));
 
     gulp.desc('dist', 'Run dist tasks');
     gulp.task('dist', function(cb){
@@ -37,17 +42,42 @@ module.exports = function(gulp, options, subtasks) {
         return subtasks.runSequence(options.dist_tasks)(cb);
     });
 
+    // Test tasks
     gulp.desc('test:generate', 'Run test tasks')
     gulp.task('test:generate', subtasks.runSequence(options.test_tasks));
 
     gulp.desc('test:jasmine', 'Run test tasks and execute with jasmine');
     gulp.task('test:jasmine', subtasks.runSequence(['test:generate', 'jasmine']));
 
+    gulp.task('requireAll:functionalTest', subtasks.requireAll({
+        glob: '**/*Spec.js', // options.glob.spec, // TODO - why doesn't it like this glob
+        cwd: options.path.functional_test,
+        dest: path.join(options.path.functional_test, 'index.js')
+    }));
+    gulp.desc('test:functional', 'Run functional tests in a browser');
+    gulp.task('test:functional', ['requireAll:functionalTest', 'catcher', 'connect'], function(done){
+        open('http://localhost:' + options.port + '/');
+        done();
+    });
+
     gulp.desc('test', 'Run test tasks and execute with Karma');
     gulp.task('test', subtasks.runSequence(['test:generate', 'karma']));
 
-    gulp.desc('default', 'Run default tasks');
-    gulp.task('default', subtasks.runSequence(options.default_tasks));
+    var server = null;
+    gulp.desc('catcher', 'Start a test result catcher server');
+    gulp.task('catcher', function(done) {
+        server = new Catcher();
+        server.start();
+        done();
+    });
+
+    gulp.desc('catcher:stop', 'Stop a test result catcher server');
+    gulp.task('catcher:stop', function(done){
+        if(server){
+            server.stop();
+        }
+        done();
+    })
 
     // Bundle tasks
     var bundleTasks = _.map(Object.keys(options.bundles), function(bundleName){
@@ -90,6 +120,15 @@ module.exports = function(gulp, options, subtasks) {
     }));
 
     // Tasks that are just a collection of other tasks
+    gulp.desc('connect:noreload', 'Start a server without livereload');
+    gulp.task('connect:noreload', subtasks.connect({livereload: false}));
+
+    gulp.desc('connect:stop', 'Stop a running connect server allowing gulp to exit');
+    gulp.task('connect:stop', function(done){
+        connect.serverClose();
+        done();
+    });
+
     gulp.desc('cover', 'View code coverage statistics');
     gulp.task('cover', ['test'], function(done){
         var results = glob.sync('**/index.html', {cwd: options.path.coverage});

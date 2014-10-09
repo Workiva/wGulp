@@ -18,9 +18,11 @@
   },
   "peerDependencies": {
     "gulp": "^3.8.7",
-    "jspm": "0.7.1"
+    "jspm": "0.7.1",
+    "nightwatch": "^0.5"
   },
   "dependencies": {
+    "autoPaw": "git+ssh://git@github.com:webfilings/autoPaw#wip",
     "autostrip-json-comments": "0.0.4",
     "browserify": "^4.1.6",
     "chalk": "^0.4.0",
@@ -82,6 +84,7 @@
     "source-map": "^0.1.33",
     "typescript": "^1.0.1",
     "vinyl-source-stream": "^0.1.1",
+    "wf-catcher": "git+ssh://git@github.com:webfilings/wf-catcher",
     "yargs": "^1.2.1"
   },
   "devDependencies": {

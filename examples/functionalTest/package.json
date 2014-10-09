@@ -1,0 +1,20 @@
+{
+  "name": "functionalTest",
+  "version": "0.0.0",
+  "description": "Another awesome JavaScript project from WebFilings.",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/WebFilings/functionalTest.git"
+  },
+  "readmeFilename": "README.md",
+  "devDependencies": {
+    "wGulp": "git+ssh://git@github.com:WebFilings/wGulp.git#jam"
+  },
+  "jspm": {
+    "name": "functionalTest",
+    "dependencies": {
+      "paw": "github:workiva/paw@HY-1378_jspm_configuration"
+    }
+  }
+}
