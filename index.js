@@ -50,7 +50,13 @@ module.exports = function(gulp, config){
     // Create tasks for each task function with default options
     _.forOwn(subtasks, function(val, key){
         key = key.replace('_', ':');
-        gulp.task(key, val());
+
+        var taskDeps = options.taskTree[key];
+        if(!taskDeps || _.isEmpty(taskDeps)){
+            gulp.task(key, val());
+        } else {
+            gulp.task(key, taskDeps, val());
+        }
     });
 
     // Add runSequence function (not really a task/subtask)

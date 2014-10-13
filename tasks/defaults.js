@@ -24,7 +24,7 @@ module.exports = function(gulp, options, subtasks) {
 
     // Tasks that call runSequence
     gulp.desc('build', 'Run build tasks');
-    gulp.task('build', subtasks.runSequence(options.build_tasks));
+    gulp.task('build', options.taskTree['build']);
 
     gulp.desc('dist', 'Run dist tasks');
     gulp.task('dist', function(cb){
@@ -34,20 +34,20 @@ module.exports = function(gulp, options, subtasks) {
         gulp.task('tsc', subtasks.tsc({options: tscOptions}));
 
         // Run dist tasks
-        return subtasks.runSequence(options.dist_tasks)(cb);
+        return gulp.start(options.taskTree['dist']);
     });
 
     gulp.desc('test:generate', 'Run test tasks')
-    gulp.task('test:generate', subtasks.runSequence(options.test_tasks));
+    gulp.task('test:generate', options.taskTree['test:generate']);
 
     gulp.desc('test:jasmine', 'Run test tasks and execute with jasmine');
-    gulp.task('test:jasmine', subtasks.runSequence(['test:generate', 'jasmine']));
+    gulp.task('test:jasmine', options.taskTree['test:jasmine']);
 
     gulp.desc('test', 'Run test tasks and execute with Karma');
-    gulp.task('test', subtasks.runSequence(['test:generate', 'karma']));
+    gulp.task('test', options.taskTree['test']);
 
     gulp.desc('default', 'Run default tasks');
-    gulp.task('default', subtasks.runSequence(options.default_tasks));
+    gulp.task('default', options.taskTree['default']);
 
     // Bundle tasks
     var bundleTasks = _.map(Object.keys(options.bundles), function(bundleName){
@@ -56,11 +56,11 @@ module.exports = function(gulp, options, subtasks) {
         return taskName;
     });
     gulp.desc('bundle', 'Run all bundle tasks');
-    gulp.task('bundle', (bundleTasks && bundleTasks.length > 0) ? subtasks.runSequence(bundleTasks) : null);
+    gulp.task('bundle', options.taskTree['bundle'], (bundleTasks && bundleTasks.length > 0) ? subtasks.runSequence(bundleTasks) : null);
 
     // Copy tasks
     gulp.desc('copy:html', "Copy HTML from src to build_src");
-    gulp.task('copy:html', subtasks.copy({
+    gulp.task('copy:html', options.taskTree['copy:html'], subtasks.copy({
         glob: options.glob.html,
         cwd: options.path.src,
         changed: true,
@@ -68,7 +68,7 @@ module.exports = function(gulp, options, subtasks) {
     }));
 
     gulp.desc('copy:js', 'Copy JS from src to build_src');
-    gulp.task('copy:js', subtasks.copy({
+    gulp.task('copy:js', options.taskTree['copy:js'], subtasks.copy({
         glob: options.glob.js,
         cwd: options.path.src,
         dest: options.path.build_src,
@@ -76,7 +76,7 @@ module.exports = function(gulp, options, subtasks) {
     }));
 
     gulp.desc('copy:jstest', 'Copy JS from test to build_test');
-    gulp.task('copy:jstest', subtasks.copy({
+    gulp.task('copy:jstest', options.taskTree['copy:jstest'], subtasks.copy({
         glob: options.glob.js,
         cwd: options.path.test,
         dest: options.path.build_test,
@@ -84,30 +84,30 @@ module.exports = function(gulp, options, subtasks) {
     }));
 
     gulp.desc('tsc:test', 'Transpile TypeScript from test to build_test');
-    gulp.task('tsc:test', subtasks.tsc({
+    gulp.task('tsc:test', options.taskTree['tsc:test'], subtasks.tsc({
         cwd: options.path.test,
         dest: options.path.build
     }));
 
     // Tasks that are just a collection of other tasks
     gulp.desc('cover', 'View code coverage statistics');
-    gulp.task('cover', ['test'], function(done){
+    gulp.task('cover', options.taskTree['cover'], function(done){
         var results = glob.sync('**/index.html', {cwd: options.path.coverage});
         open(path.resolve(options.path.coverage + results[0]));
         done();
     });
 
     gulp.desc('lint', 'Validate code');
-    gulp.task('lint', ['jshint', 'tslint']);
+    gulp.task('lint', options.taskTree['lint']);
 
     gulp.desc('minify', 'Minify JS and CSS code');
-    gulp.task('minify', ['minify:js', 'minify:css']);
+    gulp.task('minify', options.taskTree['minify']);
 
     gulp.task('_tslint', subtasks.tslint({emitError: false}));
     gulp.task('_jshint', subtasks.jshint({emitError: false}));
 
     gulp.desc('qa', 'QA - Run the default tasks and start serve afterwards.');
-    gulp.task('qa', ['default'], function() {
+    gulp.task('qa', options.taskTree['qa'], function() {
         return gulp.start('serve');
     });
 
@@ -118,6 +118,6 @@ module.exports = function(gulp, options, subtasks) {
     });
 
     gulp.desc('watch', 'Runs watch:build');
-    gulp.task('watch', ['watch:build']);
+    gulp.task('watch', options.taskTree['watch:build']);
 
 };

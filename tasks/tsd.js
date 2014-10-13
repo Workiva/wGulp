@@ -63,7 +63,7 @@ module.exports = function(gulp, defaults, subtasks) {
     }
 
     // survey the api directory and discover internal tsd files
-    gulp.task(discoverInternalTaskname, function() {
+    gulp.task(discoverInternalTaskname, defaults.taskTree['tsd'], function() {
         internalDefs = [];
 
         // get list of ignored files (ignored means external)

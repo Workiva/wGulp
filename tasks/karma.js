@@ -93,5 +93,5 @@ module.exports = function(gulp, options, subtasks) {
             .pipe(karma(karmaOptions));
     };
 
-    gulp.task(taskname, fn);
+    gulp.task(taskname, options.taskTree['karma'], fn);
 };
