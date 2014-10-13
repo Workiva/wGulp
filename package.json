@@ -5,7 +5,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git://github.com/WebFilings/wGulp.git"
+    "url": "git://github.com/Workiva/wGulp.git"
   },
   "readmeFilename": "README.md",
   "bin": {

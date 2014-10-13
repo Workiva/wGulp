@@ -40,7 +40,7 @@ $ npm install -g gulp
 $ npm init
 
 # Add wGulp as a dependency
-$ npm install webfilings/wGulp --save-dev
+$ npm install workiva/wGulp --save-dev
 
 # Create your initial gulpfile.js
 $ ./node_modules/.bin/gulp-init
@@ -187,7 +187,7 @@ Internal TS definitions simply live in `./api/` and should be committed.
 
 DefinitelyTyped definitions should be installed to `./api/` by configuring the `path` option in `tsd.json`.
 
-> This is the default setting if you build your project with the [yeoman wGulp generator](https://github.com/WebFilings/generator-wGulp).
+> This is the default setting if you build your project with the [yeoman wGulp generator](https://github.com/Workiva/generator-wGulp).
 
 ```json
 {
