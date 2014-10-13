@@ -16,9 +16,9 @@
   "scripts": {
     "test": "multi='xunit=xunit.xml tap=-' mocha test/**/*.spec.js --reporter mocha-multi"
   },
-  "peerDependencies": {
+  "optionalDependencies": {
     "gulp": "^3.8.7",
-    "jspm": "0.7.1"
+    "jspm": "^0.7.1"
   },
   "dependencies": {
     "autostrip-json-comments": "0.0.4",
@@ -80,7 +80,7 @@
     "react": "^0.10.0",
     "requirejs": "^2.1.14",
     "source-map": "^0.1.33",
-    "typescript": "^1.0.1",
+    "typescript": "1.0.1",
     "vinyl-source-stream": "^0.1.1",
     "yargs": "^1.2.1"
   },
