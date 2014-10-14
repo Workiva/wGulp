@@ -16,7 +16,7 @@
   "scripts": {
     "test": "multi='xunit=xunit.xml tap=-' mocha test/**/*.spec.js --reporter mocha-multi"
   },
-  "peerDependencies": {
+  "optionalDependencies": {
     "gulp": "^3.8.7",
     "jspm": "^0.7.1"
   },
