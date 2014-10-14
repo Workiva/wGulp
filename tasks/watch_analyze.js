@@ -16,14 +16,13 @@
 
 module.exports = function(gulp, options, subtasks) {
 
-    var open = require('open');
-    var connect = require('gulp-connect');
-
     var taskname = 'watch:analyze';
 
     gulp.desc(taskname, 'Watch source files for changes and recalculate complexity');
 
     var fn = function(done) {
+        var open = require('open');
+        var connect = require('gulp-connect');
 
         open('http://localhost:' + options.port + '/' + options.path.complexity);
 

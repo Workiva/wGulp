@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-var run_bundle = require('./run_bundle');
-
 module.exports = function(gulp, options){
+    var run_bundle = require('./run_bundle');
+
     // Dynamically create gulp tasks for each bundle config
     for(var key in options.bundles) {
         (function (bundleKey) {

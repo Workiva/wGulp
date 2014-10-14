@@ -13,10 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-var argv = require('yargs').argv;
-var bundle_browserify = require('./bundle_browserify');
-var bundle_jspm = require('./bundle_jspm');
 var gutil = require('gulp-util');
 
 
@@ -32,6 +28,10 @@ var get_bundle_options = function(options, cb, bundleName){
 };
 
 module.exports = function(gulp, options, cb, bundleName){
+    var argv = require('yargs').argv;
+    var bundle_browserify = require('./bundle_browserify');
+    var bundle_jspm = require('./bundle_jspm');
+
     var bundleOptions = get_bundle_options(options, cb, bundleName);
 
     // This means the cb was already called with an error, so exit the task.

@@ -14,9 +14,6 @@
  * limitations under the License.
  */
 
-var concat = require('gulp-concat');
-var gutil = require('gulp-util');
-
 module.exports = function(gulp, defaults){
     gulp.desc('concat', 'Concatenate JS files');
 
@@ -25,6 +22,8 @@ module.exports = function(gulp, defaults){
             config = {};
 
         return function (cb) {
+            var concat = require('gulp-concat');
+            var gutil = require('gulp-util');
 
             var stream;
             if(config.src)

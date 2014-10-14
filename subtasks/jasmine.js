@@ -14,9 +14,6 @@
  * limitations under the License.
  */
 
-var jasmine = require('gulp-jasmine');
-var gutil = require('gulp-util');
-
 module.exports = function(gulp, defaults){
     gulp.desc('jasmine', 'Run unit tests with jasmine');
 
@@ -25,6 +22,8 @@ module.exports = function(gulp, defaults){
             config = {};
 
         return function (cb) {
+            var jasmine = require('gulp-jasmine');
+            var gutil = require('gulp-util');
 
             var stream;
             if(config.src)

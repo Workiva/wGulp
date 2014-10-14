@@ -14,9 +14,6 @@
  * limitations under the License.
  */
 
-var compass = require('gulp-compass');
-var gutil = require('gulp-util');
-
 module.exports = function(gulp, defaults){
     gulp.desc('compass', 'Compile CSS with compass')
 
@@ -25,6 +22,8 @@ module.exports = function(gulp, defaults){
             config = {};
 
         return function (cb) {
+            var compass = require('gulp-compass');
+            var gutil = require('gulp-util');
 
             var stream;
             if(config.src)

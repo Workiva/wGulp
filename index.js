@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-var _ = require('lodash');
-var cwd = process.cwd();
-var glob = require('glob');
-var path = require('path');
-
 module.exports = function(gulp, config){
+    var _ = require('lodash');
+    var cwd = process.cwd();
+    var glob = require('glob');
+    var path = require('path');
+
     var options = require('./src/gulpconfig.json');
     options = require('./src/merge_options')(config, options);
 

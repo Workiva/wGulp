@@ -14,13 +14,6 @@
  * limitations under the License.
  */
 
-var changed = require('gulp-changed');
-var merge = require('merge-stream');
-var gutil = require('gulp-util');
-var path = require('path');
-var tsc = require('gulp-tsc');
-var fs = require('fs');
-
 module.exports = function(gulp, defaults){
     gulp.desc('tsc', 'Transpile TypeScript to javascript');
 
@@ -29,6 +22,12 @@ module.exports = function(gulp, defaults){
             config = {};
 
         return function (cb) {
+            var changed = require('gulp-changed');
+            var merge = require('merge-stream');
+            var gutil = require('gulp-util');
+            var path = require('path');
+            var tsc = require('gulp-tsc');
+            var fs = require('fs');
 
             var stream;
             if(config.src)

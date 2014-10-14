@@ -17,13 +17,12 @@
 module.exports = function(gulp, defaults){
     gulp.desc('copy', 'Copy files');
 
-    var changed = require('gulp-changed');
-
     return function(config) {
         if(!config)
             config = {};
 
         return function () {
+            var changed = require('gulp-changed');
 
             var stream;
             if(config.src)

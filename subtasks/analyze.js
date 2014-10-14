@@ -14,10 +14,6 @@
  * limitations under the License.
  */
 
-var gutil = require('gulp-util');
-var path = require('path');
-var plato = require('gulp-plato');
-
 module.exports = function(gulp, defaults){
     gulp.desc('analyze', 'View code complexity report');
 
@@ -26,8 +22,11 @@ module.exports = function(gulp, defaults){
             config = {};
 
         return function (cb) {
-            var reportPath = path.resolve(config.dest || defaults.path.complexity);
+            var gutil = require('gulp-util');
+            var path = require('path');
+            var plato = require('gulp-plato');
 
+            var reportPath = path.resolve(config.dest || defaults.path.complexity);
             var stream;
             if(config.src)
                 stream = gulp.src(config.src);
