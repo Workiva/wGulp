@@ -14,10 +14,6 @@
  * limitations under the License.
  */
 
-var rename = require('gulp-rename');
-var gutil = require('gulp-util');
-var uglify = require('gulp-uglify');
-
 module.exports = function(gulp, defaults){
     gulp.desc('minify:js', 'Minify JS code and change extension to .min.js');
 
@@ -26,6 +22,9 @@ module.exports = function(gulp, defaults){
             config = {};
 
         return function (cb) {
+            var rename = require('gulp-rename');
+            var gutil = require('gulp-util');
+            var uglify = require('gulp-uglify');
 
             var stream;
             if(config.src)

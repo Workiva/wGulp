@@ -16,15 +16,14 @@
 
 module.exports = function(gulp, options, subtasks) {
 
-    var glob = require('glob');
-    var open = require('open');
-    var connect = require('gulp-connect');
-
     var taskname = 'watch:cover';
 
     gulp.desc(taskname, 'Watch source and test files for changes and recalculate coverage');
 
     var fn = function(done) {
+        var glob = require('glob');
+        var open = require('open');
+        var connect = require('gulp-connect');
 
         var results = glob.sync('**/index.html', {cwd: options.path.coverage});
         open('http://localhost:' + options.port + '/' + options.path.coverage + results[0]);

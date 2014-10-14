@@ -14,10 +14,6 @@
  * limitations under the License.
  */
 
-var cwd = process.cwd();
-var path = require('path');
-var tslint = require('gulp-tslint');
-
 module.exports = function(gulp, defaults){
     gulp.desc('tslint', 'Validate TS files with tslint');
 
@@ -26,6 +22,10 @@ module.exports = function(gulp, defaults){
             config = {};
 
         return function () {
+            var cwd = process.cwd();
+            var path = require('path');
+            var tslint = require('gulp-tslint');
+
             var tslintrc = path.resolve(cwd, config.config_file || defaults.tslintrc);
             var tsConfig = require(tslintrc);
 

@@ -15,30 +15,32 @@
  */
 
 module.exports = function(gulp, defaults){
-    gulp.desc('concat', 'Concatenate JS files');
+    gulp.desc('livescript', 'Compile LiveScript');
 
     return function(config) {
         if(!config)
             config = {};
 
         return function (cb) {
-            var concat = require('gulp-concat');
+            var changed = require('gulp-changed');
+            var livescript = require('gulp-livescript');
             var gutil = require('gulp-util');
 
             var stream;
             if(config.src)
                 stream = gulp.src(config.src);
             else {
-                stream = gulp.src(config.glob || defaults.glob.js, {
-                    cwd: config.cwd || defaults.path.dist
+                stream = gulp.src(config.glob || defaults.glob.livescript, {
+                    cwd: config.cwd || defaults.path.src
                 });
             }
 
-            return stream.pipe(concat(config.outfile || 'concat.js'))
+            return stream.pipe(changed(config.dest || defaults.path.build_src))
+                .pipe(livescript({bare: config.bare || true}))
                 .on('error', function(err){
-                    cb(new gutil.PluginError('concat', err));
+                    cb(new gutil.PluginError('livescript', err));
                 })
-                .pipe(gulp.dest(config.dest || defaults.path.dist));
+                .pipe(gulp.dest(config.dest || defaults.path.build_src));
         };
     };
 };

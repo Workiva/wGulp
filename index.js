@@ -14,31 +14,29 @@
  * limitations under the License.
  */
 
-var _ = require('lodash');
-var cwd = process.cwd();
-var glob = require('glob');
-var path = require('path');
-var getDeps = require('./src/dep_tree_parser');
-
-
-function detectCycle(options, task, key, val){
-    if(_.contains(val, task)){
-        if(_.contains(getDeps(options, task), key)){
-            console.log("Circular task dependency detected! \t" + task + " --> " + key);
-        }
-    }
-}
-
 module.exports = function(gulp, config){
+    var _ = require('lodash');
+    var cwd = process.cwd();
+    var glob = require('glob');
+    var path = require('path');
+    var getDeps = require('./src/dep_tree_parser');
+
     var options = require('./src/gulpconfig.json');
     options = require('./src/merge_options')(config, options);
 
     // Check for circular dependencies (cycles) in taskTree
+    function detectCycle(task, key, val){
+        if(_.contains(val, task)){
+            if(_.contains(getDeps(options, task), key)){
+                console.log("Circular task dependency detected! \t" + task + " --> " + key);
+            }
+        }
+    }
     _.forOwn(options.taskTree, function(val, key){
         val = getDeps(options, key);
         _.forOwn(options.taskTree, function(innerVal, innerKey){
             if(innerKey != key){
-                detectCycle(options, innerKey, key, val);
+                detectCycle(innerKey, key, val);
             }
         });
     });
@@ -60,6 +58,7 @@ module.exports = function(gulp, config){
         jsdoc: require('./subtasks/jsdoc')(gulp, options),
         jshint: require('./subtasks/jshint')(gulp, options),
         jsx: require('./subtasks/jsx')(gulp, options),
+        livescript: require('./subtasks/livescript')(gulp, options),
         minify_css: require('./subtasks/minify_css')(gulp, options),
         minify_js: require('./subtasks/minify_js')(gulp, options),
         sass: require('./subtasks/sass')(gulp, options),

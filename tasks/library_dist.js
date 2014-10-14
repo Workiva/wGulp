@@ -15,8 +15,7 @@
  */
 
 module.exports = function(gulp, defaults, subtasks) {
-    var fs = require('fs'),
-        getDeps = require('../src/dep_tree_parser');
+    var getDeps = require('../src/dep_tree_parser');
 
     var taskName = 'library_dist';
 
@@ -29,6 +28,8 @@ module.exports = function(gulp, defaults, subtasks) {
     gulp.task(taskName + ':copy:api', getDeps(defaults, 'library_dist'), function(){
         // copy definition files for this repo to dist/ by copying everything
         // from api/ that isn't git ignored
+        var fs = require('fs');
+
         var excludeIgnoredGlob = [];
         try {
             var data = fs.readFileSync(defaults.path.api + '/.gitignore', {encoding: 'utf8'});

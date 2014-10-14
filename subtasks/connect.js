@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-var connect = require('gulp-connect');
-var path = require('path');
 
 module.exports = function(gulp, defaults){
     gulp.desc('connect', 'Start a local server');
@@ -25,6 +23,9 @@ module.exports = function(gulp, defaults){
             config = {};
 
         return function(done) {
+            var connect = require('gulp-connect');
+            var path = require('path');
+            
             var rootPath = path.resolve('./');
             connect.server({
                 root: [rootPath],

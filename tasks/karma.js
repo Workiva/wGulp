@@ -16,20 +16,20 @@
 
 module.exports = function(gulp, options, subtasks) {
 
-    var argv = require('yargs').argv;
-    var _ = require('lodash');
-    var cwd = process.cwd();
-    var glob = require('glob');
-    var gutil = require('gulp-util');
-    var karma = require('gulp-karma');
-    var path = require('path');
-
     var getDeps = require('../src/dep_tree_parser');
+
     var taskname = 'karma';
 
     gulp.desc(taskname, 'Start the karma test runner for any test run');
 
     var fn = function (done) {
+        var argv = require('yargs').argv;
+        var _ = require('lodash');
+        var cwd = process.cwd();
+        var glob = require('glob');
+        var gutil = require('gulp-util');
+        var karma = require('gulp-karma');
+        var path = require('path');
 
         // Check for test specs. If none, skip Karma
         if(_.isArray(options.glob.spec)){

@@ -26,6 +26,7 @@
         "tsd": "**/*.d.ts",
         "js": "**/*.js",
         "html": "**/*.html",
+        "livescript": "**/*.ls",
         "sass": "**/*.sass",
         "scss": "**/*.scss",
         "sources": [ "**/*.css", "**/*.jsx", "**/*.ts", "**/*.js", "**/*.sass", "**/*.scss"],
