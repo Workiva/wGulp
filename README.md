@@ -20,7 +20,7 @@ Take a look at the [release notes](https://github.com/Workiva/karma-jspm/release
   - [Expected/Default project structure](#expecteddefault-project-structure)
   - [See what's included out of the box](#see-whats-included-out-of-the-box)
     - [Main Tasks](#main-tasks)
-    - [Build, test, dist, and default tasks](#build-test-dist-and-default-tasks)
+    - [Task Dependency Tree](#task-dependency-tree)
     - [Bundling](#bundling)
     - [Centralized APIs with TypeScript Definition Files](#centralized-apis-with-typescript-definition-files)
   - [Testing with wGulp](#testing-with-wgulp)
@@ -123,18 +123,75 @@ Out of the box wGulp provides a *lot* of functionality. It is a collection of be
     watch:lint - Run lint task and rerun when source or test files change
     watch:test - Run test task and rerun when source or test files change
 
-### Build, test, dist, and default tasks
-Tasks `build`, `dist`, `test`, and `default` can be modified by overriding the task lists in the config (i.e. `build_tasks`).
-Here are the defaults:
+### Task Dependency Tree
+Tasks in gulp can wait until other tasks finish by designating those tasks as dependencies. We've extracted that functionality into a single configuration option called `taskTree`.
+Here are some defaults for your reference:
 
 ```js
-    build_tasks: ['clean', ['lint', 'tsd'], ['jsx', 'tsc', 'copy:html', 'copy:js', 'sass'],
-    test_tasks: ['build', ['tsc:test', 'copy:jstest']],
-    dist_tasks: ['clean', 'build', 'minify', 'bundle', 'library_dist'],
-    default_tasks: ['test', ['analyze', 'jsdoc'], 'dist'],
+taskTree: {
+    build: ['clean', 'lint', 'tsd', 'jsx', 'tsc', 'copy:html', 'copy:js', 'sass'],
+    bundle: ['clean', 'build'],
+    default: ['clean', 'build', 'test', 'analyze', 'jsdoc', 'dist'],
+    dist: ['clean', 'build', 'minify', 'bundle', 'library_dist'],
+    preTest: ['build', 'tsc:test', 'copy:jstest'],
+    test: ['preTest', 'karma'],
+    ...
+}
 ```
 
-This uses runSequence to execute the tasks. Read more about this in the [runSequence subtask](#runsequence).
+The rest of the tree can be found in [`wGulp/src/gulpconfig.json`](src/gulpconfig.json).
+
+You can override any portion of the tree to alter which tasks cause other tasks to run. Say you want to add a task called `myCustomTask` to build. You can simply copy the array from above and add it:
+
+```js
+taskTree: {
+    build: ['clean', 'lint', 'tsd', 'jsx', 'tsc', 'copy:html', 'copy:js', 'sass', 'myCustomTask'],
+    ...
+}
+```
+
+But that gets pretty verbose. Because of that annoyance we offer alternative syntax for including and excluding tasks from the default dependency arrays.
+
+```js
+taskTree: {
+    build: {
+        include: ['myCustomTask']
+    }
+    ...
+}
+```
+
+The object form of this configuration accepts the `include` and `exclude` keys as arrays.
+
+Here are some more examples of this kind of configuration:
+
+##### Not a TypeScript project?
+Then you may want to exclude the TypeScript specific tasks:
+
+```js
+taskTree: {
+    build: {
+        exclude: ['tsd', 'tsc']
+    },
+    preTest: {
+        exclude: ['tsc:test']
+    }
+    ...
+}
+```
+
+##### Not a library?
+Then you may want to exclude the `library_dist` task from dist:
+
+```js
+taskTree: {
+    dist: {
+        exclude: ['library_dist']
+    }
+    ...
+}
+```
+
 
 ### Bundling
 
@@ -437,6 +494,8 @@ Minifies CSS code.
 Minifies JS code.
 
 ##### runSequence
+*Note: we highly recommend using the [task dependency system](#task-dependency-tree) instead of runSequence to ensure the fastest possible build and to prevent duplicate task runs.*
+
 Run a set of tasks in sequence. Does not take standard args. Instead, pass an array of tasks to execute: `[["react", "ts", "js"], "bundle:app"]`
 
 Tasks in the base-level list will run sequentially. Tasks within inner lists will run in parallel. In this example, `react`, `ts`, and `js` will all run in parallel, and when they are all done, `bundle:app` will run.
