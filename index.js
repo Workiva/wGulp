@@ -24,7 +24,7 @@ module.exports = function(gulp, config){
     var options = require('./src/gulpconfig.json');
     options = require('./src/merge_options')(config, options);
 
-    // Check for circular dependencies (cycles) in taskTree
+    // Check for circular dependencies (cycles) in resulting taskTree
     function detectCycle(task, key, val){
         if(_.contains(val, task)){
             if(_.contains(getDeps(options, task), key)){
@@ -111,6 +111,9 @@ module.exports = function(gulp, config){
 
     // Add config to exports
     subtasks.config = options;
+
+    // Expose getDeps in case consumers want to use it
+    subtasks.getDeps = _.curry(getDeps)(options);
 
     return subtasks;
 };

@@ -2,8 +2,10 @@ var gulp = require('gulp');
 
 // Override default options (such as path) here
 var customizedOptions = {
-    build_tasks: ['copy:js', 'tsc'],
-    default_tasks: ['build', ['analyze', 'jsdoc']]    
+    taskTree: {
+        build: ['copy:js', 'tsc'],
+        default: ['build', 'analyze', 'jsdoc']
+    }
 };
 
 var wGulp = require('wGulp')(gulp, customizedOptions);
