@@ -15,7 +15,6 @@
  */
 
 module.exports = function(gulp, defaults, subtasks) {
-    var fs = require('fs');
 
     var taskName = 'library_dist';
 
@@ -28,6 +27,8 @@ module.exports = function(gulp, defaults, subtasks) {
     gulp.task(taskName + ':copy:api', function(){
         // copy definition files for this repo to dist/ by copying everything
         // from api/ that isn't git ignored
+        var fs = require('fs');
+
         var excludeIgnoredGlob = [];
         try {
             var data = fs.readFileSync(defaults.path.api + '/.gitignore', {encoding: 'utf8'});

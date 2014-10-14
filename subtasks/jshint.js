@@ -14,10 +14,6 @@
  * limitations under the License.
  */
 
-var cwd = process.cwd();
-var path = require('path');
-var jshint = require('gulp-jshint');
-
 module.exports = function(gulp, defaults) {
     gulp.desc('jshint', 'Validate JS files with jshint');
 
@@ -26,6 +22,10 @@ module.exports = function(gulp, defaults) {
             config = {};
 
         return function () {
+            var cwd = process.cwd();
+            var path = require('path');
+            var jshint = require('gulp-jshint');
+            
             var jshintrc = path.resolve(cwd, config.config_file || defaults.jshintrc);
 
             var stream;

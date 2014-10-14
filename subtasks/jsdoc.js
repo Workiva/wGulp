@@ -14,9 +14,6 @@
  * limitations under the License.
  */
 
-var gutil = require('gulp-util');
-var jsdoc = require('gulp-jsdoc');
-
 module.exports = function(gulp, defaults) {
     gulp.desc('jsdoc', 'Generate documentation with JSDoc');
 
@@ -25,6 +22,8 @@ module.exports = function(gulp, defaults) {
             config = {};
 
         return function (cb) {
+            var gutil = require('gulp-util');
+            var jsdoc = require('gulp-jsdoc');
 
             var stream;
             if(config.src)

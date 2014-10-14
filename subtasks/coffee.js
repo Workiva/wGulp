@@ -14,9 +14,6 @@
  * limitations under the License.
  */
 
-var changed = require('gulp-changed');
-var coffee = require('gulp-coffee');
-var gutil = require('gulp-util');
 
 module.exports = function(gulp, defaults){
     gulp.desc('coffee', 'Compile CoffeeScript');
@@ -26,6 +23,9 @@ module.exports = function(gulp, defaults){
             config = {};
 
         return function (cb) {
+            var changed = require('gulp-changed');
+            var coffee = require('gulp-coffee');
+            var gutil = require('gulp-util');
 
             var stream;
             if(config.src)

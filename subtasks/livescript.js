@@ -14,10 +14,6 @@
  * limitations under the License.
  */
 
-var changed = require('gulp-changed');
-var livescript = require('gulp-livescript');
-var gutil = require('gulp-util');
-
 module.exports = function(gulp, defaults){
     gulp.desc('livescript', 'Compile LiveScript');
 
@@ -26,6 +22,9 @@ module.exports = function(gulp, defaults){
             config = {};
 
         return function (cb) {
+            var changed = require('gulp-changed');
+            var livescript = require('gulp-livescript');
+            var gutil = require('gulp-util');
 
             var stream;
             if(config.src)
