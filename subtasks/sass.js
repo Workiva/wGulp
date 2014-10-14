@@ -14,9 +14,6 @@
  * limitations under the License.
  */
 
-var gutil = require('gulp-util');
-var sass = require('gulp-sass');
-
 module.exports = function(gulp, defaults){
     gulp.desc('sass', 'Compile SASS to CSS');
 
@@ -25,6 +22,8 @@ module.exports = function(gulp, defaults){
             config = {};
 
         return function (cb) {
+            var gutil = require('gulp-util');
+            var sass = require('gulp-sass');
 
             var stream;
             if(config.src)

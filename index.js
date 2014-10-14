@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-var _ = require('lodash');
-var cwd = process.cwd();
-var glob = require('glob');
-var path = require('path');
-
 module.exports = function(gulp, config){
+    var _ = require('lodash');
+    var cwd = process.cwd();
+    var glob = require('glob');
+    var path = require('path');
+
     var options = require('./src/gulpconfig.json');
     options = require('./src/merge_options')(config, options);
 
@@ -40,6 +40,7 @@ module.exports = function(gulp, config){
         jsdoc: require('./subtasks/jsdoc')(gulp, options),
         jshint: require('./subtasks/jshint')(gulp, options),
         jsx: require('./subtasks/jsx')(gulp, options),
+        livescript: require('./subtasks/livescript')(gulp, options),
         minify_css: require('./subtasks/minify_css')(gulp, options),
         minify_js: require('./subtasks/minify_js')(gulp, options),
         sass: require('./subtasks/sass')(gulp, options),

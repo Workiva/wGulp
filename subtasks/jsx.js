@@ -14,10 +14,6 @@
  * limitations under the License.
  */
 
-var changed = require('gulp-changed');
-var gutil = require('gulp-util');
-var react = require('gulp-react');
-
 module.exports = function(gulp, defaults){
     gulp.desc('jsx', 'Transpile JSX code with React to JS');
 
@@ -26,6 +22,9 @@ module.exports = function(gulp, defaults){
             config = {};
 
         return function (cb) {
+            var changed = require('gulp-changed');
+            var gutil = require('gulp-util');
+            var react = require('gulp-react');
 
             var stream;
             if(config.src)

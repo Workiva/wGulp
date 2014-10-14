@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-var _ = require('lodash');
-var fs = require('fs-extra');
 
 module.exports = function(gulp, defaults){
     gulp.desc('clean', 'Clean out directories');
@@ -25,6 +23,9 @@ module.exports = function(gulp, defaults){
             config = [defaults.path.build, defaults.path.dist];
 
         return function (done) {
+            var _ = require('lodash');
+            var fs = require('fs-extra');
+
             if(_.isArray(config)){
                 _.forEach(config, function(val){
                     fs.removeSync(val);

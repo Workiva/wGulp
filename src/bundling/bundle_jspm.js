@@ -14,12 +14,10 @@
  * limitations under the License.
  */
 
-var mkdirp = require('mkdirp');
-var path = require('path');
-var shell = require('gulp-shell');
-
-
 function ensureOutputDir(filePath){
+    var mkdirp = require('mkdirp');
+    var path = require('path');
+
     var dirPath = path.dirname(filePath);
     if(dirPath != '.'){
         mkdirp.sync(dirPath);
@@ -27,6 +25,8 @@ function ensureOutputDir(filePath){
 };
 
 module.exports = function(gulp, options, bundleOptions, cb){
+    var shell = require('gulp-shell');
+
     var bundleCommand = bundleOptions.sfx ? " bundle-sfx " : " bundle ";
     var entry = bundleOptions.entry || "";
     var output = bundleOptions.output || "";

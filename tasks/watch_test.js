@@ -16,18 +16,17 @@
 
 module.exports = function(gulp, options, subtasks) {
 
-    var argv = require('yargs').argv;
-    var cwd = process.cwd();
-    var _ = require('lodash');
-    var path = require('path');
-    var karma = require('gulp-karma');
-    var livereload = require('gulp-livereload');
-
     var taskname = 'watch:test';
 
     gulp.desc(taskname, 'Watch test files for changes and regenerate JS');
 
     var fn = function(done) {
+        var argv = require('yargs').argv;
+        var cwd = process.cwd();
+        var _ = require('lodash');
+        var path = require('path');
+        var karma = require('gulp-karma');
+        var livereload = require('gulp-livereload');
 
         var server = livereload();
         server.changed();

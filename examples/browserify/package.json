@@ -1,7 +1,7 @@
 {
   "devDependencies": {
     "tsd": "^0.5.7",
-    "wGulp": "git+ssh://git@github.com:WebFilings/wGulp.git#master"
+    "wGulp": "git+ssh://git@github.com:Workiva/wGulp.git#master"
   },
   "dependencies": {
     "react": "^0.11.1"

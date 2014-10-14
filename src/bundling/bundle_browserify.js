@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-var _ = require('lodash');
-var browserify = require('browserify');
-var fs = require('fs');
-var gutil = require('gulp-util');
-var source = require('vinyl-source-stream');
-
 module.exports = function(gulp, options, bundleOptions, cb){
+    var _ = require('lodash');
+    var browserify = require('browserify');
+    var fs = require('fs');
+    var gutil = require('gulp-util');
+    var source = require('vinyl-source-stream');
+    
     var i;
     var b = browserify({
         entries: bundleOptions.entry,
