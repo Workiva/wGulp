@@ -42,6 +42,7 @@
     "gulp-jshint": "^1.5.5",
     "gulp-karma": "0.0.4",
     "gulp-livereload": "^2.1.0",
+    "gulp-livescript": "^1.2.0",
     "gulp-minify-css": "^0.3.8",
     "gulp-open": "^0.2.8",
     "gulp-plato": "^0.2.1",

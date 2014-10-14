@@ -102,6 +102,7 @@ Out of the box wGulp provides a *lot* of functionality. It is a collection of be
     jshint - Validate JS files with jshint
     jsx - Compile React JSX
     lint - Validate source with jshint and tslint
+    livescript - Transpile LiveScript to JavaScript
     minify - Minifiy CSS and JS files in ./dist/
     minify:css - Minify CSS files in ./dist/
     minify:js  - Minify JS files in ./dist/
@@ -424,6 +425,10 @@ Run js code through the jshint linter. Takes one custom arg:
 
 ##### jsx
 Compile React jsx code into JavaScript.
+
+##### livescript
+Transpile code from LiveScript to JavaScript.
+Takes additional argument `bare` which defaults to `true` and is passed into gulp-livescript.
 
 ##### minify_css
 Minifies CSS code.

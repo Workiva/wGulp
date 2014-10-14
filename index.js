@@ -40,6 +40,7 @@ module.exports = function(gulp, config){
         jsdoc: require('./subtasks/jsdoc')(gulp, options),
         jshint: require('./subtasks/jshint')(gulp, options),
         jsx: require('./subtasks/jsx')(gulp, options),
+        livescript: require('./subtasks/livescript')(gulp, options),
         minify_css: require('./subtasks/minify_css')(gulp, options),
         minify_js: require('./subtasks/minify_js')(gulp, options),
         sass: require('./subtasks/sass')(gulp, options),
