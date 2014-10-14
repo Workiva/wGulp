@@ -70,7 +70,7 @@ module.exports = function(gulp, config){
     _.forOwn(subtasks, function(val, key){
         key = key.replace('_', ':');
 
-        var taskDeps = options.taskTree[key];
+        var taskDeps = getDeps(options, key);
         if(!taskDeps || _.isEmpty(taskDeps)){
             gulp.task(key, val());
         } else {
