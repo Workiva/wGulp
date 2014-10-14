@@ -192,6 +192,27 @@ taskTree: {
 }
 ```
 
+#### Using the Dependency Tree in a Custom Task
+Perhaps you want to utilize the dependency tree when defining your own task. wGulp exposes the `getDeps` function for this purpose.
+
+```js
+var customizedOptions = {
+    taskTree: {
+        'copy:dist': ['clean', 'build']
+    }
+}
+var wGulp = require('wGulp')(gulp, customizedOptions);
+
+// Add your own tasks here
+gulp.task('copy:dist', wGulp.getDeps('copy:dist'), wGulp.copy({
+    src: ['path/to/custom/file'],
+    dest: wGulp.config.paths.dist    
+}));
+
+```
+
+The `getDeps` function on the wGulp object simply takes the key of the task to lookup as an argument.
+
 
 ### Bundling
 
