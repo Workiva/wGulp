@@ -16,7 +16,8 @@
 
 module.exports = function(gulp, defaults, subtasks) {
 
-    var taskname = 'tsd';
+    var taskname = 'tsd',
+        getDeps = require('../src/dep_tree_parser');
 
     gulp.desc(taskname, 'Discover and centralize TypeScript definition files');
 
@@ -63,7 +64,7 @@ module.exports = function(gulp, defaults, subtasks) {
     }
 
     // survey the api directory and discover internal tsd files
-    gulp.task(discoverInternalTaskname, defaults.taskTree['tsd'], function() {
+    gulp.task(discoverInternalTaskname, getDeps(defaults, 'tsd'), function() {
         internalDefs = [];
 
         // get list of ignored files (ignored means external)

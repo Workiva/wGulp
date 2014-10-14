@@ -18,10 +18,30 @@ var _ = require('lodash');
 var cwd = process.cwd();
 var glob = require('glob');
 var path = require('path');
+var getDeps = require('./src/dep_tree_parser');
+
+
+function detectCycle(options, task, key, val){
+    if(_.contains(val, task)){
+        if(_.contains(getDeps(options, task), key)){
+            console.log("Circular task dependency detected! \t" + task + " --> " + key);
+        }
+    }
+}
 
 module.exports = function(gulp, config){
     var options = require('./src/gulpconfig.json');
     options = require('./src/merge_options')(config, options);
+
+    // Check for circular dependencies (cycles) in taskTree
+    _.forOwn(options.taskTree, function(val, key){
+        val = getDeps(options, key);
+        _.forOwn(options.taskTree, function(innerVal, innerKey){
+            if(innerKey != key){
+                detectCycle(options, innerKey, key, val);
+            }
+        });
+    });
 
     // Put our custom describe method onto gulp
     gulp.desc = require('./src/desc');

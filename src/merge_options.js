@@ -18,7 +18,12 @@ module.exports = function(localOptions, options) {
     var _ = require('lodash');
 
     _.merge(options, localOptions, function(a, b) {
-        if (_.isArray(a)) {
+        if(_.isObject(b) && !_.isArray(b) && _.isArray(a)){
+            var c = _.clone(b);
+            c.tasks = a;
+            return c;
+        }
+        else if (_.isArray(a)) {
             return _.clone(b)
         }
     });
