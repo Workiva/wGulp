@@ -8,7 +8,7 @@ describe('Library Distribution definition task', function() {
         this.timeout(10000);
         var task = 'dist';
         var helper = new Integration(gulp, 'library_dist',
-            ["tsd", ["jsx", "tsc", "copy:js"]],
+            ["tsd", "jsx", "tsc", "copy:js"],
             ['build', 'library_dist']);
         var lineHelper = new Linebyline(gulp);
         var actualPath = join(__dirname, './modes/library_dist/dist/internal.d.ts');
@@ -21,7 +21,7 @@ describe('Library Distribution definition task', function() {
         this.timeout(10000);
         var task = 'dist';
         var helper = new Integration(gulp, 'library_dist',
-            ["tsd", ["jsx", "tsc", "copy:js"]],
+            ["tsd", "jsx", "tsc", "copy:js"],
             ['build', 'library_dist']);
         var lineHelper = new Linebyline(gulp);
         var actualPath = join(__dirname, './modes/library_dist/dist/app.js');

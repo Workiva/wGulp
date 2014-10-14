@@ -10,10 +10,10 @@ Integration = (function() {
         gulp.desc = require('../src/desc');
         this.options = JSON.parse(fs.readFileSync('src/gulpconfig.json', 'utf8'));
         if(buildTasks){
-            this.options.build_tasks = buildTasks;
+            this.options.taskTree.build = buildTasks;
         }
         if(distTasks){
-            this.options.dist_tasks = distTasks;
+            this.options.taskTree.dist = distTasks;
         }
         this.options.path.root = "./test/integration/modes/" + mode + "/";
         this.options.path.src = "./test/integration/modes/" + mode + "/src/";
@@ -32,7 +32,7 @@ Integration = (function() {
         this.options.ts.noLib = true;
         this.options.jshintrc = "./template/.jshintrc";
         this.options.tslintrc = "./template/tslint.json";
-        this.options.test_tasks = [["react", "ts", "tstest"]];
+        this.options.taskTree.preTest = ["react", "ts", "tstest"];
         this.options.bundles = {
             browserify: {
                 bundler: "browserify",
