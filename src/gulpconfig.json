@@ -33,8 +33,8 @@
         "spec": ["**/*Spec.js", "**/*.spec.js", "**/*Spec.ts", "**/*.spec.ts"]
     },
     "compass_config": "config.rb",
-    "jshintrc": "node_modules/wGulp/template/.jshintrc",
-    "tslintrc": "node_modules/wGulp/template/tslint.json",
+    "jshintrc": "node_modules/wGulp/src/template/.jshintrc",
+    "tslintrc": "node_modules/wGulp/src/template/tslint.json",
     "karma": "node_modules/wGulp/karma.conf.js",
     "build_tasks": ["clean", ["lint", "tsd"], ["jsx", "tsc", "copy:html", "copy:js", "sass"]],
     "transforms": [],

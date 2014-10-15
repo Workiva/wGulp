@@ -21,7 +21,7 @@ Harness = (function() {
         this.options.path.complexity = "./test/subtasks/report/complexity/";
         this.options.path.docs = "./test/subtasks/docs/";
         this.options.ts.noLib = true;
-        this.options.tslintrc = "./template/tslint.json";
+        this.options.tslintrc = "./src/template/tslint.json";
         require('../src/bundling/build_bundle_tasks')(gulp, this.options);
     };
 
@@ -29,8 +29,8 @@ Harness = (function() {
         var actualPath, expectedPath, actualFile, expectedFile;
         this.gulp.task('example', [task], function() {
             for (var i = 0; i < files.length; i++) {
-                actualPath = './subtasks/build/' + prefix + '/' + files[i];
-                expectedPath = './subtasks/fixtures/' + prefix + '/' + files[i];
+                actualPath = './src/subtasks/build/' + prefix + '/' + files[i];
+                expectedPath = './src/subtasks/fixtures/' + prefix + '/' + files[i];
                 actualFile = fs.readFileSync(join(__dirname, actualPath), 'utf8');
                 expectedFile = fs.readFileSync(join(__dirname, expectedPath), 'utf8');
                 expect(actualFile).to.equal(expectedFile);

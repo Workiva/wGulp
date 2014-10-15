@@ -13,7 +13,7 @@ describe("livescript subtask", function() {
         var actualPath = join(__dirname, './build/js/livescript.js');
         var expectedPath = join(__dirname, './fixtures/js/livescript.js');
 
-        var livescript = require('../../subtasks/livescript')(gulp, helper.options);
+        var livescript = require('../../src/subtasks/livescript')(gulp, helper.options);
         gulp.task(task, livescript({cwd: "./test/subtasks/src/"}));
 
         lineHelper.assertExpectedOutputMatchesExceptLastLine(done, task, actualPath, expectedPath);
