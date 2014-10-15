@@ -56,7 +56,7 @@ module.exports = function(gulp, config){
     });
 
     // Add runSequence function (not really a task/subtask)
-    subtasks.runSequence = require('./src/subtasks/run_sequence')(gulp, options);
+    subtasks.runSequence = require(sPath + 'run_sequence')(gulp, options);
 
     // Generate bundle tasks
     require('./src/bundling/build_bundle_tasks')(gulp, options);
