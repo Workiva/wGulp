@@ -29,8 +29,8 @@ Harness = (function() {
         var actualPath, expectedPath, actualFile, expectedFile;
         this.gulp.task('example', [task], function() {
             for (var i = 0; i < files.length; i++) {
-                actualPath = './src/subtasks/build/' + prefix + '/' + files[i];
-                expectedPath = './src/subtasks/fixtures/' + prefix + '/' + files[i];
+                actualPath = './subtasks/build/' + prefix + '/' + files[i];
+                expectedPath = './subtasks/fixtures/' + prefix + '/' + files[i];
                 actualFile = fs.readFileSync(join(__dirname, actualPath), 'utf8');
                 expectedFile = fs.readFileSync(join(__dirname, expectedPath), 'utf8');
                 expect(actualFile).to.equal(expectedFile);
