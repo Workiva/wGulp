@@ -21,7 +21,7 @@ Harness = (function() {
         this.options.path.complexity = "./test/subtasks/report/complexity/";
         this.options.path.docs = "./test/subtasks/docs/";
         this.options.ts.noLib = true;
-        this.options.tslintrc = "./template/tslint.json";
+        this.options.tslintrc = "./src/template/tslint.json";
         require('../src/bundling/build_bundle_tasks')(gulp, this.options);
     };
 

@@ -8,7 +8,7 @@ describe("tsc subtask", function() {
         var task = 'ts';
         var helper = new Harness(gulp);
 
-        var tsc = require('../../subtasks/tsc')(gulp, helper.options);
+        var tsc = require('../../src/subtasks/tsc')(gulp, helper.options);
         gulp.task(task, tsc());
         helper.assertTaskGeneratesExpectedFileOutput(done, task, src, 'js');
     });
@@ -19,7 +19,7 @@ describe("tsc subtask", function() {
         var task = 'ts';
         var helper = new Harness(gulp);
 
-        var tsc = require('../../subtasks/tsc')(gulp, helper.options);
+        var tsc = require('../../src/subtasks/tsc')(gulp, helper.options);
         gulp.task(task, tsc({
             cwd: "./test/subtasks/srcB/",
             dest: helper.options.path.build

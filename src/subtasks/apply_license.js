@@ -30,7 +30,7 @@ module.exports = function(gulp, defaults) {
 
         var join = require('path').join;
         var fs = require('fs');
-        var DEFAULT_LICENSE = join(__dirname, '../src/licenses/APACHE_HEADER.txt');
+        var DEFAULT_LICENSE = join(__dirname, '../licenses/APACHE_HEADER.txt');
 
         var globs = config.globs || defaultGlobs;
         var license = config.license || (fs.existsSync(DEFAULT_LICENSE) ? fs.readFileSync(DEFAULT_LICENSE) : 'NO LICENSE');

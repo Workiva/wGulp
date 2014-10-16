@@ -42,7 +42,7 @@ describe("clean subtask", function() {
             buildDirPath
         ];
 
-        var clean = require('../../subtasks/clean')(gulp, helper.options);
+        var clean = require('../../src/subtasks/clean')(gulp, helper.options);
         clean()(function(){
             for (var i = 0; i < directories.length; i++) {
                 if (fs.existsSync(directories[i])) {
@@ -71,7 +71,7 @@ describe("clean subtask", function() {
             coverageDirPath
         ];
 
-        var clean = require('../../subtasks/clean')(gulp, helper.options);
+        var clean = require('../../src/subtasks/clean')(gulp, helper.options);
         clean(directories)(function(){
             for (var i = 0; i < directories.length; i++) {
                 if (fs.existsSync(directories[i])) {

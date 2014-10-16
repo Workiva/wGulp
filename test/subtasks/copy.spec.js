@@ -13,7 +13,7 @@ describe("copy task", function() {
         var actualPath = join(__dirname, './build/js/index.html');
         var expectedPath = join(__dirname, './fixtures/js/index.html');
 
-        var copy = require('../../subtasks/copy')(gulp, helper.options);
+        var copy = require('../../src/subtasks/copy')(gulp, helper.options);
         gulp.task(task, copy({
             glob: "**/*.html",
             cwd: "./test/subtasks/src/"

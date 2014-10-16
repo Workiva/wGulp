@@ -27,25 +27,26 @@ module.exports = function(gulp, config){
     gulp.desc = require('./src/desc');
 
     // Register task functions for exporting
+    var sPath = './src/subtasks/';
     var subtasks = {
-        analyze: require('./subtasks/analyze')(gulp, options),
-        applyLicense: require('./subtasks/apply_license')(gulp, options),
-        clean: require('./subtasks/clean')(gulp, options),
-        coffee: require('./subtasks/coffee')(gulp, options),
-        compass: require('./subtasks/compass')(gulp, options),
-        concat: require('./subtasks/concat')(gulp, options),
-        connect: require('./subtasks/connect')(gulp, options),
-        copy: require('./subtasks/copy')(gulp, options),
-        jasmine: require('./subtasks/jasmine')(gulp, options),
-        jsdoc: require('./subtasks/jsdoc')(gulp, options),
-        jshint: require('./subtasks/jshint')(gulp, options),
-        jsx: require('./subtasks/jsx')(gulp, options),
-        livescript: require('./subtasks/livescript')(gulp, options),
-        minify_css: require('./subtasks/minify_css')(gulp, options),
-        minify_js: require('./subtasks/minify_js')(gulp, options),
-        sass: require('./subtasks/sass')(gulp, options),
-        tsc: require('./subtasks/tsc')(gulp, options),
-        tslint: require('./subtasks/tslint')(gulp, options)
+        analyze: require(sPath + 'analyze')(gulp, options),
+        applyLicense: require(sPath + 'apply_license')(gulp, options),
+        clean: require(sPath + 'clean')(gulp, options),
+        coffee: require(sPath + 'coffee')(gulp, options),
+        compass: require(sPath + 'compass')(gulp, options),
+        concat: require(sPath + 'concat')(gulp, options),
+        connect: require(sPath + 'connect')(gulp, options),
+        copy: require(sPath + 'copy')(gulp, options),
+        jasmine: require(sPath + 'jasmine')(gulp, options),
+        jsdoc: require(sPath + 'jsdoc')(gulp, options),
+        jshint: require(sPath + 'jshint')(gulp, options),
+        jsx: require(sPath + 'jsx')(gulp, options),
+        livescript: require(sPath + 'livescript')(gulp, options),
+        minify_css: require(sPath + 'minify_css')(gulp, options),
+        minify_js: require(sPath + 'minify_js')(gulp, options),
+        sass: require(sPath + 'sass')(gulp, options),
+        tsc: require(sPath + 'tsc')(gulp, options),
+        tslint: require(sPath + 'tslint')(gulp, options)
     };
 
     // Create tasks for each task function with default options
@@ -55,13 +56,13 @@ module.exports = function(gulp, config){
     });
 
     // Add runSequence function (not really a task/subtask)
-    subtasks.runSequence = require('./subtasks/run_sequence')(gulp, options);
+    subtasks.runSequence = require(sPath + 'run_sequence')(gulp, options);
 
     // Generate bundle tasks
     require('./src/bundling/build_bundle_tasks')(gulp, options);
 
     // Create tasks in task folders
-    var globalTaskFolder = path.resolve(__dirname, 'tasks');
+    var globalTaskFolder = path.resolve(__dirname, 'src/tasks');
     var projectTaskFolder = path.resolve(cwd, 'tasks');
     var taskFolders = [
         globalTaskFolder,
