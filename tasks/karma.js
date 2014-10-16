@@ -87,6 +87,14 @@ module.exports = function(gulp, options, subtasks) {
             }
         }
 
+        // Add coverage options is this is a cover run
+        if(argv['_'][0] === 'cover' || argv['_'][0] === 'watch:cover'){
+            karmaOptions.preprocessors = {
+                'build/src/**/*.js': ['coverage']
+            };
+            karmaOptions.reporters = ['progress', 'coverage'];
+        }
+
         // Run karma
         return gulp.src(files)
             .pipe(karma(karmaOptions));
