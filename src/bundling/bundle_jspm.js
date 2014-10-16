@@ -43,7 +43,7 @@ module.exports = function(gulp, options, bundleOptions, cb){
     // Ensure output directory exists
     ensureOutputDir(output);
 
-    var command = "./node_modules/.bin/jspm" + bundleCommand + entry + includes + excludes + " " + output + inject;
+    var command = "jspm" + bundleCommand + entry + includes + excludes + " " + output + inject;
 
     return gulp.src('').pipe(shell([command]));
 };
