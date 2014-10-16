@@ -36,6 +36,9 @@ Quick-start
 # Install gulp globally
 $ npm install -g gulp
 
+# Install jspm globally
+$ npm install -g jspm
+
 # Create a package.json if you don't have one
 $ npm init
 

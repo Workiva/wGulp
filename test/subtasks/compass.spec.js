@@ -15,7 +15,7 @@ describe("compass task", function() {
 
         helper.options.compass_config = "";
 
-        var compass = require('../../subtasks/compass')(gulp, helper.options);
+        var compass = require('../../src/subtasks/compass')(gulp, helper.options);
         gulp.task(task, compass({
             config_file: "",
             import_path: [],

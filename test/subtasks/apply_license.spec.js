@@ -24,7 +24,7 @@ describe("applyLicense task", function() {
         var actualPath = join(__dirname, join(TEST_DIR, 'test.js'));
         var expectedPath = join(__dirname, join(TEST_DIR, 'fixture', 'expectedTest.js'));
 
-        var applyLicense = require('../../subtasks/apply_license')(gulp, helper.options);
+        var applyLicense = require('../../src/subtasks/apply_license')(gulp, helper.options);
 
         gulp.task(task, applyLicense({
             globs: [join(__dirname, join(TEST_DIR, 'test.js'))],

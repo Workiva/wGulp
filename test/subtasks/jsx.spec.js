@@ -6,7 +6,7 @@ describe("jsx subtask", function() {
         var files = ['react.js'];
         var helper = new Harness(gulp);
         var task = 'jsx';
-        var jsx = require('../../subtasks/jsx')(gulp, helper.options);
+        var jsx = require('../../src/subtasks/jsx')(gulp, helper.options);
         gulp.task(task, jsx());
         helper.assertTaskGeneratesExpectedFileOutput(done, task, files, 'js');
     });

@@ -13,7 +13,7 @@ describe("coffee subtask", function() {
         var actualPath = join(__dirname, './build/js/coffee.js');
         var expectedPath = join(__dirname, './fixtures/js/coffee.js');
 
-        var coffee = require('../../subtasks/coffee')(gulp, helper.options);
+        var coffee = require('../../src/subtasks/coffee')(gulp, helper.options);
         gulp.task(task, coffee({cwd: "./test/subtasks/src/"}));
 
         lineHelper.assertExpectedOutputMatchesExceptLastLine(done, task, actualPath, expectedPath);

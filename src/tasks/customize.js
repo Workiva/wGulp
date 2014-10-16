@@ -32,7 +32,7 @@ module.exports = function(gulp, options, subtasks) {
                 '.jshintrc',
                 'tslint.json',
                 'karma.conf.js'
-            ], {cwd: path.resolve(cwd, 'node_modules/wGulp/template/')})
+            ], {cwd: path.resolve(cwd, 'node_modules/wGulp/src/template/')})
             .pipe(gulp.dest(path.resolve(cwd)));
     };
     gulp.task(taskname, fn);

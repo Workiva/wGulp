@@ -9,4 +9,4 @@ function copy(src, target) {
     fs.writeFileSync(target,contents);
 }
 
-copy('node_modules/wGulp/template/gulpfile.js', path.resolve(process.cwd(), 'gulpfile.js'));
+copy('node_modules/wGulp/src/template/gulpfile.js', path.resolve(process.cwd(), 'gulpfile.js'));
