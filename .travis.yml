@@ -3,7 +3,7 @@ node_js:
 - '0.10'
 before_install:
 - npm install -g gulp
-- gem install compass --version "=0.12.2"
+- gem install compass --version "=0.12.7"
 install:
 - npm install
 script:
