@@ -11,7 +11,7 @@ It's easy, it's sensible, it gets you cool features for free, it frees up your m
 
 #### Upgrading wGulp?
 
-Take a look at the [release notes](https://github.com/Workiva/karma-jspm/releases/tag/1.0.0). We will publish any breaking changes there.
+Take a look at the [release notes](https://github.com/Workiva/wGulp/releases). We will publish any breaking changes there.
 
 ### Table of Contents
 
