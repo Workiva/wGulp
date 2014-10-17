@@ -1,4 +1,4 @@
-wGulp - Convention Over Configuration  ![status](https://travis-ci.org/Workiva/wGulp.svg?branch=master)
+wGulp - Convention Over Configuration  [![Build Status](https://travis-ci.org/Workiva/wGulp.svg?branch=master)](https://travis-ci.org/Workiva/wGulp)
 ======================================
 
 > Opinionated Suite of Gulp Tasks for JavaScript and TypeScript
