@@ -15,10 +15,7 @@ module.exports = function(karma) {
             loadFiles: ['build/test/**/*.js'],
             serveFiles: ['build/src/**/*.js']
         },
-        preprocessors: {
-            'build/src/**/*.js': ['coverage']
-        },
-        reporters: ['progress', 'junit', 'html', 'coverage'],
+        reporters: ['progress', 'junit', 'html'],
         junitReporter: {
             outputFile: './report/tests/test-results.xml'
         },
