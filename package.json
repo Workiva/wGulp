@@ -1,6 +1,6 @@
 {
   "name": "wGulp",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Gulp Recipes",
   "private": true,
   "repository": {
@@ -17,8 +17,7 @@
     "test": "multi='xunit=xunit.xml tap=-' mocha test/**/*.spec.js --reporter mocha-multi"
   },
   "peerDependencies": {
-    "gulp": "^3.8.7",
-    "jspm": "^0.7.1"
+    "gulp": "^3.8.7"
   },
   "dependencies": {
     "autostrip-json-comments": "0.0.4",

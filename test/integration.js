@@ -30,8 +30,8 @@ Integration = (function() {
             "./test/integration/modes/" + mode + "/jspm_packages/"
         ];
         this.options.ts.noLib = true;
-        this.options.jshintrc = "./template/.jshintrc";
-        this.options.tslintrc = "./template/tslint.json";
+        this.options.jshintrc = "./src/template/.jshintrc";
+        this.options.tslintrc = "./src/template/tslint.json";
         this.options.taskTree.preTest = ["react", "ts", "tstest"];
         this.options.bundles = {
             browserify: {

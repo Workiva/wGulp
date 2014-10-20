@@ -9,7 +9,7 @@ describe("analyze subtask", function() {
         var helper = new Harness(gulp);
         var complexityOutput = helper.options.path.complexity;
 
-        var analyze = require('../../subtasks/analyze')(gulp, helper.options);
+        var analyze = require('../../src/subtasks/analyze')(gulp, helper.options);
         gulp.task('analyze', analyze({cwd: "./test/subtasks/fixtures/js/"}));
         
         gulp.task('run:analyze', ['analyze'], function(){

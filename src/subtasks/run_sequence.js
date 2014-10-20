@@ -17,7 +17,7 @@
 module.exports = function(gulp, defaults){
     return function(tasks) {
         return function (cb) {
-            var run_sequence = require('../src/run_sequence');
+            var run_sequence = require('../run_sequence');
             var _ = require('lodash');
 
             var argArray = _.cloneDeep(tasks).concat(cb);
