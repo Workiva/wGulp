@@ -65,7 +65,7 @@
         "qa": ["default"],
         "sass": ["clean"],
         "serve": [],
-        "tsc": ["clean", "lint"],
+        "tsc": ["clean", "lint", "tsd"],
         "tsc:test": ["clean"],
         "tsd": ["clean"],
         "tslint": [],

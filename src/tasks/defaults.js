@@ -27,8 +27,8 @@ module.exports = function(gulp, options, subtasks) {
     gulp.desc('build', 'Run build tasks');
     gulp.task('build', getDeps(options, 'build'));
 
-    gulp.desc('dist', 'Run dist tasks');
-    gulp.task('dist', function(cb){
+    gulp.desc('preDist', 'Run before dist');
+    gulp.task('preDist', getDeps(options, 'preDist'), function(done){
         // Redefine tsc task with sourcemaps disabled
         var tscOptions = options.ts;
         tscOptions.sourcemap = false;
@@ -36,10 +36,10 @@ module.exports = function(gulp, options, subtasks) {
             'tsc', getDeps(options, 'tsc'),
             subtasks.tsc({options: tscOptions})
         );
-
-        // Run dist tasks
-        return gulp.start(getDeps(options, 'dist'));
     });
+
+    gulp.desc('dist', 'Run dist tasks');
+    gulp.task('dist', getDeps(options, 'dist'));
 
     gulp.desc('preTest', 'Run test tasks')
     gulp.task('preTest', getDeps(options, 'preTest'));

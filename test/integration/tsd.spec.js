@@ -102,7 +102,8 @@ describe('TypeScript definition task', function() {
         proc.stdout.on('data', function(data) {
             if(!errorHeaderLogged && /Error: The above collision would overwrite/.test(data)) {
                 errorHeaderLogged = true;
-            } else if (!errorFileLogged && /api\/internal\.d\.ts/.test(data)) {
+            } 
+            if (!errorFileLogged && /api\/internal\.d\.ts/.test(data)) {
                 errorFileLogged = true;
             }
         });
