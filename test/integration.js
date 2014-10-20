@@ -15,6 +15,9 @@ Integration = (function() {
         if(distTasks){
             this.options.taskTree.dist = distTasks;
         }
+        this.options.taskTree.bundle = ['jsx', 'tsc'];
+        this.options.taskTree.jsx = ['clean'];
+        this.options.taskTree.tsc = ['clean'];
         this.options.path.root = "./test/integration/modes/" + mode + "/";
         this.options.path.src = "./test/integration/modes/" + mode + "/src/";
         this.options.path.test = "./test/integration/modes/" + mode + "/test/";

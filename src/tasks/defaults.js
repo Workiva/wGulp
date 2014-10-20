@@ -21,7 +21,7 @@ module.exports = function(gulp, options, subtasks) {
         glob = require('glob'),
         open = require('open'),
         path = require('path'),
-        getDeps = require('../src/dep_tree_parser');
+        getDeps = require('../dep_tree_parser');
 
     // Tasks that call runSequence
     gulp.desc('build', 'Run build tasks');
