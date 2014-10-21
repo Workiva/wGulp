@@ -146,8 +146,8 @@ Here are some defaults for your reference:
 
 ```js
 taskTree: {
-    build: ['clean', 'lint', 'tsd', 'jsx', 'tsc', 'copy:html', 'copy:js', 'sass'],
-    bundle: ['clean', 'build'],
+    build: ['clean', 'lint', 'tsd', 'jsx', 'tsc', 'copy:html', 'copy:js', 'coffee', 'livescript', 'sass'],
+    bundle: ['clean:dist', 'build'],
     default: ['clean', 'build', 'test', 'analyze', 'jsdoc', 'dist'],
     dist: ['clean', 'build', 'minify', 'bundle', 'library_dist'],
     preTest: ['build', 'tsc:test', 'copy:jstest'],
@@ -162,12 +162,12 @@ You can override any portion of the tree to alter which tasks cause other tasks 
 
 ```js
 taskTree: {
-    build: ['clean', 'lint', 'tsd', 'jsx', 'tsc', 'copy:html', 'copy:js', 'sass', 'myCustomTask'],
+    build: ['clean', 'lint', 'tsd', 'jsx', 'tsc', 'copy:html', 'copy:js', 'coffee', 'livescript', 'sass', 'myCustomTask'],
     ...
 }
 ```
 
-But that gets pretty verbose. Because of that annoyance we offer alternative syntax for including and excluding tasks from the default dependency arrays.
+But that gets pretty long and verbose. Because of that annoyance we offer alternative syntax for including and excluding tasks from the default dependency arrays.
 
 ```js
 taskTree: {
