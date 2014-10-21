@@ -20,7 +20,7 @@ module.exports = function(gulp, defaults){
 
     return function(config) {
         if(!config)
-            config = [defaults.path.build, defaults.path.dist];
+            config = [];
 
         return function (done) {
             var _ = require('lodash');
@@ -31,8 +31,9 @@ module.exports = function(gulp, defaults){
                     fs.removeSync(val);
                 });
             }
-            else
+            else {
                 fs.removeSync(config);
+            }
             done();
         };
     };
