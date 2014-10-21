@@ -80,6 +80,9 @@ System.config({
     "react": "npm:react@^0.11.1",
     "npm:ieee754@1.1.4": {
       "github:jspm/nodelibs@0.0.3": "github:jspm/nodelibs@0.0.3"
+    },
+    "npm:react@0.11.2": {
+      "envify": "npm:envify@2"
     }
   }
 });
@@ -87,7 +90,7 @@ System.config({
 System.config({
   "versions": {
     "github:components/jquery": "1.11.1",
-    "npm:react": "0.11.1",
+    "npm:react": "0.11.2",
     "github:jspm/nodelibs": "0.0.3",
     "npm:envify": "2.0.1",
     "npm:through": "2.3.4",
