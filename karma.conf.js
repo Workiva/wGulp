@@ -13,7 +13,7 @@ module.exports = function(karma) {
         frameworks: ['jspm', 'jasmine'],
         jspm: {
             loadFiles: ['build/test/**/*.js'],
-            serveFiles: ['build/src/**/*.js', 'build/src/**/*.map']
+            serveFiles: ['build/src/**/*.js', 'build/src/**/*.map', 'build/test/**/*.map', 'src/**/*.ts', 'test/**/*.ts']
         },
         reporters: ['progress', 'junit', 'html'],
         junitReporter: {
