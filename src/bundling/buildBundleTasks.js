@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-module.exports = function(gulp, defaults){
-    return function(tasks) {
-        return function (cb) {
-            var runSequence = require('../runSequence');
-            var _ = require('lodash');
+module.exports = function(gulp, options){
+    var runBundle = require('./runBundle');
 
-            var argArray = _.cloneDeep(tasks).concat(cb);
-            argArray.unshift(gulp);
-            runSequence.apply(this, argArray);
-        };
-    };
+    // Dynamically create gulp tasks for each bundle config
+    for(var key in options.bundles) {
+        (function (bundleKey) {
+            gulp.task("bundle:" + bundleKey, function (cb) {
+                return runBundle(gulp, options, cb, bundleKey);
+            });
+        }(key));
+    }
 };

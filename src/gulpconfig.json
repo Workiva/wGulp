@@ -97,33 +97,33 @@
     "sauceLabs": {
         "testName": "Unit test run through wGulp",
         "browsers": {
-            "sl_chrome": {
+            "sauceChrome": {
                 "base": "SauceLabs",
                 "browserName": "chrome"
             },
-            "sl_firefox": {
+            "sauceFirefox": {
                 "base": "SauceLabs",
                 "browserName": "firefox"
             },
-            "sl_ios_safari": {
+            "sauceIosSafari": {
                 "base": "SauceLabs",
                 "browserName": "safari",
                 "platform": "OS X 10.9",
                 "version": "7"
             },
-            "sl_ie_9": {
+            "sauceIe9": {
                 "base": "SauceLabs",
                 "browserName": "internet explorer",
                 "platform": "Windows 7",
                 "version": "9"
             },
-            "sl_ie_10": {
+            "sauceIe10": {
                 "base": "SauceLabs",
                 "browserName": "internet explorer",
                 "platform": "Windows 7",
                 "version": "10"
             },
-            "sl_ie_11": {
+            "sauceIe11": {
                 "base": "SauceLabs",
                 "browserName": "internet explorer",
                 "platform": "Windows 7",

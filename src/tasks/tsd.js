@@ -17,7 +17,7 @@
 module.exports = function(gulp, defaults, subtasks) {
 
     var taskname = 'tsd',
-        getDeps = require('../dep_tree_parser');
+        getDeps = require('../depTreeParser');
 
     gulp.desc(taskname, 'Discover and centralize TypeScript definition files');
 

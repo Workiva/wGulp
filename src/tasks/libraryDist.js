@@ -15,7 +15,7 @@
  */
 
 module.exports = function(gulp, defaults, subtasks) {
-    var getDeps = require('../dep_tree_parser');
+    var getDeps = require('../depTreeParser');
 
     var taskName = 'libraryDist';
 

@@ -21,7 +21,7 @@ module.exports = function(gulp, options, subtasks) {
         glob = require('glob'),
         open = require('open'),
         path = require('path'),
-        getDeps = require('../dep_tree_parser');
+        getDeps = require('../depTreeParser');
 
     // Tasks that call runSequence
     gulp.desc('build', 'Run build tasks');
@@ -65,15 +65,15 @@ module.exports = function(gulp, options, subtasks) {
     // Clean tasks
     gulp.desc('clean:buildSrc', 'Clean buildSrc');
     gulp.task('clean:buildSrc', getDeps(options, 'clean:buildSrc'),
-        subtasks.clean(options.path.build_src));
+        subtasks.clean(options.path.buildSrc));
 
     gulp.desc('clean:buildStyles', 'Clean buildStyles');
     gulp.task('clean:buildStyles', getDeps(options, 'clean:buildStyles'),
-        subtasks.clean(options.path.build_styles));
+        subtasks.clean(options.path.buildStyles));
 
     gulp.desc('clean:buildTest', 'Clean buildTest');
     gulp.task('clean:buildTest', getDeps(options, 'clean:buildTest'),
-        subtasks.clean(options.path.build_test));
+        subtasks.clean(options.path.buildTest));
 
     gulp.desc('clean:dist', 'Clean dist');
     gulp.task('clean:dist', getDeps(options, 'clean:dist'),

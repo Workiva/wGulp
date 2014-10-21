@@ -21,7 +21,7 @@ Harness = (function() {
         this.options.path.docs = "./test/subtasks/docs/";
         this.options.ts.noLib = true;
         this.options.tslintrc = "./src/template/tslint.json";
-        require('../src/bundling/build_bundle_tasks')(gulp, this.options);
+        require('../src/bundling/buildBundleTasks')(gulp, this.options);
     };
 
     harness.prototype.assertTaskGeneratesExpectedFileOutput = function(done, task, files, prefix) {

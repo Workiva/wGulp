@@ -14,15 +14,16 @@
  * limitations under the License.
  */
 
-module.exports = function(gulp, options){
-    var run_bundle = require('./run_bundle');
+module.exports = function(gulp, options, subtasks) {
 
-    // Dynamically create gulp tasks for each bundle config
-    for(var key in options.bundles) {
-        (function (bundleKey) {
-            gulp.task("bundle:" + bundleKey, function (cb) {
-                return run_bundle(gulp, options, cb, bundleKey);
-            });
-        }(key));
-    }
+    var taskname = 'watch:dist';
+
+    gulp.desc(taskname, 'Watch source files for changes and re-run dist');
+
+    var fn = function(done) {
+        gulp.watch(options.glob.all, {
+            cwd: options.path.src
+        }, ['dist']);
+    };
+    gulp.task(taskname, ['dist'], fn);
 };
