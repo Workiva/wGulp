@@ -13,12 +13,10 @@ describe("compass task", function() {
         var actualPath = join(__dirname, './build/css/app.css');
         var expectedPath = join(__dirname, './fixtures/css/compass.css');
 
-        helper.options.compass_config = "";
-
         var compass = require('../../src/subtasks/compass')(gulp, helper.options);
         gulp.task(task, compass({
-            config_file: "",
-            import_path: [],
+            configFile: "",
+            importPath: [],
             cwd: "./test/subtasks/src/styles/",
             dest: "./test/subtasks/build/css/"
         }));

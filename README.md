@@ -87,7 +87,7 @@ Out of the box wGulp provides a *lot* of functionality. It is a collection of be
 ### Main Tasks
     analyze - Generate code complexity report
     applyLicense - Prepends an Apache 2.0 license header to source files in src and sass. Does *not* do CoffeeScript yet
-    build - Build. Execute the tasks specified in build_tasks
+    build - Build. Execute the tasks specified in build
     bundle - Generate all bundles specified in "bundles"
     bundle:<bundleName> - Create a bundle using the <bundleName> options specified in "bundles"
     clean - Clean up the build and dist directories
@@ -98,8 +98,8 @@ Out of the box wGulp provides a *lot* of functionality. It is a collection of be
     copy:jstest - Copy JavaScript files in ./test/ to ./build/test/
     cover - Generate and view code coverage report
     customize - Copy the standard config files to your project for customization
-    default - Execute the tasks specified in default_tasks
-    dist - Create a distribution, execute the tasks specified in dist_tasks
+    default - Execute the tasks specified in default
+    dist - Create a distribution, execute the tasks specified in dist
     help - List the available tasks
     jsdoc - Generate JSdoc
     jshint - Validate JS files with jshint
@@ -112,8 +112,8 @@ Out of the box wGulp provides a *lot* of functionality. It is a collection of be
     qa - Run default tasks and start serve
     sass - compile sass css
     serve - Open the project website
-    test - Execute tasks specified in test_tasks and use Karma to run the tests
-    test:jasmine - Execute tasks specified in test_tasks and use node-jasmine to run the tests
+    test - Execute tasks specified in test and use Karma to run the tests
+    test:jasmine - Execute tasks specified in test and use node-jasmine to run the tests
     tsc - Compile TypeScript
     tsd - Discover and centralize TypeScript definition files
     tslint - Validate TS files with tslint
@@ -135,7 +135,7 @@ taskTree: {
     build: ['clean', 'lint', 'tsd', 'jsx', 'tsc', 'copy:html', 'copy:js', 'sass'],
     bundle: ['clean', 'build'],
     default: ['clean', 'build', 'test', 'analyze', 'jsdoc', 'dist'],
-    dist: ['clean', 'build', 'minify', 'bundle', 'library_dist'],
+    dist: ['clean', 'build', 'minify', 'bundle', 'libraryDist'],
     preTest: ['build', 'tsc:test', 'copy:jstest'],
     test: ['preTest', 'karma'],
     ...
@@ -184,12 +184,12 @@ taskTree: {
 ```
 
 ##### Not a library?
-Then you may want to exclude the `library_dist` task from dist:
+Then you may want to exclude the `libraryDist` task from dist:
 
 ```js
 taskTree: {
     dist: {
-        exclude: ['library_dist']
+        exclude: ['libraryDist']
     }
     ...
 }
@@ -243,7 +243,7 @@ Adding bundle configurations is easy! Here is a simple example using jspm:
     include - [optional] Array of module names to additionally include
     exclude - [optional] Array of module names to exclude from the bundle
     external - [optional - applies to browserify only] Array of module names to externalize
-    add_to_config - [optional - applies to jspm only] true or false. Writes bundle information to config.js, defaults to true
+    addToConfig - [optional - applies to jspm only] true or false. Writes bundle information to config.js, defaults to true
     sfx - [optional - applies to jspm only] If true, create a [self-executing bundle](https://github.com/jspm/jspm-cli#4-creating-a-self-executing-bundle)
 
 
@@ -450,7 +450,7 @@ wGulp currently has these subtasks:
 ##### analyze
 Analyze code complexity with plato.
 
-##### apply_license
+##### applyLicense
 Given a list of glob patterns, and a license string this will prepend all matching files with said license. Does nothing
 else intelligent at this point. Default behavior is to apply Apache 2.0 header to sources specified in defaults.glob.sources
 ```
@@ -473,8 +473,8 @@ Takes additional argument `bare` which defaults to `true` and is passed into gul
 ##### compass
 Compile SASS using compass. Takes a few custom args:
 
-    config_file - Path to compass config file. Defaults to config's "compass_config"
-    include_paths - Array of paths to include. Defaults to config's "path.style_include_paths"
+    configFile - Path to compass config file. Defaults to config's "compassConfig"
+    includePaths - Array of paths to include. Defaults to config's "path.styleIncludePaths"
 
 ##### concat
 Concatenate JS files. Takes one custom arg:
@@ -501,7 +501,7 @@ Generate docs using jsdoc
 ##### jshint
 Run js code through the jshint linter. Takes one custom arg:
 
-    config_file - Path to jshint config file. Defaults to config's "jshintrc"
+    configFile - Path to jshint config file. Defaults to config's "jshintrc"
     emitError - Whether or not to fail/exit on error. Defaults to true
 
 ##### jsx
@@ -520,14 +520,14 @@ Minifies JS code.
 ##### runSequence
 *Note: we highly recommend using the [task dependency system](#task-dependency-tree) instead of runSequence to ensure the fastest possible build and to prevent duplicate task runs.*
 
-Run a set of tasks in sequence. Does not take standard args. Instead, pass an array of tasks to execute: `[["react", "ts", "js"], "bundle:app"]`
+Run a set of tasks in sequence. Does not take standard args. Instead, pass an array of tasks to execute: `[["jsx", "tsc", "copy:js"], "bundle:app"]`
 
-Tasks in the base-level list will run sequentially. Tasks within inner lists will run in parallel. In this example, `react`, `ts`, and `js` will all run in parallel, and when they are all done, `bundle:app` will run.
+Tasks in the base-level list will run sequentially. Tasks within inner lists will run in parallel. In this example, `jsx`, `tsc`, and `copy:js` will all run in parallel, and when they are all done, `bundle:app` will run.
 
 ##### sass
 Compile SASS into CSS using gulp-sass. Takes one custom arg:
 
-    include_paths - Array of paths to include. Defaults to config's "path.style_include_paths"
+    includePaths - Array of paths to include. Defaults to config's "path.styleIncludePaths"
 
 ##### tsc
 Compile Typescript code into JavaScript. Takes one custom arg:
@@ -537,7 +537,7 @@ Compile Typescript code into JavaScript. Takes one custom arg:
 ##### tslint
 Lint TypeScript files. Takes one custom arg:
 
-    config_file - Path to tslint config file. Defaults to config's "tslintrc"
+    configFile - Path to tslint config file. Defaults to config's "tslintrc"
     emitError - Whether or not to fail/exit on error. Defaults to true
 
 
@@ -563,16 +563,16 @@ Any of these paths can be overridden with your custom configuration and the defa
         src: "./src/",
         test: "./test/",
         build: "./build/",
-        build_src: "./build/src/",
-        build_styles: "./build/css/",
-        build_test: "./build/test/",
+        buildSrc: "./build/src/",
+        buildStyles: "./build/css/",
+        buildTest: "./build/test/",
         dist: "./dist/",
         api: "./api/",
         coverage: "./report/coverage/",
         complexity: "./report/complexity/",
         docs: "./docs/",
         styles: "./sass/",
-        style_include_paths: [],
+        styleIncludePaths: [],
         dependencies: ["./jspm_packages"]
     }
 ```

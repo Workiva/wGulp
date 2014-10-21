@@ -17,12 +17,12 @@
 module.exports = function(gulp, defaults){
     return function(tasks) {
         return function (cb) {
-            var run_sequence = require('../run_sequence');
+            var runSequence = require('../run_sequence');
             var _ = require('lodash');
 
             var argArray = _.cloneDeep(tasks).concat(cb);
             argArray.unshift(gulp);
-            run_sequence.apply(this, argArray);
+            runSequence.apply(this, argArray);
         };
     };
 };

@@ -34,9 +34,9 @@ module.exports = function(gulp, defaults){
             }
 
             if(config.changed)
-                stream = stream.pipe(changed(config.dest || defaults.path.build_src))
+                stream = stream.pipe(changed(config.dest || defaults.path.buildSrc))
             
-            return stream.pipe(gulp.dest(config.dest || defaults.path.build_src));
+            return stream.pipe(gulp.dest(config.dest || defaults.path.buildSrc));
         };
     };
 };

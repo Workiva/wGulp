@@ -33,18 +33,21 @@ module.exports = function(gulp, defaults){
                     cwd: config.cwd || defaults.path.styles
                 });
             }
+
+            var configFile = 'configFile' in config ? config.configFile : defaults.compassConfig;
+            var includePaths = 'includePaths' in config ? config.includePaths : defaults.path.styleIncludePaths;
             
             return stream.pipe(
                 compass({
-                    config_file: config.config_file || defaults.compass_config,
-                    import_path: config.include_paths || defaults.path.style_include_paths,
+                    config_file: configFile,
+                    import_path: includePaths,
                     sass: config.cwd || defaults.path.styles,
-                    css: config.dest || defaults.path.build_styles
+                    css: config.dest || defaults.path.buildStyles
                 }))
                 .on('error', function(err){
                     cb(new gutil.PluginError('compass', err));
                 })
-                .pipe(gulp.dest(config.dest || defaults.path.build_src));
+                .pipe(gulp.dest(config.dest || defaults.path.buildSrc));
         };
     };
 };

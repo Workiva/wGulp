@@ -35,12 +35,12 @@ module.exports = function(gulp, defaults){
                 });
             }
 
-            return stream.pipe(changed(config.dest || defaults.path.build_src))
+            return stream.pipe(changed(config.dest || defaults.path.buildSrc))
                 .pipe(react())
                 .on('error', function(err){
                     cb(new gutil.PluginError('jsx', err));
                 })
-                .pipe(gulp.dest(config.dest || defaults.path.build_src));
+                .pipe(gulp.dest(config.dest || defaults.path.buildSrc));
         };
     };
 };

@@ -48,7 +48,7 @@ module.exports = function(gulp, config){
     var sPath = './src/subtasks/';
     var subtasks = {
         analyze: require(sPath + 'analyze')(gulp, options),
-        applyLicense: require(sPath + 'apply_license')(gulp, options),
+        applyLicense: require(sPath + 'applyLicense')(gulp, options),
         clean: require(sPath + 'clean')(gulp, options),
         coffee: require(sPath + 'coffee')(gulp, options),
         compass: require(sPath + 'compass')(gulp, options),
@@ -80,7 +80,7 @@ module.exports = function(gulp, config){
     });
 
     // Add runSequence function (not really a task/subtask)
-    subtasks.runSequence = require(sPath + 'run_sequence')(gulp, options);
+    subtasks.runSequence = require(sPath + 'runSequence')(gulp, options);
 
     // Generate bundle tasks
     require('./src/bundling/build_bundle_tasks')(gulp, options);

@@ -17,7 +17,7 @@ describe("sass subtask", function() {
         gulp.task(task, sass({
             cwd: "./test/subtasks/src/styles/",
             dest: "./test/subtasks/build/css/",
-            include_paths: []
+            includePaths: []
         }));
         lineHelper.assertExpectedOutputMatchesExceptLastLine(done, task, actualPath, expectedPath);
     });

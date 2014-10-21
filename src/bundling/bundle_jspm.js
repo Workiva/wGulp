@@ -30,7 +30,7 @@ module.exports = function(gulp, options, bundleOptions, cb){
     var bundleCommand = bundleOptions.sfx ? " bundle-sfx " : " bundle ";
     var entry = bundleOptions.entry || "";
     var output = bundleOptions.output || "";
-    var inject = bundleOptions.add_to_config === false ? "" : " --inject";
+    var inject = bundleOptions.addToConfig === false ? "" : " --inject";
     var includes = "";
     var excludes = "";
     if(bundleOptions.include && bundleOptions.include.length > 0){

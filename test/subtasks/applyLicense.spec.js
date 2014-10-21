@@ -9,7 +9,7 @@ describe("applyLicense task", function() {
         this.timeout(5000);
 
         // Clean up prior test file if it exists
-        var TEST_DIR = 'apply_license';
+        var TEST_DIR = 'applyLicense';
         try {
             fsSync.remove(join(__dirname, TEST_DIR, 'test.js'));
         } catch(e) {
@@ -24,7 +24,7 @@ describe("applyLicense task", function() {
         var actualPath = join(__dirname, join(TEST_DIR, 'test.js'));
         var expectedPath = join(__dirname, join(TEST_DIR, 'fixture', 'expectedTest.js'));
 
-        var applyLicense = require('../../src/subtasks/apply_license')(gulp, helper.options);
+        var applyLicense = require('../../src/subtasks/applyLicense')(gulp, helper.options);
 
         gulp.task(task, applyLicense({
             globs: [join(__dirname, join(TEST_DIR, 'test.js'))],
