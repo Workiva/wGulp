@@ -1,4 +1,5 @@
 {
+    "languages": ["javascript", "typescript", "coffeescript", "livescript"],
     "path": {
         "root": "./",
         "src": "./src/",
@@ -75,7 +76,7 @@
         "tsd": [],
         "tslint": [],
         "watch": ["watch:build"],
-        "build": ["clean", "lint", "tsd", "jsx", "tsc", "copy:html", "copy:js", "sass"],
+        "build": ["clean", "lint", "tsd", "jsx", "tsc", "copy:html", "copy:js", "coffee", "livescript", "sass"],
         "bundle": ["clean:dist", "build"],
         "default": ["clean", "build", "test", "analyze", "jsdoc", "dist"],
         "dist": ["clean", "build", "minify", "bundle", "library_dist"],

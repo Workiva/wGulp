@@ -14,15 +14,21 @@
  * limitations under the License.
  */
 
-module.exports = function(gulp, config){
+module.exports = function(gulp, userConfig){
     var _ = require('lodash');
     var cwd = process.cwd();
     var glob = require('glob');
     var path = require('path');
     var getDeps = require('./src/dep_tree_parser');
 
-    var options = require('./src/gulpconfig.json');
-    options = require('./src/merge_options')(config, options);
+    // Load default options from gulpconfig.json
+    var defaultOptions = require('./src/gulpconfig.json');
+    // Use user defined languages if provided, otherwise use defaults
+    var languages = 'languages' in userConfig ? userConfig.languages : defaultOptions.languages;
+    // Apply changes to options based on languages selected
+    defaultOptions = require('./src/apply_language_options')(defaultOptions, languages);
+    // Merge user defined config with wGulp's default options
+    var options = require('./src/merge_options')(userConfig, defaultOptions);
 
     // Is this a `dist` run? Check the sequence for 'dist'
     gulp.on('start', function(e){
