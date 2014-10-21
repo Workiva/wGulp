@@ -66,7 +66,7 @@
         "sass": ["clean"],
         "serve": [],
         "tsc": ["clean", "lint", "tsd"],
-        "tsc:test": ["clean"],
+        "tsc:test": ["clean", "tsd"],
         "tsd": ["clean"],
         "tslint": [],
         "watch": ["watch:build"],

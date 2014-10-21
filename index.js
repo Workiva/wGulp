@@ -24,6 +24,11 @@ module.exports = function(gulp, config){
     var options = require('./src/gulpconfig.json');
     options = require('./src/merge_options')(config, options);
 
+    // Is this a `dist` run? Check the sequence for 'dist'
+    gulp.on('start', function(e){
+        options.isDist = e.message.indexOf('dist') != -1;
+    });
+
     // Check for circular dependencies (cycles) in resulting taskTree
     function detectCycle(task, key, val){
         if(_.contains(val, task)){
