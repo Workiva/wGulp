@@ -26,7 +26,7 @@ module.exports = function(options, languages){
     };
 
     // All languages we support
-    var allLanguages = ['coffeescript', 'javascript', 'livescript', 'typescript'];
+    var allLanguages = Object.keys(langMap);
     var missingLanguages = _.difference(allLanguages, languages);
 
     _.forEach(missingLanguages, function(language){
