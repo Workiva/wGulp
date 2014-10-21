@@ -17,7 +17,9 @@
 module.exports = function(options, languages){
     var _ = require('lodash');
 
-    // Language specific tasks
+    // ** Language specific tasks map **
+    // These are the tasks we remove for each language if that language
+    // is not included in the project's `languages` option
     var langMap = {
         coffeescript: ['coffee'],
         javascript: ['copy:js', 'jshint', 'minify:js', 'copy:jstest'],
@@ -25,7 +27,6 @@ module.exports = function(options, languages){
         typescript: ['tsd', 'tsc', 'tslint', 'tsc:test']
     };
 
-    // All languages we support
     var allLanguages = Object.keys(langMap);
     var missingLanguages = _.difference(allLanguages, languages);
 
