@@ -20,6 +20,7 @@ Take a look at the [release notes](https://github.com/Workiva/wGulp/releases). W
   - [Expected/Default project structure](#expecteddefault-project-structure)
   - [See what's included out of the box](#see-whats-included-out-of-the-box)
     - [Main Tasks](#main-tasks)
+    - [Language Configuration](#language-configuration)
     - [Task Dependency Tree](#task-dependency-tree)
     - [Bundling](#bundling)
     - [Centralized APIs with TypeScript Definition Files](#centralized-apis-with-typescript-definition-files)
@@ -126,6 +127,19 @@ Out of the box wGulp provides a *lot* of functionality. It is a collection of be
     watch:lint - Run lint task and rerun when source or test files change
     watch:test - Run test task and rerun when source or test files change
 
+### Language Configuration
+wGulp comes with a `languages` option to help trim tasks you don't need from your build. By default, all wGulp languages will be included in your `gulpconfig.js`:
+
+```js
+var customizedOptions = {
+    languages: ['javascript', 'typescript', 'coffeescript', 'livescript']
+};
+```
+
+You should remove any language you aren't using to reduce build times.
+
+Note: If you are using JavaScript for tests but CoffeeScript for source code, you will still need both `javascript` and `coffeescript` listed in your languages configuration.
+
 ### Task Dependency Tree
 Tasks in gulp can wait until other tasks finish by designating those tasks as dependencies. We've extracted that functionality into a single configuration option called `taskTree`.
 Here are some defaults for your reference:
@@ -167,21 +181,6 @@ taskTree: {
 The object form of this configuration accepts the `include` and `exclude` keys as arrays.
 
 Here are some more examples of this kind of configuration:
-
-##### Not a TypeScript project?
-Then you may want to exclude the TypeScript specific tasks:
-
-```js
-taskTree: {
-    build: {
-        exclude: ['tsd', 'tsc']
-    },
-    preTest: {
-        exclude: ['tsc:test']
-    }
-    ...
-}
-```
 
 ##### Not a library?
 Then you may want to exclude the `library_dist` task from dist:
