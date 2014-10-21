@@ -61,7 +61,7 @@
         "jasmine": ["preTest"],
         "jsdoc": ["build"],
         "jshint": [],
-        "jsx": ["clean:buildSrc", "lint"],
+        "jsx": ["clean:buildSrc", "jshint"],
         "karma": ["preTest"],
         "lint": ["jshint", "tslint"],
         "livescript": ["clean:buildSrc", "lint"],
