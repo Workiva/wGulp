@@ -62,6 +62,30 @@ module.exports = function(gulp, options, subtasks) {
     gulp.desc('bundle', 'Run all bundle tasks');
     gulp.task('bundle', getDeps(options, 'bundle'), (bundleTasks && bundleTasks.length > 0) ? subtasks.runSequence(bundleTasks) : null);
 
+    // Clean tasks
+    gulp.desc('clean:buildSrc', 'Clean buildSrc');
+    gulp.task('clean:buildSrc', getDeps(options, 'clean:buildSrc'),
+        subtasks.clean(options.path.build_src));
+
+    gulp.desc('clean:buildStyles', 'Clean buildStyles');
+    gulp.task('clean:buildStyles', getDeps(options, 'clean:buildStyles'),
+        subtasks.clean(options.path.build_styles));
+
+    gulp.desc('clean:buildTest', 'Clean buildTest');
+    gulp.task('clean:buildTest', getDeps(options, 'clean:buildTest'),
+        subtasks.clean(options.path.build_test));
+
+    gulp.desc('clean:dist', 'Clean dist');
+    gulp.task('clean:dist', getDeps(options, 'clean:dist'),
+        subtasks.clean(options.path.dist));
+
+    gulp.desc('clean:report', 'Clean report');
+    gulp.task('clean:report', getDeps(options, 'clean:report'),
+        subtasks.clean(options.path.report));
+
+    gulp.desc('clean', 'Clean out directories');
+    gulp.task('clean', getDeps(options, 'clean'));
+
     // Copy tasks
     gulp.desc('copy:html', "Copy HTML from src to build_src");
     gulp.task('copy:html', getDeps(options, 'copy:html'), subtasks.copy({
