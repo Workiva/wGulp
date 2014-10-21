@@ -32,7 +32,7 @@ module.exports = function(gulp, userConfig){
 
     // Is this a `dist` run? Check the sequence for 'dist'
     gulp.on('start', function(e){
-        options.isDist = e.message.indexOf('dist') != -1;
+        options.isDist = _.contains(e.message.split(','), 'dist');
     });
 
     // Check for circular dependencies (cycles) in resulting taskTree
