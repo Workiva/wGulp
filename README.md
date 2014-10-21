@@ -1,4 +1,4 @@
-wGulp - Convention Over Configuration  [![Build Status](https://travis-ci.org/Workiva/wGulp.svg?branch=master)](https://travis-ci.org/Workiva/wGulp)
+wGulp - Convention Over Configuration  [![Build Status](https://travis-ci.org/Workiva/wGulp.svg?branch=master)](https://travis-ci.org/Workiva/wGulp)  [![Dependency Status](https://david-dm.org/Workiva/wGulp.svg?style=flat)](https://david-dm.org/Workiva/wGulp)
 ======================================
 
 > Opinionated Suite of Gulp Tasks for JavaScript and TypeScript
@@ -20,6 +20,7 @@ Take a look at the [release notes](https://github.com/Workiva/wGulp/releases). W
   - [Expected/Default project structure](#expecteddefault-project-structure)
   - [See what's included out of the box](#see-whats-included-out-of-the-box)
     - [Main Tasks](#main-tasks)
+    - [Language Configuration](#language-configuration)
     - [Task Dependency Tree](#task-dependency-tree)
     - [Bundling](#bundling)
     - [Centralized APIs with TypeScript Definition Files](#centralized-apis-with-typescript-definition-files)
@@ -126,14 +127,27 @@ Out of the box wGulp provides a *lot* of functionality. It is a collection of be
     watch:lint - Run lint task and rerun when source or test files change
     watch:test - Run test task and rerun when source or test files change
 
+### Language Configuration
+wGulp comes with a `languages` option to help trim tasks you don't need from your build. By default, all wGulp languages will be included in your `gulpconfig.js`:
+
+```js
+var customizedOptions = {
+    languages: ['javascript', 'typescript', 'coffeescript', 'livescript']
+};
+```
+
+You should remove any language you aren't using to reduce build times.
+
+Note: If you are using JavaScript for tests but CoffeeScript for source code, you will still need both `javascript` and `coffeescript` listed in your languages configuration.
+
 ### Task Dependency Tree
 Tasks in gulp can wait until other tasks finish by designating those tasks as dependencies. We've extracted that functionality into a single configuration option called `taskTree`.
 Here are some defaults for your reference:
 
 ```js
 taskTree: {
-    build: ['clean', 'lint', 'tsd', 'jsx', 'tsc', 'copy:html', 'copy:js', 'sass'],
-    bundle: ['clean', 'build'],
+    build: ['clean', 'lint', 'tsd', 'jsx', 'tsc', 'copy:html', 'copy:js', 'coffee', 'livescript', 'sass'],
+    bundle: ['clean:dist', 'build'],
     default: ['clean', 'build', 'test', 'analyze', 'jsdoc', 'dist'],
     dist: ['clean', 'build', 'minify', 'bundle', 'libraryDist'],
     preTest: ['build', 'tsc:test', 'copy:jstest'],
@@ -148,12 +162,12 @@ You can override any portion of the tree to alter which tasks cause other tasks 
 
 ```js
 taskTree: {
-    build: ['clean', 'lint', 'tsd', 'jsx', 'tsc', 'copy:html', 'copy:js', 'sass', 'myCustomTask'],
+    build: ['clean', 'lint', 'tsd', 'jsx', 'tsc', 'copy:html', 'copy:js', 'coffee', 'livescript', 'sass', 'myCustomTask'],
     ...
 }
 ```
 
-But that gets pretty verbose. Because of that annoyance we offer alternative syntax for including and excluding tasks from the default dependency arrays.
+But that gets pretty long and verbose. Because of that annoyance we offer alternative syntax for including and excluding tasks from the default dependency arrays.
 
 ```js
 taskTree: {
@@ -167,21 +181,6 @@ taskTree: {
 The object form of this configuration accepts the `include` and `exclude` keys as arrays.
 
 Here are some more examples of this kind of configuration:
-
-##### Not a TypeScript project?
-Then you may want to exclude the TypeScript specific tasks:
-
-```js
-taskTree: {
-    build: {
-        exclude: ['tsd', 'tsc']
-    },
-    preTest: {
-        exclude: ['tsc:test']
-    }
-    ...
-}
-```
 
 ##### Not a library?
 Then you may want to exclude the `libraryDist` task from dist:
