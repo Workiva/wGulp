@@ -83,11 +83,7 @@ module.exports = function(gulp, userConfig){
         key = key.replace('_', ':');
 
         var taskDeps = getDeps(options, key);
-        if(!taskDeps || _.isEmpty(taskDeps)){
-            gulp.task(key, val());
-        } else {
-            gulp.task(key, taskDeps, val());
-        }
+        gulp.task(key, taskDeps, val());
     });
 
     // Add runSequence function (not really a task/subtask)
