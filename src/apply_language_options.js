@@ -23,6 +23,7 @@ module.exports = function(options, languages){
     var langMap = {
         coffeescript: ['coffee'],
         javascript: ['copy:js', 'jshint', 'minify:js', 'copy:jstest'],
+        jsx: ['jsx'],
         livescript: ['livescript'],
         typescript: ['tsd', 'tsc', 'tslint', 'tsc:test']
     };

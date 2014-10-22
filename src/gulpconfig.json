@@ -1,5 +1,5 @@
 {
-    "languages": ["javascript", "typescript", "coffeescript", "livescript"],
+    "languages": ["javascript", "jsx", "typescript", "coffeescript", "livescript"],
     "path": {
         "root": "./",
         "src": "./src/",
@@ -48,7 +48,7 @@
         "clean:buildTest": [],
         "clean:dist": [],
         "clean:report": [],
-        "coffee": ["lint"],
+        "coffee": ["clean:buildSrc"],
         "compass": ["clean:buildStyles"],
         "concat": ["build"],
         "connect": [],
@@ -64,7 +64,7 @@
         "jsx": ["clean:buildSrc", "jshint"],
         "karma": ["preTest"],
         "lint": ["jshint", "tslint"],
-        "livescript": ["clean:buildSrc", "lint"],
+        "livescript": ["clean:buildSrc"],
         "minify": ["minify:js", "minify:css"],
         "minify:css": ["clean:dist", "build"],
         "minify:js": ["clean:dist", "build"],

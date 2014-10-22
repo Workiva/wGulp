@@ -132,13 +132,13 @@ wGulp comes with a `languages` option to help trim tasks you don't need from you
 
 ```js
 var customizedOptions = {
-    languages: ['javascript', 'typescript', 'coffeescript', 'livescript']
+    languages: ['javascript', 'jsx', 'typescript', 'coffeescript', 'livescript']
 };
 ```
 
 You should remove any language you aren't using to reduce build times.
 
-Note: If you are using JavaScript for tests but CoffeeScript for source code, you will still need both `javascript` and `coffeescript` listed in your languages configuration.
+Note: If you are using JavaScript for tests but CoffeeScript for source code, for example, you will still need both `javascript` and `coffeescript` listed in your languages configuration.
 
 ### Task Dependency Tree
 Tasks in gulp can wait until other tasks finish by designating those tasks as dependencies. We've extracted that functionality into a single configuration option called `taskTree`.
