@@ -16,7 +16,7 @@
 
 module.exports = function(gulp, options, subtasks) {
 
-    var getDeps = require('../dep_tree_parser');
+    var getDeps = require('../depTreeParser');
 
     var taskname = 'karma';
 

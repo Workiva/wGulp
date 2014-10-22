@@ -30,7 +30,7 @@ module.exports = function(gulp, defaults){
                 stream = gulp.src(config.src);
             else {
                 stream = gulp.src(config.glob || defaults.glob.spec, {
-                    cwd: config.cwd || defaults.path.build_test
+                    cwd: config.cwd || defaults.path.buildTest
                 });
             }
             

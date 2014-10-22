@@ -21,7 +21,7 @@ module.exports = function(gulp, options, subtasks) {
         glob = require('glob'),
         open = require('open'),
         path = require('path'),
-        getDeps = require('../dep_tree_parser');
+        getDeps = require('../depTreeParser');
 
     // Tasks that call runSequence
     gulp.desc('build', 'Run build tasks');
@@ -65,15 +65,15 @@ module.exports = function(gulp, options, subtasks) {
     // Clean tasks
     gulp.desc('clean:buildSrc', 'Clean buildSrc');
     gulp.task('clean:buildSrc', getDeps(options, 'clean:buildSrc'),
-        subtasks.clean(options.path.build_src));
+        subtasks.clean(options.path.buildSrc));
 
     gulp.desc('clean:buildStyles', 'Clean buildStyles');
     gulp.task('clean:buildStyles', getDeps(options, 'clean:buildStyles'),
-        subtasks.clean(options.path.build_styles));
+        subtasks.clean(options.path.buildStyles));
 
     gulp.desc('clean:buildTest', 'Clean buildTest');
     gulp.task('clean:buildTest', getDeps(options, 'clean:buildTest'),
-        subtasks.clean(options.path.build_test));
+        subtasks.clean(options.path.buildTest));
 
     gulp.desc('clean:dist', 'Clean dist');
     gulp.task('clean:dist', getDeps(options, 'clean:dist'),
@@ -87,31 +87,31 @@ module.exports = function(gulp, options, subtasks) {
     gulp.task('clean', getDeps(options, 'clean'));
 
     // Copy tasks
-    gulp.desc('copy:html', "Copy HTML from src to build_src");
+    gulp.desc('copy:html', "Copy HTML from src to buildSrc");
     gulp.task('copy:html', getDeps(options, 'copy:html'), subtasks.copy({
         glob: options.glob.html,
         cwd: options.path.src,
         changed: true,
-        dest: options.path.build_src
+        dest: options.path.buildSrc
     }));
 
-    gulp.desc('copy:js', 'Copy JS from src to build_src');
+    gulp.desc('copy:js', 'Copy JS from src to buildSrc');
     gulp.task('copy:js', getDeps(options, 'copy:js'), subtasks.copy({
         glob: options.glob.js,
         cwd: options.path.src,
-        dest: options.path.build_src,
+        dest: options.path.buildSrc,
         changed: true
     }));
 
-    gulp.desc('copy:jstest', 'Copy JS from test to build_test');
+    gulp.desc('copy:jstest', 'Copy JS from test to buildTest');
     gulp.task('copy:jstest', getDeps(options, 'copy:jstest'), subtasks.copy({
         glob: options.glob.js,
         cwd: options.path.test,
-        dest: options.path.build_test,
+        dest: options.path.buildTest,
         changed: true
     }));
 
-    gulp.desc('tsc:test', 'Transpile TypeScript from test to build_test');
+    gulp.desc('tsc:test', 'Transpile TypeScript from test to buildTest');
     gulp.task('tsc:test', getDeps(options, 'tsc:test'), subtasks.tsc({
         cwd: options.path.test,
         dest: options.path.build

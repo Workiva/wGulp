@@ -49,7 +49,7 @@ module.exports = function(gulp, defaults){
                 gulp.src('.baseDir.ts', {cwd: defaults.path.src})
             );
 
-            var outDir = config.dest || defaults.path.build_src;
+            var outDir = config.dest || defaults.path.buildSrc;
             var tscOptions = config.options || defaults.ts;
             tscOptions.outDir = outDir;
 

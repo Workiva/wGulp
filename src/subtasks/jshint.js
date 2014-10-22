@@ -26,7 +26,7 @@ module.exports = function(gulp, defaults) {
             var path = require('path');
             var jshint = require('gulp-jshint');
             
-            var jshintrc = path.resolve(cwd, config.config_file || defaults.jshintrc);
+            var jshintrc = path.resolve(cwd, config.configFile || defaults.jshintrc);
 
             var stream;
             if(config.src)

@@ -19,16 +19,16 @@ module.exports = function(gulp, userConfig){
     var cwd = process.cwd();
     var glob = require('glob');
     var path = require('path');
-    var getDeps = require('./src/dep_tree_parser');
+    var getDeps = require('./src/depTreeParser');
 
     // Load default options from gulpconfig.json
     var defaultOptions = require('./src/gulpconfig.json');
     // Use user defined languages if provided, otherwise use defaults
     var languages = 'languages' in userConfig ? userConfig.languages : defaultOptions.languages;
     // Apply changes to options based on languages selected
-    defaultOptions = require('./src/apply_language_options')(defaultOptions, languages);
+    defaultOptions = require('./src/applyLanguageOptions')(defaultOptions, languages);
     // Merge user defined config with wGulp's default options
-    var options = require('./src/merge_options')(userConfig, defaultOptions);
+    var options = require('./src/mergeOptions')(userConfig, defaultOptions);
 
     // Is this a `dist` run? Check the sequence for 'dist'
     gulp.on('start', function(e){
@@ -59,7 +59,7 @@ module.exports = function(gulp, userConfig){
     var sPath = './src/subtasks/';
     var subtasks = {
         analyze: require(sPath + 'analyze')(gulp, options),
-        applyLicense: require(sPath + 'apply_license')(gulp, options),
+        applyLicense: require(sPath + 'applyLicense')(gulp, options),
         clean: require(sPath + 'clean')(gulp, options),
         coffee: require(sPath + 'coffee')(gulp, options),
         compass: require(sPath + 'compass')(gulp, options),
@@ -71,8 +71,8 @@ module.exports = function(gulp, userConfig){
         jshint: require(sPath + 'jshint')(gulp, options),
         jsx: require(sPath + 'jsx')(gulp, options),
         livescript: require(sPath + 'livescript')(gulp, options),
-        minify_css: require(sPath + 'minify_css')(gulp, options),
-        minify_js: require(sPath + 'minify_js')(gulp, options),
+        minify_css: require(sPath + 'minifyCss')(gulp, options),
+        minify_js: require(sPath + 'minifyJs')(gulp, options),
         sass: require(sPath + 'sass')(gulp, options),
         tsc: require(sPath + 'tsc')(gulp, options),
         tslint: require(sPath + 'tslint')(gulp, options)
@@ -87,10 +87,10 @@ module.exports = function(gulp, userConfig){
     });
 
     // Add runSequence function (not really a task/subtask)
-    subtasks.runSequence = require(sPath + 'run_sequence')(gulp, options);
+    subtasks.runSequence = require(sPath + 'runSequence')(gulp, options);
 
     // Generate bundle tasks
-    require('./src/bundling/build_bundle_tasks')(gulp, options);
+    require('./src/bundling/buildBundleTasks')(gulp, options);
 
     // Create tasks in task folders
     var globalTaskFolder = path.resolve(__dirname, 'src/tasks');

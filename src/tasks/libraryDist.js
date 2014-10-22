@@ -15,17 +15,17 @@
  */
 
 module.exports = function(gulp, defaults, subtasks) {
-    var getDeps = require('../dep_tree_parser');
+    var getDeps = require('../depTreeParser');
 
-    var taskName = 'library_dist';
+    var taskName = 'libraryDist';
 
     // copy transpiled js from build/ to dist/
-    gulp.task(taskName + ':copy:src', getDeps(defaults, 'library_dist'), subtasks.copy({
-        src: [defaults.path.build_src + '/**'],
+    gulp.task(taskName + ':copy:src', getDeps(defaults, 'libraryDist'), subtasks.copy({
+        src: [defaults.path.buildSrc + '/**'],
         dest: defaults.path.dist
     }));
 
-    gulp.task(taskName + ':copy:api', getDeps(defaults, 'library_dist'), function(){
+    gulp.task(taskName + ':copy:api', getDeps(defaults, 'libraryDist'), function(){
         // copy definition files for this repo to dist/ by copying everything
         // from api/ that isn't git ignored
         var fs = require('fs');

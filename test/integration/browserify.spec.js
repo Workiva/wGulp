@@ -3,7 +3,7 @@ var path = require('path');
 var join = path.join;
 var integration = require('../integration');
 var linebyline = require('../linebyline');
-var bundle_browserify = require('../../src/bundling/bundle_browserify');
+var bundle_browserify = require('../../src/bundling/bundleBrowserify');
 
 
 describe("browserify bundler", function() {

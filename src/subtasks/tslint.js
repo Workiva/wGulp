@@ -26,7 +26,7 @@ module.exports = function(gulp, defaults){
             var path = require('path');
             var tslint = require('gulp-tslint');
 
-            var tslintrc = path.resolve(cwd, config.config_file || defaults.tslintrc);
+            var tslintrc = path.resolve(cwd, config.configFile || defaults.tslintrc);
             var tsConfig = require(tslintrc);
 
             var stream;

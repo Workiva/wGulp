@@ -36,12 +36,12 @@ module.exports = function(gulp, defaults){
                 });
             }
 
-            return stream.pipe(changed(config.dest || defaults.path.build_src))
+            return stream.pipe(changed(config.dest || defaults.path.buildSrc))
                 .pipe(coffee({bare: config.bare || true}))
                 .on('error', function(err){
                     cb(new gutil.PluginError('coffee', err));
                 })
-                .pipe(gulp.dest(config.dest || defaults.path.build_src));
+                .pipe(gulp.dest(config.dest || defaults.path.buildSrc));
         };
     };
 };

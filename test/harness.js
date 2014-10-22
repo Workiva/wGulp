@@ -13,16 +13,15 @@ Harness = (function() {
         this.options.path.src = "./test/subtasks/src/";
         this.options.path.test = "./test/subtasks/test/";
         this.options.path.build = "./test/subtasks/build/";
-        this.options.path.build_src = "./test/subtasks/build/js/";
-        this.options.path.build_test  = "./test/subtasks/build/test/";
-        this.options.path.test_ts_dir = "./test/subtasks/build/test/";
+        this.options.path.buildSrc = "./test/subtasks/build/js/";
+        this.options.path.buildTest  = "./test/subtasks/build/test/";
         this.options.path.dist = "./test/subtasks/dist/";
         this.options.path.coverage = "./test/subtasks/report/coverage/";
         this.options.path.complexity = "./test/subtasks/report/complexity/";
         this.options.path.docs = "./test/subtasks/docs/";
         this.options.ts.noLib = true;
         this.options.tslintrc = "./src/template/tslint.json";
-        require('../src/bundling/build_bundle_tasks')(gulp, this.options);
+        require('../src/bundling/buildBundleTasks')(gulp, this.options);
     };
 
     harness.prototype.assertTaskGeneratesExpectedFileOutput = function(done, task, files, prefix) {

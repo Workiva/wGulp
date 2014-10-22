@@ -29,8 +29,8 @@ var get_bundle_options = function(options, cb, bundleName){
 
 module.exports = function(gulp, options, cb, bundleName){
     var argv = require('yargs').argv;
-    var bundle_browserify = require('./bundle_browserify');
-    var bundle_jspm = require('./bundle_jspm');
+    var bundleBrowserify = require('./bundleBrowserify');
+    var bundleJspm = require('./bundleJspm');
 
     var bundleOptions = get_bundle_options(options, cb, bundleName);
 
@@ -46,10 +46,10 @@ module.exports = function(gulp, options, cb, bundleName){
 
     // Choose which bundler to use based on the option specified.
     if(bundleOptions.bundler == "jspm"){
-        return bundle_jspm(gulp, options, bundleOptions, cb);
+        return bundleJspm(gulp, options, bundleOptions, cb);
     }
     else if(bundleOptions.bundler == "browserify"){
-        return bundle_browserify(gulp, options, bundleOptions, cb);
+        return bundleBrowserify(gulp, options, bundleOptions, cb);
     }
     else {
         // An unknown bundler was specified. Error gracefully.

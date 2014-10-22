@@ -11,7 +11,7 @@ describe("minify subtask", function() {
         var task = 'minify:js';
         var helper = new Harness(gulp);
 
-        var minify = require('../../src/subtasks/minify_js')(gulp, helper.options);
+        var minify = require('../../src/subtasks/minifyJs')(gulp, helper.options);
         minify({
             src: "./test/subtasks/minify/app.js",
             dest: "./test/subtasks/minify/"

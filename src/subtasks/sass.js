@@ -34,14 +34,16 @@ module.exports = function(gulp, defaults){
                 });
             }
 
+            var includePaths = 'includePaths' in config ? config.includePaths : defaults.path.styleIncludePaths;
+
             return stream.pipe(
                 sass({
-                    includePaths: config.include_paths || defaults.path.style_include_paths
+                    includePaths: includePaths
                 }))
                 .on('error', function(err){
                     cb(new gutil.PluginError('sass', err));
                 })
-                .pipe(gulp.dest(config.dest || defaults.path.build_styles));
+                .pipe(gulp.dest(config.dest || defaults.path.buildStyles));
         };
     };
 };

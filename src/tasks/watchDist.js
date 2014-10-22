@@ -14,15 +14,16 @@
  * limitations under the License.
  */
 
-module.exports = function(gulp, defaults){
-    return function(tasks) {
-        return function (cb) {
-            var run_sequence = require('../run_sequence');
-            var _ = require('lodash');
+module.exports = function(gulp, options, subtasks) {
 
-            var argArray = _.cloneDeep(tasks).concat(cb);
-            argArray.unshift(gulp);
-            run_sequence.apply(this, argArray);
-        };
+    var taskname = 'watch:dist';
+
+    gulp.desc(taskname, 'Watch source files for changes and re-run dist');
+
+    var fn = function(done) {
+        gulp.watch(options.glob.all, {
+            cwd: options.path.src
+        }, ['dist']);
     };
+    gulp.task(taskname, ['dist'], fn);
 };
