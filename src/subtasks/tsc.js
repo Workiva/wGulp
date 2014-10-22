@@ -64,7 +64,14 @@ module.exports = function(gulp, defaults){
                 })
                 .on('end', function(){
                     // delete the temporary src TS file
-                    fs.unlink(baseDirFile);
+                    fs.unlink(baseDirFile, function (err) {
+                        // Swallow the error if the file no longer exists.
+                        // Multiple tsc tasks can operate concurrently, so it's
+                        // possible that another tsc task will have completed and
+                        // subsequently deleted this temporary file before this
+                        // tsc task completes (does not adversely affect the
+                        // functionality).
+                    });
                 })
                 .pipe(gulp.dest(outDir));
         };
