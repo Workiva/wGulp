@@ -71,8 +71,8 @@ module.exports = function(gulp, userConfig){
         jshint: require(sPath + 'jshint')(gulp, options),
         jsx: require(sPath + 'jsx')(gulp, options),
         livescript: require(sPath + 'livescript')(gulp, options),
-        minifyCss: require(sPath + 'minifyCss')(gulp, options),
-        minifyJs: require(sPath + 'minifyJs')(gulp, options),
+        minify_css: require(sPath + 'minifyCss')(gulp, options),
+        minify_js: require(sPath + 'minifyJs')(gulp, options),
         sass: require(sPath + 'sass')(gulp, options),
         tsc: require(sPath + 'tsc')(gulp, options),
         tslint: require(sPath + 'tslint')(gulp, options)
@@ -80,6 +80,8 @@ module.exports = function(gulp, userConfig){
 
     // Create tasks for each task function with default options
     _.forOwn(subtasks, function(val, key){
+        key = key.replace('_', ':');
+
         var taskDeps = getDeps(options, key);
         gulp.task(key, taskDeps, val());
     });
