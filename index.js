@@ -14,14 +14,43 @@
  * limitations under the License.
  */
 
-module.exports = function(gulp, config){
+module.exports = function(gulp, userConfig){
     var _ = require('lodash');
     var cwd = process.cwd();
     var glob = require('glob');
     var path = require('path');
+    var getDeps = require('./src/dep_tree_parser');
 
-    var options = require('./src/gulpconfig.json');
-    options = require('./src/merge_options')(config, options);
+    // Load default options from gulpconfig.json
+    var defaultOptions = require('./src/gulpconfig.json');
+    // Use user defined languages if provided, otherwise use defaults
+    var languages = 'languages' in userConfig ? userConfig.languages : defaultOptions.languages;
+    // Apply changes to options based on languages selected
+    defaultOptions = require('./src/apply_language_options')(defaultOptions, languages);
+    // Merge user defined config with wGulp's default options
+    var options = require('./src/merge_options')(userConfig, defaultOptions);
+
+    // Is this a `dist` run? Check the sequence for 'dist'
+    gulp.on('start', function(e){
+        options.isDist = _.contains(e.message.split(','), 'dist');
+    });
+
+    // Check for circular dependencies (cycles) in resulting taskTree
+    function detectCycle(task, key, val){
+        if(_.contains(val, task)){
+            if(_.contains(getDeps(options, task), key)){
+                console.log("Circular task dependency detected! \t" + task + " --> " + key);
+            }
+        }
+    }
+    _.forOwn(options.taskTree, function(val, key){
+        val = getDeps(options, key);
+        _.forOwn(options.taskTree, function(innerVal, innerKey){
+            if(innerKey != key){
+                detectCycle(innerKey, key, val);
+            }
+        });
+    });
 
     // Put our custom describe method onto gulp
     gulp.desc = require('./src/desc');
@@ -52,7 +81,9 @@ module.exports = function(gulp, config){
     // Create tasks for each task function with default options
     _.forOwn(subtasks, function(val, key){
         key = key.replace('_', ':');
-        gulp.task(key, val());
+
+        var taskDeps = getDeps(options, key);
+        gulp.task(key, taskDeps, val());
     });
 
     // Add runSequence function (not really a task/subtask)
@@ -88,6 +119,9 @@ module.exports = function(gulp, config){
 
     // Add config to exports
     subtasks.config = options;
+
+    // Expose getDeps in case consumers want to use it
+    subtasks.getDeps = _.curry(getDeps)(options);
 
     return subtasks;
 };

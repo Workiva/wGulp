@@ -53,6 +53,10 @@ module.exports = function(gulp, defaults){
             var tscOptions = config.options || defaults.ts;
             tscOptions.outDir = outDir;
 
+            if(defaults.isDist){
+                tscOptions.sourcemap = false;
+            }
+
             return mergedStream.pipe(changed(outDir))
                 .pipe(tsc(tscOptions))
                 .on('error', function(err){

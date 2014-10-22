@@ -28,36 +28,6 @@ describe("clean subtask", function() {
         ];
     });
 
-    it("should remove build and dist directories by default", function(done) {
-
-        for (var i = 0; i < directories.length; i++) {
-            if (!fs.existsSync(directories[i])) {
-                console.log("making dir: " + directories[i]);
-                fs.mkdirSync(directories[i]);
-            }
-        }
-        
-        directories = [
-            distDirPath,
-            buildDirPath
-        ];
-
-        var clean = require('../../src/subtasks/clean')(gulp, helper.options);
-        clean()(function(){
-            for (var i = 0; i < directories.length; i++) {
-                if (fs.existsSync(directories[i])) {
-                    var message = "the " + directories[i] + " directory was not removed";
-                    throw new Error(message);
-                }
-            }
-            if (!fs.existsSync(reportDirPath)) {
-                throw new Error("report directory was removed by mistake!");
-            }
-            done();
-        });
-
-    });
-
     it("should remove directories passed in at call-time", function(done){
         for (var i = 0; i < directories.length; i++) {
             if (!fs.existsSync(directories[i])) {

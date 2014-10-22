@@ -16,6 +16,8 @@
 
 module.exports = function(gulp, options, subtasks) {
 
+    var getDeps = require('../dep_tree_parser');
+
     var taskname = 'karma';
 
     gulp.desc(taskname, 'Start the karma test runner for any test run');
@@ -100,5 +102,5 @@ module.exports = function(gulp, options, subtasks) {
             .pipe(karma(karmaOptions));
     };
 
-    gulp.task(taskname, fn);
+    gulp.task(taskname, getDeps(options, 'karma'), fn);
 };

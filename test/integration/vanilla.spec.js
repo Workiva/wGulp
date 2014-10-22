@@ -8,7 +8,7 @@ var integration = require('../integration');
 
 describe("vanilla mode integration tests", function() {
     it("should execute all vanilla tasks and generate correct output", function(done) {
-        var helper = new Integration(gulp, "vanilla", [['copy:js']]);
+        var helper = new Integration(gulp, "vanilla", ['copy:js']);
 
         gulp.task('example', ['build'], function() {
             if (fs.existsSync(join(__dirname, './modes/vanilla/build/src/Person.d.ts'))) {

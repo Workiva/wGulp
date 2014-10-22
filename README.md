@@ -20,7 +20,8 @@ Take a look at the [release notes](https://github.com/Workiva/wGulp/releases). W
   - [Expected/Default project structure](#expecteddefault-project-structure)
   - [See what's included out of the box](#see-whats-included-out-of-the-box)
     - [Main Tasks](#main-tasks)
-    - [Build, test, dist, and default tasks](#build-test-dist-and-default-tasks)
+    - [Language Configuration](#language-configuration)
+    - [Task Dependency Tree](#task-dependency-tree)
     - [Bundling](#bundling)
     - [Centralized APIs with TypeScript Definition Files](#centralized-apis-with-typescript-definition-files)
   - [Testing with wGulp](#testing-with-wgulp)
@@ -126,18 +127,94 @@ Out of the box wGulp provides a *lot* of functionality. It is a collection of be
     watch:lint - Run lint task and rerun when source or test files change
     watch:test - Run test task and rerun when source or test files change
 
-### Build, test, dist, and default tasks
-Tasks `build`, `dist`, `test`, and `default` can be modified by overriding the task lists in the config (i.e. `build_tasks`).
-Here are the defaults:
+### Language Configuration
+wGulp comes with a `languages` option to help trim tasks you don't need from your build. By default, all wGulp languages will be included in your `gulpconfig.js`:
 
 ```js
-    build_tasks: ['clean', ['lint', 'tsd'], ['jsx', 'tsc', 'copy:html', 'copy:js', 'sass'],
-    test_tasks: ['build', ['tsc:test', 'copy:jstest']],
-    dist_tasks: ['clean', 'build', 'minify', 'bundle', 'library_dist'],
-    default_tasks: ['test', ['analyze', 'jsdoc'], 'dist'],
+var customizedOptions = {
+    languages: ['javascript', 'jsx', 'typescript', 'coffeescript', 'livescript']
+};
 ```
 
-This uses runSequence to execute the tasks. Read more about this in the [runSequence subtask](#runsequence).
+You should remove any language you aren't using to reduce build times.
+
+Note: If you are using JavaScript for tests but CoffeeScript for source code, for example, you will still need both `javascript` and `coffeescript` listed in your languages configuration.
+
+### Task Dependency Tree
+Tasks in gulp can wait until other tasks finish by designating those tasks as dependencies. We've extracted that functionality into a single configuration option called `taskTree`.
+Here are some defaults for your reference:
+
+```js
+taskTree: {
+    build: ['clean', 'lint', 'tsd', 'jsx', 'tsc', 'copy:html', 'copy:js', 'coffee', 'livescript', 'sass'],
+    bundle: ['clean:dist', 'build'],
+    default: ['clean', 'build', 'test', 'analyze', 'jsdoc', 'dist'],
+    dist: ['clean', 'build', 'minify', 'bundle', 'library_dist'],
+    preTest: ['build', 'tsc:test', 'copy:jstest'],
+    test: ['preTest', 'karma'],
+    ...
+}
+```
+
+The rest of the tree can be found in [`wGulp/src/gulpconfig.json`](src/gulpconfig.json).
+
+You can override any portion of the tree to alter which tasks cause other tasks to run. Say you want to add a task called `myCustomTask` to build. You can simply copy the array from above and add it:
+
+```js
+taskTree: {
+    build: ['clean', 'lint', 'tsd', 'jsx', 'tsc', 'copy:html', 'copy:js', 'coffee', 'livescript', 'sass', 'myCustomTask'],
+    ...
+}
+```
+
+But that gets pretty long and verbose. Because of that annoyance we offer alternative syntax for including and excluding tasks from the default dependency arrays.
+
+```js
+taskTree: {
+    build: {
+        include: ['myCustomTask']
+    }
+    ...
+}
+```
+
+The object form of this configuration accepts the `include` and `exclude` keys as arrays.
+
+Here are some more examples of this kind of configuration:
+
+##### Not a library?
+Then you may want to exclude the `library_dist` task from dist:
+
+```js
+taskTree: {
+    dist: {
+        exclude: ['library_dist']
+    }
+    ...
+}
+```
+
+#### Using the Dependency Tree in a Custom Task
+Perhaps you want to utilize the dependency tree when defining your own task. wGulp exposes the `getDeps` function for this purpose.
+
+```js
+var customizedOptions = {
+    taskTree: {
+        'copy:dist': ['clean', 'build']
+    }
+}
+var wGulp = require('wGulp')(gulp, customizedOptions);
+
+// Add your own tasks here
+gulp.task('copy:dist', wGulp.getDeps('copy:dist'), wGulp.copy({
+    src: ['path/to/custom/file'],
+    dest: wGulp.config.paths.dist    
+}));
+
+```
+
+The `getDeps` function on the wGulp object simply takes the key of the task to lookup as an argument.
+
 
 ### Bundling
 
@@ -440,6 +517,8 @@ Minifies CSS code.
 Minifies JS code.
 
 ##### runSequence
+*Note: we highly recommend using the [task dependency system](#task-dependency-tree) instead of runSequence to ensure the fastest possible build and to prevent duplicate task runs.*
+
 Run a set of tasks in sequence. Does not take standard args. Instead, pass an array of tasks to execute: `[["react", "ts", "js"], "bundle:app"]`
 
 Tasks in the base-level list will run sequentially. Tasks within inner lists will run in parallel. In this example, `react`, `ts`, and `js` will all run in parallel, and when they are all done, `bundle:app` will run.

@@ -8,7 +8,7 @@ var integration = require('../integration');
 
 describe("compiled mode integration tests", function() {
     it("should execute all compiled tasks and generate correct output", function(done) {
-        var helper = new Integration(gulp, "compiled", [['copy:js', 'tsc']]);
+        var helper = new Integration(gulp, "compiled", ['copy:js', 'tsc']);
 
         gulp.task('example', ['build'], function() {
             var build = "./modes/compiled/build/src/";

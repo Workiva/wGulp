@@ -20,34 +20,38 @@ module.exports = function(gulp, options, subtasks) {
         changed = require('gulp-changed'),
         glob = require('glob'),
         open = require('open'),
-        path = require('path');
+        path = require('path'),
+        getDeps = require('../dep_tree_parser');
 
     // Tasks that call runSequence
     gulp.desc('build', 'Run build tasks');
-    gulp.task('build', subtasks.runSequence(options.build_tasks));
+    gulp.task('build', getDeps(options, 'build'));
 
-    gulp.desc('dist', 'Run dist tasks');
-    gulp.task('dist', function(cb){
+    gulp.desc('preDist', 'Run before dist');
+    gulp.task('preDist', getDeps(options, 'preDist'), function(done){
         // Redefine tsc task with sourcemaps disabled
         var tscOptions = options.ts;
         tscOptions.sourcemap = false;
-        gulp.task('tsc', subtasks.tsc({options: tscOptions}));
-
-        // Run dist tasks
-        return subtasks.runSequence(options.dist_tasks)(cb);
+        gulp.task(
+            'tsc', getDeps(options, 'tsc'),
+            subtasks.tsc({options: tscOptions})
+        );
     });
 
-    gulp.desc('test:generate', 'Run test tasks')
-    gulp.task('test:generate', subtasks.runSequence(options.test_tasks));
+    gulp.desc('dist', 'Run dist tasks');
+    gulp.task('dist', getDeps(options, 'dist'));
+
+    gulp.desc('preTest', 'Run test tasks')
+    gulp.task('preTest', getDeps(options, 'preTest'));
 
     gulp.desc('test:jasmine', 'Run test tasks and execute with jasmine');
-    gulp.task('test:jasmine', subtasks.runSequence(['test:generate', 'jasmine']));
+    gulp.task('test:jasmine', getDeps(options, 'test:jasmine'));
 
     gulp.desc('test', 'Run test tasks and execute with Karma');
-    gulp.task('test', subtasks.runSequence(['test:generate', 'karma']));
+    gulp.task('test', getDeps(options, 'test'));
 
     gulp.desc('default', 'Run default tasks');
-    gulp.task('default', subtasks.runSequence(options.default_tasks));
+    gulp.task('default', getDeps(options, 'default'));
 
     // Bundle tasks
     var bundleTasks = _.map(Object.keys(options.bundles), function(bundleName){
@@ -56,11 +60,35 @@ module.exports = function(gulp, options, subtasks) {
         return taskName;
     });
     gulp.desc('bundle', 'Run all bundle tasks');
-    gulp.task('bundle', (bundleTasks && bundleTasks.length > 0) ? subtasks.runSequence(bundleTasks) : null);
+    gulp.task('bundle', getDeps(options, 'bundle'), (bundleTasks && bundleTasks.length > 0) ? subtasks.runSequence(bundleTasks) : null);
+
+    // Clean tasks
+    gulp.desc('clean:buildSrc', 'Clean buildSrc');
+    gulp.task('clean:buildSrc', getDeps(options, 'clean:buildSrc'),
+        subtasks.clean(options.path.build_src));
+
+    gulp.desc('clean:buildStyles', 'Clean buildStyles');
+    gulp.task('clean:buildStyles', getDeps(options, 'clean:buildStyles'),
+        subtasks.clean(options.path.build_styles));
+
+    gulp.desc('clean:buildTest', 'Clean buildTest');
+    gulp.task('clean:buildTest', getDeps(options, 'clean:buildTest'),
+        subtasks.clean(options.path.build_test));
+
+    gulp.desc('clean:dist', 'Clean dist');
+    gulp.task('clean:dist', getDeps(options, 'clean:dist'),
+        subtasks.clean(options.path.dist));
+
+    gulp.desc('clean:report', 'Clean report');
+    gulp.task('clean:report', getDeps(options, 'clean:report'),
+        subtasks.clean(options.path.report));
+
+    gulp.desc('clean', 'Clean out directories');
+    gulp.task('clean', getDeps(options, 'clean'));
 
     // Copy tasks
     gulp.desc('copy:html', "Copy HTML from src to build_src");
-    gulp.task('copy:html', subtasks.copy({
+    gulp.task('copy:html', getDeps(options, 'copy:html'), subtasks.copy({
         glob: options.glob.html,
         cwd: options.path.src,
         changed: true,
@@ -68,7 +96,7 @@ module.exports = function(gulp, options, subtasks) {
     }));
 
     gulp.desc('copy:js', 'Copy JS from src to build_src');
-    gulp.task('copy:js', subtasks.copy({
+    gulp.task('copy:js', getDeps(options, 'copy:js'), subtasks.copy({
         glob: options.glob.js,
         cwd: options.path.src,
         dest: options.path.build_src,
@@ -76,7 +104,7 @@ module.exports = function(gulp, options, subtasks) {
     }));
 
     gulp.desc('copy:jstest', 'Copy JS from test to build_test');
-    gulp.task('copy:jstest', subtasks.copy({
+    gulp.task('copy:jstest', getDeps(options, 'copy:jstest'), subtasks.copy({
         glob: options.glob.js,
         cwd: options.path.test,
         dest: options.path.build_test,
@@ -84,30 +112,30 @@ module.exports = function(gulp, options, subtasks) {
     }));
 
     gulp.desc('tsc:test', 'Transpile TypeScript from test to build_test');
-    gulp.task('tsc:test', subtasks.tsc({
+    gulp.task('tsc:test', getDeps(options, 'tsc:test'), subtasks.tsc({
         cwd: options.path.test,
         dest: options.path.build
     }));
 
     // Tasks that are just a collection of other tasks
     gulp.desc('cover', 'View code coverage statistics');
-    gulp.task('cover', ['test'], function(done){
+    gulp.task('cover', getDeps(options, 'cover'), function(done){
         var results = glob.sync('**/index.html', {cwd: options.path.coverage});
         open(path.resolve(options.path.coverage + results[0]));
         done();
     });
 
     gulp.desc('lint', 'Validate code');
-    gulp.task('lint', ['jshint', 'tslint']);
+    gulp.task('lint', getDeps(options, 'lint'));
 
     gulp.desc('minify', 'Minify JS and CSS code');
-    gulp.task('minify', ['minify:js', 'minify:css']);
+    gulp.task('minify', getDeps(options, 'minify'));
 
     gulp.task('_tslint', subtasks.tslint({emitError: false}));
     gulp.task('_jshint', subtasks.jshint({emitError: false}));
 
     gulp.desc('qa', 'QA - Run the default tasks and start serve afterwards.');
-    gulp.task('qa', ['default'], function() {
+    gulp.task('qa', getDeps(options, 'qa'), function() {
         return gulp.start('serve');
     });
 

@@ -14,27 +14,15 @@
  * limitations under the License.
  */
 
-
-module.exports = function(gulp, defaults){
-    gulp.desc('clean', 'Clean out directories');
-
-    return function(config) {
-        if(!config)
-            config = [];
-
-        return function (done) {
-            var _ = require('lodash');
-            var fs = require('fs-extra');
-
-            if(_.isArray(config)){
-                _.forEach(config, function(val){
-                    fs.removeSync(val);
-                });
-            }
-            else {
-                fs.removeSync(config);
-            }
-            done();
-        };
-    };
+module.exports = function(options, key){
+    var _ = require('lodash');
+    var depsEntry = options.taskTree[key];
+    if(_.isArray(depsEntry)){
+        return depsEntry;
+    } else if(_.isObject(depsEntry)){
+        var baseTasks = depsEntry.tasks;
+        baseTasks = _.difference(baseTasks, depsEntry.exclude || []);
+        baseTasks = _.union(baseTasks, depsEntry.include || []);
+        return baseTasks;
+    }
 };
