@@ -38,7 +38,7 @@ module.exports = function(gulp, options, subtasks) {
         var srcJsx = options.path.src + options.glob.jsx;
         var buildJs = options.path.build + options.glob.js;
 
-        gulp.watch([testJs, testTs, srcJs, srcTs, srcJsx], ['test:generate']);
+        gulp.watch([testJs, testTs, srcJs, srcTs, srcJsx], ['preTest']);
         gulp.watch(buildJs).on('change', server.changed);
 
         // get files from karma config
@@ -74,5 +74,5 @@ module.exports = function(gulp, options, subtasks) {
         return gulp.src(files)
             .pipe(karma(karmaOptions));
     };
-    gulp.task(taskname, ['test:generate'], fn);
+    gulp.task(taskname, ['preTest'], fn);
 };
