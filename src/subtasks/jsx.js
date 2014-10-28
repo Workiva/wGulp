@@ -14,6 +14,15 @@
  * limitations under the License.
  */
 
+function removeCwd(path){
+    var cwd = process.cwd();
+    var i = path.indexOf(cwd);
+    if(i != -1){
+        return path.substring(path.indexOf(cwd) + cwd.length);
+    }
+    return path;
+}
+
 module.exports = function(gulp, defaults){
     gulp.desc('jsx', 'Transpile JSX code with React to JS');
 
@@ -38,6 +47,7 @@ module.exports = function(gulp, defaults){
             return stream.pipe(changed(config.dest || defaults.path.buildSrc))
                 .pipe(react())
                 .on('error', function(err){
+                    console.log("Error parsing JSX file: ." + removeCwd(err.fileName));
                     cb(new gutil.PluginError('jsx', err));
                 })
                 .pipe(gulp.dest(config.dest || defaults.path.buildSrc));
