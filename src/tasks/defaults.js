@@ -103,6 +103,14 @@ module.exports = function(gulp, options, subtasks) {
         changed: true
     }));
 
+    gulp.desc('copy:htmltest', 'Copy HTML from test to buildTest');
+    gulp.task('copy:htmltest', getDeps(options, 'copy:htmltest'), subtasks.copy({
+        glob: options.glob.html,
+        cwd: options.path.test,
+        changed: true,
+        dest: options.path.buildTest
+    }));
+
     gulp.desc('copy:jstest', 'Copy JS from test to buildTest');
     gulp.task('copy:jstest', getDeps(options, 'copy:jstest'), subtasks.copy({
         glob: options.glob.js,

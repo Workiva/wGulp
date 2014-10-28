@@ -54,6 +54,7 @@
         "connect": [],
         "copy": ["clean:buildSrc", "clean:buildStyles", "clean:buildTest"],
         "copy:html": ["clean:buildSrc"],
+        "copy:htmltest": ["clean:buildTest"],
         "copy:js": ["clean:buildSrc"],
         "copy:jstest": ["clean:buildTest"],
         "cover": ["test"],
@@ -80,7 +81,7 @@
         "bundle": ["clean:dist", "build"],
         "default": ["clean", "build", "test", "analyze", "jsdoc", "dist"],
         "dist": ["clean", "build", "minify", "bundle", "libraryDist"],
-        "preTest": ["build", "tsc:test", "copy:jstest"],
+        "preTest": ["build", "tsc:test", "copy:htmltest", "copy:jstest"],
         "test": ["preTest", "karma"],
         "test:jasmine": ["preTest", "jasmine"]
     },
