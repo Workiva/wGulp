@@ -95,6 +95,7 @@ Out of the box wGulp provides a *lot* of functionality. It is a collection of be
     coffee - Transpile CoffeeScript to JavaScript
     compass - compile sass css (using compass)
     copy:html - Copy html templates in ./src/ to ./build/src/
+    copy:htmltest - Copy html templates in ./test/ to ./build/test/
     copy:js - Copy JavaScript files in ./src/ to ./build/src/
     copy:jstest - Copy JavaScript files in ./test/ to ./build/test/
     cover - Generate and view code coverage report
