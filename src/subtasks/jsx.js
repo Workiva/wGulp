@@ -16,9 +16,9 @@
 
 function removeCwd(path){
     var cwd = process.cwd();
-    var i = path.indexOf(cwd);
-    if(i != -1){
-        return path.substring(path.indexOf(cwd) + cwd.length);
+    var index = path.indexOf(cwd);
+    if(index != -1){
+        return path.substring(index + cwd.length);
     }
     return path;
 }
