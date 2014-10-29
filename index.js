@@ -35,6 +35,11 @@ module.exports = function(gulp, userConfig){
         options.isDist = _.contains(e.message.split(','), 'dist');
     });
 
+    // Echo a system bell on all errors to alert the user
+    gulp.on('err', function(e){
+        console.log("\u0007");
+    });
+
     // Check for circular dependencies (cycles) in resulting taskTree
     function detectCycle(task, key, val){
         if(_.contains(val, task)){
