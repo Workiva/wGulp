@@ -20,6 +20,7 @@
     "gulp": "^3.8.7"
   },
   "dependencies": {
+    "license-checker": "^0.0.10",
     "browserify": "^6.1.0",
     "chalk": "^0.5.1",
     "fs-extra": "^0.12.0",
