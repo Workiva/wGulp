@@ -98,29 +98,21 @@ module.exports = function(gulp, userConfig){
     require('./src/bundling/buildBundleTasks')(gulp, options);
 
     // Create tasks in task folders
-    var globalTaskFolder = path.resolve(__dirname, 'src/tasks');
-    var projectTaskFolder = path.resolve(cwd, 'tasks');
-    var taskFolders = [
-        globalTaskFolder,
-        projectTaskFolder
-    ];
-    function loadFiles(err, files) {
-        if (err) {
-            throw err;
-        }
+    function addTasks(folder) {
+        var files = glob('*.js', {
+            cwd: folder,
+            sync: true
+        });
         _.forEach(files, function(file){
             var taskName = file.replace(/\.js$/i, '');
-            var taskPath = path.resolve(taskFolders[i], taskName);
+            var taskPath = path.resolve(folder, taskName);
             require(taskPath)(gulp, options, subtasks);
         });
     };
-
-    for (var i = 0; i < taskFolders.length; i++) {
-        glob("*.js", {
-            cwd: taskFolders[i],
-            sync: true
-        }, loadFiles);
-    }
+    var globalTaskFolder = path.resolve(__dirname, 'src/tasks/');
+    var projectTaskFolder = path.resolve(cwd, 'tasks/');
+    addTasks(globalTaskFolder);
+    addTasks(projectTaskFolder);
 
     // Add config to exports
     subtasks.config = options;
