@@ -119,6 +119,11 @@ module.exports = function(gulp, options, subtasks) {
         changed: true
     }));
 
+    gulp.task('jsx:test', getDeps(options, 'jsx:test'), subtasks.jsx({
+        cwd: options.path.test,
+        dest: options.path.buildTest
+    }));
+
     gulp.desc('tsc:test', 'Transpile TypeScript from test to buildTest');
     gulp.task('tsc:test', getDeps(options, 'tsc:test'), subtasks.tsc({
         cwd: options.path.test,
