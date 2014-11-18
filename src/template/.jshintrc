@@ -14,12 +14,14 @@
         "runs",
         "waits",
         "waitsFor",
-        "spyOn"
+        "spyOn",
+        "console",
+        "-Promise"
     ],
     "browser": true,
 
     "asi": false,
-    "camelcase": true,
+    "camelcase": false,
     "curly": true,
     "eqeqeq": true,
     "esnext": true,
