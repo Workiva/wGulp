@@ -62,6 +62,7 @@
         "jsdoc": ["build"],
         "jshint": [],
         "jsx": ["clean:buildSrc", "jshint"],
+        "jsx:test": ["clean:buildTest"],
         "karma": ["preTest"],
         "libraryDist": ["clean", "build"],
         "lint": ["jshint", "tslint"],
@@ -81,7 +82,7 @@
         "bundle": ["clean:dist", "build"],
         "default": ["clean", "build", "test", "analyze", "jsdoc", "dist"],
         "dist": ["clean", "build", "bundle", "libraryDist", "minify"],
-        "preTest": ["build", "tsc:test", "copy:htmltest", "copy:jstest"],
+        "preTest": ["build", "tsc:test", "copy:htmltest", "copy:jstest", "jsx:test"],
         "test": ["preTest", "karma"],
         "test:jasmine": ["preTest", "jasmine"]
     },

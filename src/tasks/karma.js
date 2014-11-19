@@ -34,14 +34,14 @@ module.exports = function(gulp, options, subtasks) {
         // Check for test specs. If none, skip Karma
         if(_.isArray(options.glob.spec)){
             if(_.every(_.map(options.glob.spec, function(specStr){
-                return _.isEmpty(glob.sync(specStr, {cwd: options.path.test}));
+                return _.isEmpty(glob.sync(specStr, {cwd: options.path.buildTest}));
             }))){
                 gutil.log(gutil.colors.yellow("No tests found. Skipping Karma."));
                 done();
                 return;
             }
         } else {
-            if(_.isEmpty(glob.sync(options.glob.spec, {cwd: options.path.test}))){
+            if(_.isEmpty(glob.sync(options.glob.spec, {cwd: options.path.buildTest}))){
                 gutil.log(gutil.colors.yellow("No tests found. Skipping Karma."));
                 done();
                 return;
