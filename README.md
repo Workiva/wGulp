@@ -190,7 +190,14 @@ Then you may want to exclude the `libraryDist` task from dist:
 taskTree: {
     dist: {
         exclude: ['libraryDist']
-    }
+    },
+    // Only need the following if you are using the minify tasks
+    "minify:css": {
+        exclude: ['libraryDist']
+    },
+    "minify:js": {
+        exclude: ['libraryDist']
+    },
     ...
 }
 ```
