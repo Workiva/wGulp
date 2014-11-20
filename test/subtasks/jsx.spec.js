@@ -9,5 +9,6 @@ describe("jsx subtask", function() {
         var jsx = require('../../src/subtasks/jsx')(gulp, helper.options);
         gulp.task(task, jsx());
         helper.assertTaskGeneratesExpectedFileOutput(done, task, files, 'js');
+        done();
     });
 });
