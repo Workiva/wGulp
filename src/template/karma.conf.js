@@ -4,7 +4,8 @@ module.exports = function(config) {
         frameworks: ['jspm', 'jasmine'],
         jspm: {
             loadFiles: ['build/test/**/*.js'],
-            serveFiles: ['build/**', 'src/**', 'test/**']
+            serveFiles: ['build/**', 'src/**', 'test/**'],
+            useBundles: true
         },
         reporters: ['progress', 'junit', 'html'],
         junitReporter: {
