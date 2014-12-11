@@ -62,6 +62,16 @@ module.exports = function(gulp, options, subtasks) {
     gulp.desc('bundle', 'Run all bundle tasks');
     gulp.task('bundle', getDeps(options, 'bundle'), (bundleTasks && bundleTasks.length > 0) ? subtasks.runSequence(bundleTasks) : null);
 
+    gulp.desc('test:bundle', 'Test bundled application');
+    gulp.task('test:bundle', getDeps(options, 'test:bundle'));
+
+    gulp.desc('unbundle', 'Disable jspm bundle');
+    gulp.task('unbundle', getDeps(options, 'unbundle'), function() {
+        var shell = require('gulp-shell');
+        var command = "jspm unbundle";
+        return gulp.src('').pipe(shell([command])); 
+    });
+
     // Clean tasks
     gulp.desc('clean:buildSrc', 'Clean buildSrc');
     gulp.task('clean:buildSrc', getDeps(options, 'clean:buildSrc'),
