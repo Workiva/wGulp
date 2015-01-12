@@ -512,7 +512,9 @@ Run js code through the jshint linter. Takes one custom arg:
     emitError - Whether or not to fail/exit on error. Defaults to true
 
 ##### jsx
-Compile React jsx code into JavaScript.
+Compile React jsx code into JavaScript. Takes one custom arg:
+
+    options - An object of options that gets passed to react's transform function. Defaults to `{stripTypes: true}`
 
 ##### livescript
 Transpile code from LiveScript to JavaScript.
