@@ -27,8 +27,9 @@ module.exports = function(gulp, defaults){
     gulp.desc('jsx', 'Transpile JSX code with React to JS');
 
     return function(config) {
-        if(!config)
+        if(!config) {
             config = {};
+        }
 
         return function (cb) {
             var changed = require('gulp-changed');
@@ -44,8 +45,14 @@ module.exports = function(gulp, defaults){
                 });
             }
 
+            if (!config.options) {
+                config.options = {
+                    stripTypes: true
+                };
+            }
+
             return stream.pipe(changed(config.dest || defaults.path.buildSrc))
-                .pipe(react())
+                .pipe(react(config.options))
                 .on('error', function(err){
                     console.log("Error parsing JSX file: ." + removeCwd(err.fileName));
                     cb(new gutil.PluginError('jsx', err));
