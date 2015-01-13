@@ -66,10 +66,7 @@ Using wGulp
 
 The best and quickest way to get value out of wGulp is to adhere to a standard directory structure (which can be overridden for legacy projects).
 
-* `./src` - TypeScript or JavaScript source code
 * `./api` - TypeScript definition files (see [Centralized APIs with TypeScript Definition Files](#centralized-apis-with-typescript-definition-files))
-* `./test` - TypeScript or JavaScript test specs, written with Jasmine
-* `./sass` - Default location for OOCSS styles
 * `./build` - Assets generated via build
     - `./build/src` - Destination for transpiled/copied source code (from `./src`)
     - `./build/test` - Destination for transpiled/copied test spec code (from `./test`)
@@ -77,6 +74,9 @@ The best and quickest way to get value out of wGulp is to adhere to a standard d
 * `./dist` - Destination for generated distribution assets
 * `./docs` - Destination for generated documentation
 * `./report` - Destination for generated reports (coverage, complexity, test)
+* `./sass` - Default location for OOCSS styles
+* `./src` - TypeScript, JavaScript, JSX, Coffee, ... source code
+* `./test` - TypeScript or JavaScript test specs, written with Jasmine
 
 ### See what's included out of the box
 ```
