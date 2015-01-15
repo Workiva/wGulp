@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-function ensureOutputDir(filePath){
+function ensureOutputDir(filePath) {
     var mkdirp = require('mkdirp');
     var path = require('path');
 
@@ -24,13 +24,16 @@ function ensureOutputDir(filePath){
     }
 };
 
-module.exports = function(gulp, options, bundleOptions, cb){
+module.exports = function(gulp, options, bundleOptions, cb) {
     var shell = require('gulp-shell');
 
     var bundleCommand = bundleOptions.sfx ? " bundle-sfx " : " bundle ";
     var entry = bundleOptions.entry || "";
     var output = bundleOptions.output || "";
     var inject = bundleOptions.addToConfig === false ? "" : " --inject";
+    var minify = bundleOptions.minify ? " --minify" : "";
+    var sourceMaps = bundleOptions.sourceMaps === false ? " --skip-source-maps" : "";
+
     var includes = "";
     var excludes = "";
     if(bundleOptions.include && bundleOptions.include.length > 0){
@@ -43,7 +46,7 @@ module.exports = function(gulp, options, bundleOptions, cb){
     // Ensure output directory exists
     ensureOutputDir(output);
 
-    var command = "jspm" + bundleCommand + entry + includes + excludes + " " + output + inject;
+    var command = "jspm" + bundleCommand + entry + includes + excludes + " " + output + inject + minify + sourceMaps;
 
     return gulp.src('').pipe(shell([command]));
 };
