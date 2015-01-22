@@ -25,17 +25,22 @@ module.exports = function(gulp, defaults) {
             var cwd = process.cwd();
             var path = require('path');
             var jshint = require('gulp-jshint');
-            
             var jshintrc = path.resolve(cwd, config.configFile || defaults.jshintrc);
+            var glob = config.glob || defaults.glob.js;
 
             var stream;
-            if(config.src)
-                stream = gulp.src(config.src);
-            else {
-                stream = gulp.src(config.glob || defaults.glob.js, {
-                    cwd: config.cwd || defaults.path.src
-                });
+            var globs = [];
+            var options = {};
+
+            if (config.src) {
+                globs.push(config.src);
+            } else {
+                globs.push(defaults.path.src + glob);
+                globs.push(defaults.path.test + glob);
+                options.cwd = config.cwd || defaults.path.root;
             }
+
+            stream = gulp.src(globs, options)
 
             stream = stream.pipe(jshint(jshintrc))
                 .pipe(jshint.reporter('jshint-stylish'));
