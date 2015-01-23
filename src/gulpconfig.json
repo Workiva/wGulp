@@ -81,7 +81,7 @@
         "build": ["clean", "lint", "tsd", "jsx", "tsc", "copy:html", "copy:js", "coffee", "livescript", "sass"],
         "bundle": ["clean:dist", "build"],
         "default": ["clean", "build", "test", "analyze", "jsdoc", "dist"],
-        "dist": ["clean", "build", "bundle", "libraryDist", "minify"],
+        "dist": ["clean", "build", "bundle", "libraryDist", "minify:css"],
         "preTest": ["build", "tsc:test", "copy:htmltest", "copy:jstest", "jsx:test"],
         "test": ["preTest", "karma"],
         "test:jasmine": ["preTest", "jasmine"]
