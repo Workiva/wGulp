@@ -87,6 +87,10 @@
     "chai": "^1.9.1",
     "mocha": "^1.18.2",
     "mocha-multi": "^0.4.1",
-    "sinon": "^1.10.3"
+    "sinon": "^1.10.3",
+    "intern": "^2.2.2",
+    "wInternLib": "^0.3.0",
+    "grunt": "^0.4.5",
+    "grunt-selenium-webdriver": "^0.2.431"
   }
 }
