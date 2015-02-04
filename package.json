@@ -89,7 +89,6 @@
     "mocha-multi": "^0.4.1",
     "sinon": "^1.10.3",
     "intern": "^2.2.2",
-    "wInternLib": "git+ssh://git@github.com:Workiva/wInternLib.git#master",
     "grunt": "^0.4.5",
     "grunt-selenium-webdriver": "^0.2.431"
   }
