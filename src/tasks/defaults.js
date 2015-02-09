@@ -18,6 +18,7 @@ module.exports = function(gulp, options, subtasks) {
 
     var _ = require('lodash'),
         changed = require('gulp-changed'),
+        connect = require('gulp-connect'),
         glob = require('glob'),
         open = require('open'),
         path = require('path'),
@@ -27,6 +28,9 @@ module.exports = function(gulp, options, subtasks) {
     gulp.desc('build', 'Run build tasks');
     gulp.task('build', getDeps(options, 'build'));
 
+    gulp.desc('default', 'Run default tasks');
+    gulp.task('default', subtasks.runSequence(options.default_tasks));
+    
     gulp.desc('preDist', 'Run before dist');
     gulp.task('preDist', getDeps(options, 'preDist'), function(done){
         // Redefine tsc task with sourcemaps disabled
@@ -46,7 +50,7 @@ module.exports = function(gulp, options, subtasks) {
 
     gulp.desc('test:jasmine', 'Run test tasks and execute with jasmine');
     gulp.task('test:jasmine', getDeps(options, 'test:jasmine'));
-
+    
     gulp.desc('test', 'Run test tasks and execute with Karma');
     gulp.task('test', getDeps(options, 'test'));
 
@@ -131,6 +135,16 @@ module.exports = function(gulp, options, subtasks) {
     }));
 
     // Tasks that are just a collection of other tasks
+    
+    gulp.desc('connect:noreload', 'Start a server without livereload');
+    gulp.task('connect:noreload', subtasks.connect({livereload: false}));
+    
+    gulp.desc('connect:stop', 'Stop a running connect server allowing gulp to exit');
+    gulp.task('connect:stop', function (done) {
+        connect.serverClose();
+        done();
+            });
+    
     gulp.desc('cover', 'View code coverage statistics');
     gulp.task('cover', getDeps(options, 'cover'), function(done){
         var results = glob.sync('**/index.html', {cwd: options.path.coverage});
