@@ -1,8 +1,9 @@
-var gutil = require('gulp-util');
+
 
 module.exports = function(gulp, defaults, subtasks) {
 
     var argv = require('yargs').argv;
+    var gutil = require('gulp-util');
     var shell = require('gulp-shell');
     var wait = require('gulp-wait');
 
@@ -27,7 +28,7 @@ module.exports = function(gulp, defaults, subtasks) {
     }
     else 
     {
-        gutil.log(gutil.colors.red("Need to pick a configuration. (--sauce or --local)"))
+        gutil.log(gutil.colors.red("Need to pick a configuration. (--sauce or --local)"));
         gulp.task(taskName, function (done) {
             done();
         })
