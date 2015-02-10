@@ -52,7 +52,7 @@ module.exports = function(gulp, options, subtasks) {
     gulp.task('test', getDeps(options, 'test'));
 
     gulp.desc('default', 'Run default tasks');
-    gulp.task('default', subtasks.runSequence(options.default_tasks));
+    gulp.task('default', getDeps(options, 'default'));
 
     // Bundle tasks
     var bundleTasks = _.map(Object.keys(options.bundles), function(bundleName){
