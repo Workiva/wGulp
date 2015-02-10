@@ -1,16 +1,27 @@
+var gutil = require('gulp-util');
+
 module.exports = function(gulp, defaults, subtasks) {
 
+    var argv = require('yargs').argv;
     var shell = require('gulp-shell');
     var wait = require('gulp-wait');
     
     var taskName = 'test:intern';
 
     gulp.task('start_test', function () {
+        var command = '';
+        
+        if (argv.local){
+            command = './node_modules/.bin/intern-runner config=tests/functional/internLocal';
+        } else if (argv.sauce){
+            command = './node_modules/.bin/intern-runner config=tests/functional/internSauce';
+        } else {
+            gutil.log(gutil.colors.red("Need to pick a configuration. (--sauce or --local)"))
+        }
+        
         return gulp.src('')
             .pipe(wait(500))
-            .pipe(shell([
-                './node_modules/.bin/intern-runner config=tests/functional/intern'
-            ]))
+            .pipe(shell([command]))
     })
 
     gulp.task('start_selenium', function () {
@@ -33,8 +44,6 @@ module.exports = function(gulp, defaults, subtasks) {
     })
     
     gulp.task('begin_Testing',
-        
-        
         ['start_selenium', 'connect:noreload','_stop_selenium_server'],
         function(done){
             var command = '';
