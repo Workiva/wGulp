@@ -27,7 +27,7 @@ module.exports = function(gulp, defaults, subtasks) {
     }
     else 
     {
-        gutil.log(gutil.colors.red("Need to pick a configuration. (--sauce or --local)"));
+        gutil.log(gutil.colors.red("Need to pick a configuration. (--sauce or --local)"))
         gulp.task(taskName, function (done) {
             done();
         })
