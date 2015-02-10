@@ -28,9 +28,6 @@ module.exports = function(gulp, options, subtasks) {
     gulp.desc('build', 'Run build tasks');
     gulp.task('build', getDeps(options, 'build'));
 
-    gulp.desc('default', 'Run default tasks');
-    gulp.task('default', subtasks.runSequence(options.default_tasks));
-    
     gulp.desc('preDist', 'Run before dist');
     gulp.task('preDist', getDeps(options, 'preDist'), function(done){
         // Redefine tsc task with sourcemaps disabled
@@ -53,6 +50,9 @@ module.exports = function(gulp, options, subtasks) {
 
     gulp.desc('test', 'Run test tasks and execute with Karma');
     gulp.task('test', getDeps(options, 'test'));
+
+    gulp.desc('default', 'Run default tasks');
+    gulp.task('default', subtasks.runSequence(options.default_tasks));
 
     // Bundle tasks
     var bundleTasks = _.map(Object.keys(options.bundles), function(bundleName){
