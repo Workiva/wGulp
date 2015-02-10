@@ -17,10 +17,14 @@
 module.exports = function(options, key){
     var _ = require('lodash');
     var depsEntry = options.taskTree[key];
+    var excludeFromAll = options.taskTree.excludeFromAll || [];
+
     if(_.isArray(depsEntry)){
-        return depsEntry;
-    } else if(_.isObject(depsEntry)){
+        return _.difference(depsEntry, excludeFromAll);
+    }
+    else if(_.isObject(depsEntry)){
         var baseTasks = depsEntry.tasks;
+        baseTasks = _.difference(baseTasks, excludeFromAll);
         baseTasks = _.difference(baseTasks, depsEntry.exclude || []);
         baseTasks = _.union(baseTasks, depsEntry.include || []);
         return baseTasks;
