@@ -16,7 +16,7 @@ module.exports = function(gulp, defaults, subtasks) {
         } else if (argv.sauce){
             command = './node_modules/.bin/intern-runner config=tests/functional/internSauce';
         } else {
-            gutil.log(gutil.colors.red("Need to pick a configuration. (--sauce or --local)"))
+            gutil.log(gutil.colors.red("Need to pick a configuration. (--sauce or --local)"));
         }
         
         return gulp.src('')
@@ -45,9 +45,9 @@ module.exports = function(gulp, defaults, subtasks) {
     
     gulp.task('begin_Testing',
         ['start_selenium', 'connect:noreload','_stop_selenium_server'],
-        function(done){
+        function(){
             var command = '';
-        return gulp.src('').pipe(shell([command]));
+            return gulp.src('').pipe(shell([command]));
     });
 
     gulp.task(taskName, ['begin_Testing'], function(done){
