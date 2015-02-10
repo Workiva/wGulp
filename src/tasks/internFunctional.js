@@ -50,7 +50,7 @@ module.exports = function(gulp, defaults, subtasks) {
             .pipe(shell(['lsof -t -i tcp:4444 | xargs kill']))
     })
 
-    gulp.task('_stop_Selenium_Server',['start_test'], function(){
+    gulp.task('_stop_Selenium_Server',['start_Test'], function(){
         gulp.start('stop_Selenium_Server')
     })
 
