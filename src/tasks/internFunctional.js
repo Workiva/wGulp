@@ -28,8 +28,8 @@ module.exports = function(gulp, defaults, subtasks) {
     }
     else 
     {
-        gutil.log(gutil.colors.red("Need to pick a configuration. (--sauce or --local)"));
         gulp.task(taskName, function (done) {
+            gutil.log(gutil.colors.red("Need to pick a configuration. (--sauce or --local)"));
             done();
         })
     }
