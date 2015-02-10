@@ -50,12 +50,9 @@ module.exports = function(gulp, options, subtasks) {
 
     gulp.desc('test:jasmine', 'Run test tasks and execute with jasmine');
     gulp.task('test:jasmine', getDeps(options, 'test:jasmine'));
-    
+
     gulp.desc('test', 'Run test tasks and execute with Karma');
     gulp.task('test', getDeps(options, 'test'));
-
-    gulp.desc('default', 'Run default tasks');
-    gulp.task('default', getDeps(options, 'default'));
 
     // Bundle tasks
     var bundleTasks = _.map(Object.keys(options.bundles), function(bundleName){
