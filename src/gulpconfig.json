@@ -52,6 +52,8 @@
         "compass": ["clean:buildStyles"],
         "concat": ["build"],
         "connect": [],
+        "connect:noReload": [],
+        "connect:stop": [],
         "copy": ["clean:buildSrc", "clean:buildStyles", "clean:buildTest"],
         "copy:html": ["clean:buildSrc"],
         "copy:htmltest": ["clean:buildTest"],

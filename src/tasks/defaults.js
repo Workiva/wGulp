@@ -134,10 +134,10 @@ module.exports = function(gulp, options, subtasks) {
     // Tasks that are just a collection of other tasks
     
     gulp.desc('connect:noReload', 'Start a server without livereload');
-    gulp.task('connect:noReload', subtasks.connect({livereload: false}));
+    gulp.task('connect:noReload', getDeps(options, 'connect:noReload'), subtasks.connect({livereload: false}));
     
     gulp.desc('connect:stop', 'Stop a running connect server allowing gulp to exit');
-    gulp.task('connect:stop', function (done) {
+    gulp.task('connect:stop', getDeps(options, 'connect:stop'), function (done) {
         connect.serverClose();
         done();
             });

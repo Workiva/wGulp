@@ -7,22 +7,29 @@ module.exports = function(gulp, defaults, subtasks) {
     var shell = require('gulp-shell');
     var wait = require('gulp-wait');
 
-    var taskName = 'test:intern';
-    var command = '';
+    var taskName = 'test:intern',
+        beginTesting = taskName + ':beginTesting',
+        startTest = taskName + ':startTest',
+        startSelenium = taskName + ':startSelenium',
+        stopSelenium = taskName + ':stopSelenium',
+        _stopSelenium = taskName + ':_stopSelenium',
+        connectNoReload = 'connect:noReload',
+        connectStop = 'connect:stop',
+        command = '';
 
     if (argv.local) 
     {
         command = './node_modules/.bin/intern-runner config=tests/functional/internLocal';
-        gulp.task(taskName, ['begin_Testing'], function (done) {
-            gulp.start(['connect:stop']);
+        gulp.task(taskName, [beginTesting], function (done) {
+            gulp.start([connectStop]);
             done();
         })
     }
     else if (argv.sauce) 
     {
         command = './node_modules/.bin/intern-runner config=tests/functional/internSauce';
-        gulp.task(taskName, ['connect:noReload','start_Test'], function (done) {
-            gulp.start(['connect:stop']);
+        gulp.task(taskName, [connectNoReload, startTest], function (done) {
+            gulp.start([connectStop]);
             done();
         })
     }
@@ -34,30 +41,26 @@ module.exports = function(gulp, defaults, subtasks) {
         })
     }
 
-    gulp.task('start_Test', function () {
+    gulp.task(startTest, function () {
         return gulp.src('')
             .pipe(wait(500))
             .pipe(shell([command]))
     })
 
-    gulp.task('start_Selenium', function () {
+    gulp.task(startSelenium, function () {
         return gulp.src('')
             .pipe(shell(['cd ./node_modules/wGulp/src/intern && java -jar selenium-server-standalone-2.44.0.jar &' ]))
     })
 
-    gulp.task('stop_Selenium_Server', function () {
+    gulp.task(stopSelenium, function () {
         return gulp.src('')
             .pipe(wait(500))
             .pipe(shell(['lsof -t -i tcp:4444 | xargs kill']))
     })
 
-    gulp.task('_stop_Selenium_Server',['start_Test'], function(){
-        gulp.start('stop_Selenium_Server')
+    gulp.task(_stopSelenium, [startTest], function(){
+        gulp.start(stopSelenium)
     })
 
-    gulp.task('begin_Testing',
-        ['start_Selenium', 'connect:noReload','_stop_Selenium_Server'],
-        function(done){
-            done();
-    });
+    gulp.task(beginTesting, [startSelenium, connectNoReload, _stopSelenium]);
 };
