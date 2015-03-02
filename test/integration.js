@@ -33,7 +33,6 @@ Integration = (function() {
         this.options.path.dependencies = [
             "./test/integration/modes/" + mode + "/jspm_packages/"
         ];
-        this.options.ts.noLib = true;
         this.options.jshintrc = "./src/template/.jshintrc";
         this.options.tslintrc = "./src/template/tslint.json";
         this.options.taskTree.preTest = ["react", "ts", "tstest"];
