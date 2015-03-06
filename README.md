@@ -431,6 +431,20 @@ gulp test --sauce
 
 If you would like to customize the browsers that your tests get run in, add a `browsers` key to the sauceLabs config. Its value should be an object containing karma-sauce-launcher configs. See the karma-sauce-launcher [documentation](https://github.com/karma-runner/karma-sauce-launcher#adding-karma-sauce-launcher-to-an-existing-karma-config) for more information.
 
+### Functional testing with theIntern
+
+wGulp allows you to run your functional intern tests with one command and not be concerned with maintaining your 
+selenium server.  You are also able to pass in an argument to determine if your tests will be run locally or on 
+SauceLabs based on your intern config files (found in tests/functional/CONFIGFILE).
+
+```
+gulp test:intern --local OR gulp test:intern --sauce
+```
+
+*Note:* This requires that port 4444 is open because that is what the selenium sever will be utilizing to run as well 
+        as what this task will be expecting to close as part of its clean up.
+
+*Note:* This task does not include the standing up of the server that is utilized to run your application.
 
 # Extending wGulp
 

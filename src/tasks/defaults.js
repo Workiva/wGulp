@@ -18,6 +18,7 @@ module.exports = function(gulp, options, subtasks) {
 
     var _ = require('lodash'),
         changed = require('gulp-changed'),
+        connect = require('gulp-connect'),
         glob = require('glob'),
         open = require('open'),
         path = require('path'),
@@ -131,6 +132,16 @@ module.exports = function(gulp, options, subtasks) {
     }));
 
     // Tasks that are just a collection of other tasks
+    
+    gulp.desc('connect:noReload', 'Start a server without livereload');
+    gulp.task('connect:noReload', getDeps(options, 'connect:noReload'), subtasks.connect({livereload: false}));
+    
+    gulp.desc('connect:stop', 'Stop a running connect server allowing gulp to exit');
+    gulp.task('connect:stop', getDeps(options, 'connect:stop'), function (done) {
+        connect.serverClose();
+        done();
+            });
+    
     gulp.desc('cover', 'View code coverage statistics');
     gulp.task('cover', getDeps(options, 'cover'), function(done){
         var results = glob.sync('**/index.html', {cwd: options.path.coverage});
