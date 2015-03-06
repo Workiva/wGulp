@@ -40,7 +40,7 @@
     "gulp-jsdoc": "^0.1.4",
     "gulp-jshint": "^1.5.5",
     "gulp-karma": "0.0.4",
-    "gulp-livereload": "^2.1.0",
+    "gulp-livereload": "2.1.0",
     "gulp-livescript": "^2.0.0",
     "gulp-minify-css": "^0.3.8",
     "gulp-open": "^0.3.0",
@@ -81,6 +81,7 @@
     "react": "^0.12.1",
     "requirejs": "^2.1.14",
     "source-map": "^0.1.33",
+    "tiny-lr": "0.0.7",
     "typescript": "1.0.1",
     "vinyl-source-stream": "^1.0.0",
     "yargs": "^1.2.1"
