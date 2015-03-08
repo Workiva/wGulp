@@ -3,7 +3,7 @@ var harness = require('../harness');
 
 describe("tsc subtask", function() {
     it("should transform TypeScript to vanilla javascript", function(done) {
-        this.timeout(10000);
+        this.timeout(5000);
         var src = ['app.js'];
         var task = 'ts';
         var helper = new Harness(gulp);
@@ -14,7 +14,7 @@ describe("tsc subtask", function() {
     });
 
     it("should transform TypeScript from alternate src dir into proper output dir", function(done) {
-        this.timeout(10000);
+        this.timeout(5000);
         var src = ['altSrcDir.js'];
         var task = 'ts';
         var helper = new Harness(gulp);
