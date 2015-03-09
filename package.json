@@ -17,8 +17,7 @@
     "test": "multi='xunit=xunit.xml tap=-' mocha test/**/*.spec.js --reporter mocha-multi"
   },
   "peerDependencies": {
-    "gulp": "^3.8.7",
-    "intern": "^2.2.2"
+    "gulp": "^3.8.7"
   },
   "dependencies": {
     "browserify": "^6.1.0",
