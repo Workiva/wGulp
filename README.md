@@ -202,6 +202,18 @@ taskTree: {
 }
 ```
 
+##### Exclude from every task
+The above configuration is useful, however it may become annoying if you are attempting to exclude a task from everything that depends on it.
+wGulp now supports an `excludeFromAll` feature that will simplify the above like so:
+
+```js
+taskTree: {
+    excludeFromAll: ['libraryDist']
+}
+```
+
+The `excludeFromAll` option takes least precedence when determining dependencies. So if you explicitly include something for a specific task, that will override the `excludeFromAll` for that particular case.
+
 #### Using the Dependency Tree in a Custom Task
 Perhaps you want to utilize the dependency tree when defining your own task. wGulp exposes the `getDeps` function for this purpose.
 
