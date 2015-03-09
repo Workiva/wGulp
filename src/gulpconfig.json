@@ -40,6 +40,7 @@
     "transforms": [],
     "bundles": {},
     "taskTree": {
+        "excludeFromAll": [],
         "analyze": ["build"],
         "applyLicense": [],
         "clean": ["clean:buildSrc", "clean:buildStyles", "clean:buildTest", "clean:dist"],
