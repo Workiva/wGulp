@@ -81,7 +81,7 @@
     "react": "^0.12.1",
     "requirejs": "^2.1.14",
     "source-map": "^0.1.33",
-    "typescript": "1.0.1",
+    "typescript": "^1.4.1",
     "vinyl-source-stream": "^1.0.0",
     "yargs": "^1.2.1"
   },

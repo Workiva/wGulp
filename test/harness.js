@@ -19,7 +19,6 @@ Harness = (function() {
         this.options.path.coverage = "./test/subtasks/report/coverage/";
         this.options.path.complexity = "./test/subtasks/report/complexity/";
         this.options.path.docs = "./test/subtasks/docs/";
-        this.options.ts.noLib = true;
         this.options.tslintrc = "./src/template/tslint.json";
         require('../src/bundling/buildBundleTasks')(gulp, this.options);
     };

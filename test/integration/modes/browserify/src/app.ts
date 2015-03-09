@@ -1,4 +1,5 @@
-declare var require, document;
+declare var document: Document;
+declare var require;
 
 var Hat = require('./hat');
 var Hello:any = require('./hello').Hello;
