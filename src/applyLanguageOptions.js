@@ -25,7 +25,7 @@ module.exports = function(options, languages){
         javascript: ['copy:js', 'jshint', 'minify:js', 'copy:jstest'],
         jsx: ['jsx', 'jsx:test'],
         livescript: ['livescript'],
-        typescript: ['tsd', 'tsc', 'tslint', 'tsc:test']
+        typescript: ['copy:ts', 'tsd', 'tsc', 'tslint', 'tsc:test']
     };
 
     var allLanguages = Object.keys(langMap);

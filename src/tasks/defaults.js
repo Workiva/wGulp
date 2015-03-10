@@ -104,6 +104,14 @@ module.exports = function(gulp, options, subtasks) {
         changed: true
     }));
 
+    gulp.desc('copy:ts', 'Copy TS from src to buildSrc');
+    gulp.task('copy:ts', getDeps(options, 'copy:ts'), subtasks.copy({
+        glob: options.glob.ts,
+        cwd: options.path.src,
+        dest: options.path.buildSrc,
+        changed: true
+    }));
+
     gulp.desc('copy:htmltest', 'Copy HTML from test to buildTest');
     gulp.task('copy:htmltest', getDeps(options, 'copy:htmltest'), subtasks.copy({
         glob: options.glob.html,

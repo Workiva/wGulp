@@ -98,6 +98,7 @@ Out of the box wGulp provides a *lot* of functionality. It is a collection of be
     copy:htmltest - Copy html templates in ./test/ to ./build/test/
     copy:js - Copy JavaScript files in ./src/ to ./build/src/
     copy:jstest - Copy JavaScript files in ./test/ to ./build/test/
+    copy:ts - Copy TypeScript files in ./src/ to ./build/src/
     cover - Generate and view code coverage report
     customize - Copy the standard config files to your project for customization
     default - Execute the tasks specified in default
