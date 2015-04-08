@@ -1,6 +1,6 @@
 {
   "name": "wGulp",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "Opinionated Suite of Gulp Tasks for JavaScript and TypeScript",
   "private": true,
   "repository": {
