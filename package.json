@@ -75,6 +75,7 @@
     "lodash": "^2.4.1",
     "merge-stream": "^0.1.5",
     "mkdirp": "^0.5.0",
+    "node-sass": "3.3.0",
     "open": "0.0.5",
     "partialify": "^3.1.1",
     "phantomjs": "1.9.15",
