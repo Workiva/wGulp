@@ -82,13 +82,14 @@
         "tsd": [],
         "tslint": [],
         "watch": ["watch:build"],
-        "build": ["clean", "lint", "tsd", "jsx", "tsc", "copy:html", "copy:js", "coffee", "livescript", "sass"],
+        "build": ["clean", "unbundle", "lint", "tsd", "jsx", "tsc", "copy:html", "copy:js", "coffee", "livescript", "sass"],
         "bundle": ["clean:dist", "build"],
         "default": ["clean", "build", "test", "analyze", "jsdoc", "dist"],
         "dist": ["clean", "build", "bundle", "libraryDist", "minify:css"],
         "preTest": ["build", "tsc:test", "copy:htmltest", "copy:jstest", "jsx:test", "copy:ts"],
         "test": ["preTest", "karma"],
-        "test:jasmine": ["preTest", "jasmine"]
+        "test:jasmine": ["preTest", "jasmine"],
+        "test:bundle": ["preTest", "bundle", "karma"]
     },
     "ts": {
         "sourcemap": true,
