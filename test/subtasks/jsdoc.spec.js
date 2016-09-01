@@ -10,7 +10,7 @@ describe("jsdoc subtask", function() {
         var docOutput = helper.options.path.docs;
 
         var jsdoc = require('../../src/subtasks/jsdoc')(gulp, helper.options);
-        jsdoc({cwd: "./test/subtasks/fixtures/coverage/js/"})();
+        jsdoc({cwd: "./test/subtasks/fixtures/js/"})();
         if (!fs.existsSync(docOutput)) {
             throw new Error("JSDoc output not found");
         }
