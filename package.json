@@ -37,7 +37,7 @@
     "gulp-header": "^1.0.5",
     "gulp-istanbul": "^0.3.1",
     "gulp-jasmine": "^1.0.1",
-    "gulp-jsdoc": "^0.1.4",
+    "gulp-jsdoc3": "^0.2.0",
     "gulp-jshint": "^1.5.5",
     "gulp-karma": "0.0.4",
     "gulp-livereload": "2.1.0",
