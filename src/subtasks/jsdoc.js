@@ -23,7 +23,7 @@ module.exports = function(gulp, defaults) {
 
         return function (cb) {
             var gutil = require('gulp-util');
-            var jsdoc = require('gulp-jsdoc');
+            var jsdoc = require('gulp-jsdoc3');
 
             var stream;
             if(config.src)
@@ -34,11 +34,11 @@ module.exports = function(gulp, defaults) {
                 });
             }
 
-            return stream.pipe(jsdoc.parser())
+            return stream.pipe(jsdoc(cb))
                 .on('error', function(err){
                     cb(new gutil.PluginError('jsdoc', err));
                 })
-                .pipe(jsdoc.generator(config.dest || defaults.path.docs));
+                .pipe(gulp.dest(config.dest || defaults.path.docs));
         };
     };
 };
