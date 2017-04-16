@@ -160,6 +160,16 @@ module.exports = function(gulp, options, subtasks) {
     gulp.desc('lint', 'Validate code');
     gulp.task('lint', getDeps(options, 'lint'));
 
+    gulp.desc('licenses', 'Get all licenses');
+    gulp.task('licenses', function() {
+        var checker = require('license-checker');
+        checker.init({
+          start: '.'
+          }, function(json) {
+            checker.print(json);
+            });
+    });
+
     gulp.desc('minify', 'Minify JS and CSS code');
     gulp.task('minify', getDeps(options, 'minify'));
 
