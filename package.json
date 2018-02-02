@@ -1,6 +1,6 @@
 {
   "name": "wGulp",
-  "version": "0.8.5",
+  "version": "0.8.5-unit-test-only",
   "description": "Opinionated Suite of Gulp Tasks for JavaScript and TypeScript",
   "private": true,
   "repository": {
@@ -17,10 +17,10 @@
     "test": "multi='xunit=xunit.xml tap=-' mocha test/**/*.spec.js --reporter mocha-multi"
   },
   "peerDependencies": {
-    "gulp": "^3.8.7",
-    "intern": "^2.2.2"
+    "gulp": "^3.8.7"
   },
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "browserify": "^6.1.0",
     "chalk": "^0.5.1",
     "fs-extra": "^0.12.0",
@@ -67,7 +67,7 @@
     "karma-jasmine": "^0.2.2",
     "karma-jasmine-html-reporter": "^0.1.5",
     "karma-jasmine-html-reporter-livereload": "^1.0.0",
-    "karma-jspm": "^2.0.0",
+    "karma-jspm": "^1.0.0",
     "karma-junit-reporter": "^0.2.2",
     "karma-phantomjs-launcher": "^0.1.4",
     "karma-requirejs": "^0.2.2",
