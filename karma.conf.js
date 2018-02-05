@@ -12,6 +12,7 @@ module.exports = function(karma) {
         files: [polyfill],
         frameworks: ['jspm', 'jasmine'],
         jspm: {
+            beforeFiles: ['node_modules/babel-polyfill/dist/polyfill.js'],
             loadFiles: ['build/test/**/*.js'],
             serveFiles: ['build/**', 'src/**', 'test/**']
         },
