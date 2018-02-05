@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-- '0.10'
+- '0.10.41'
 before_install:
 - npm install -g gulp
 - gem install compass --version "=0.12.7"
@@ -8,3 +8,4 @@ install:
 - npm install
 script:
 - npm test
+group: deprecated-2017Q4
